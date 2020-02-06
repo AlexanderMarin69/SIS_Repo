@@ -139,48 +139,7 @@
                     <v-card-text>
                         <v-container>
                             <v-row>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editName" label="Namn"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field readonly v-model="editCustomerId" label="Kundnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editInvoiceAddress" label="Fakturaadress"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editSecondInvoiceAddress" label="Fakturaadress 2"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editZipCode" label="Postnr"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editCity" label="Ort"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editCountry" label="Land"></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field v-model="editOrganisationNumber" label="Organisationsnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editPhoneNumber" label="Telefonnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editSecondPhoneNumber" label="Andra telefonnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editFax" label="Fax"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editEmailAddress" label="E-post"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editWebAddress" label="Webbadress"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="12">
-                                    <v-text-field v-model="editDescription" label="Beskrivning / egna anteckningar"></v-text-field>
-                                </v-col>
+                              
                             </v-row>
                         </v-container>
 
@@ -217,7 +176,208 @@
             </v-dialog>
         </v-row>
         <!-- DELETE PRODUCT DIALOG  --------   END-->
+
+
+
+        <v-row justify="center">
+            <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+                <template v-slot:activator="{ on }">
+                    <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+                </template>
+                <v-card>
+                    <v-toolbar dark color="primary">
+                        <v-btn icon dark @click="dialog = false">
+                            <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                        <v-toolbar-title>Ny faktura</v-toolbar-title>
+
+
+                        <v-spacer></v-spacer>
+
+
+                        <v-toolbar-items>
+                            <v-btn dark text @click="dialog = false">Spara</v-btn>
+                        </v-toolbar-items>
+                    </v-toolbar>
+                    <v-list three-line subheader>
+                        <v-subheader>User Controls</v-subheader>
+                        <v-list-item>
+                            <v-list-item-content>
+
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editName" label="HÄMTA LISTA PÅ KUNDER OCH FYLL INVOICE V-MODELS"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-menu ref="invoiceDateMenu"
+                                            v-model="invoiceDateMenu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="invoiceDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px">
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field v-model="invoiceDate"
+                                                          label="Picker in invoiceDateMenu: "
+                                                          readonly
+                                                          v-on="on"></v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="invoiceDate" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="invoiceDateMenu = false">Cancel</v-btn>
+                                            <v-btn text color="primary" @click="$refs.invoiceDateMenu.save(invoiceDate)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-menu ref="invoicePayDateMenu"
+                                            v-model="invoicePayDateMenu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="invoicePayDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px">
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field v-model="invoicePayDate"
+                                                          label="Picker in invoicePayDateMenu: "
+                                                          readonly
+                                                          v-on="on"></v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="invoicePayDate" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="invoiceDatePayMenu = false">Cancel</v-btn>
+                                            <v-btn text color="primary" @click="$refs.invoicePayDateMenu.save(invoicePayDate)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-col>
+
+
+                                <v-text-field class="pa-2 mt-4" label="Lägg till produkter" placeholder="Sök produkter" v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
+                                <div>
+                                    <!--<v-list-item-group>-->
+                                    <v-row>
+                                        <template v-for="(item, index) in productsToChoose">
+                                            <div :key="item.name" @click="showCustomerDetails(item)">
+                                                <!--<v-list-item-content>-->
+                                                <!--<v-list-item-subtitle v-text="item.phoneNumber"></v-list-item-subtitle>
+            <v-list-item-title v-text="item.name" style="font-weight: bold;"></v-list-item-title>
+            <v-list-item-subtitle class="text--primary" v-text="item.emailAddress"></v-list-item-subtitle>
+            <v-list-item-subtitle class="text--primary" v-text="item.city"></v-list-item-subtitle>-->
+                                                <v-col cols="12" sm="6" md="4">
+                                                    <v-card>
+
+                                                        <p>item.phoneNumber</p>
+
+                                                        <p style="font-weight: bold;">item.name</p>
+
+                                                        <p>item.emailAddress</p>
+
+                                                        <p>item.city</p>
+
+
+                                                    </v-card>
+                                                </v-col>
+                                            </div>
+                                            <v-divider v-if="index + 1 < listOfProducts.length"
+                                                       :key="index"></v-divider>
+                                        </template>
+                                    </v-row>
+                                    <!--</v-list-item-group>-->
+                                </div>
+
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-card>hello</v-card>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-card>hello</v-card>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-card>hello</v-card>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-card>hello</v-card>
+                                </v-col>
+
+
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editZipCode" label="Postnr"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editCity" label="Ort"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editCountry" label="Land"></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-text-field v-model="editOrganisationNumber" label="Organisationsnummer"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editPhoneNumber" label="Telefonnummer"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editSecondPhoneNumber" label="Andra telefonnummer"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editFax" label="Fax"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editEmailAddress" label="E-post"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editWebAddress" label="Webbadress"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12">
+                                    <v-text-field v-model="editDescription" label="Beskrivning / egna anteckningar"></v-text-field>
+                                </v-col>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+
+
+
+                    <v-divider></v-divider>
+
+
+
+                    <v-list three-line subheader>
+                        <v-subheader>General</v-subheader>
+                        <v-list-item>
+                            <v-list-item-action>
+                                <v-checkbox v-model="notifications"></v-checkbox>
+                            </v-list-item-action>
+                            <v-list-item-content>
+                                <v-list-item-title>Notifications</v-list-item-title>
+                                <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-action>
+                                <v-checkbox v-model="sound"></v-checkbox>
+                            </v-list-item-action>
+                            <v-list-item-content>
+                                <v-list-item-title>Sound</v-list-item-title>
+                                <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-action>
+                                <v-checkbox v-model="widgets"></v-checkbox>
+                            </v-list-item-action>
+                            <v-list-item-content>
+                                <v-list-item-title>Auto-add widgets</v-list-item-title>
+                                <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-card>
+            </v-dialog>
+        </v-row>
     </div>
+
+
+
+
+
+
 </template>
 
 <script>
@@ -226,6 +386,66 @@
     import CustomerAPI from '@/services/Customer'
     export default {
         data: () => ({
+            dialog: false,
+            notifications: false,
+            sound: true,
+            widgets: false,
+
+
+
+
+
+
+
+
+
+
+            invoiceDate: new Date().toISOString().substr(0, 10),
+            invoiceDateMenu: false,
+            invoiceDateModal: false,
+
+            invoicePayDate: new Date().toISOString().substr(0, 10),
+            invoicePayDateMenu: false,
+            invoicePayDateModal: false,
+
+
+            productsToChoose: [
+
+                {
+                    phoneNumber: '0761952005',
+                    city: 'Värnamo',
+                    emailAddress: 'alexander@hotmail.com',
+                    name: 'Produktnamnet'
+                },
+                 {
+                    phoneNumber: '0761952005',
+                    city: 'Värnamo',
+                    emailAddress: 'alexander@hotmail.com',
+                    name: 'Produktnamn2'
+                },
+                  {
+                    phoneNumber: '0761952005',
+                    city: 'Värnamo',
+                    emailAddress: 'alexander@hotmail.com',
+                    name: 'Produktnamn3'
+                },
+                   {
+                    phoneNumber: '0761952005',
+                    city: 'Värnamo',
+                    emailAddress: 'alexander@hotmail.com',
+                    name: 'Produktnamn4'
+                },
+
+            ],
+
+
+
+
+
+
+
+
+
 
             //create customer v-models start------------
             name: '',
@@ -293,9 +513,9 @@
                 this.deleteCustomerDialog = false,
                     CustomerAPI.DeleteCustomer(
                         {
-                        CustomerId: this.customerId
-                       }
-                       
+                            CustomerId: this.customerId
+                        }
+
                     );
             },   // DELETE customer START -------
 
@@ -304,40 +524,40 @@
             updateExistingCustomer() {
                 CustomerAPI.UpdateExistingCustomer({
                     Name: this.editName,
-                            CustomerId: this.editCustomerId,
-                            InvoiceAddress: this.editInvoiceAddress,
-                            SecondInvoiceAddress: this.editSecondInvoiceAddress,
-                            ZipCode: this.editZipCode,
-                            City: this.editCity,
-                            Country: this.editCountry,
-                            OrganisationNumber: this.editOrganisationNumber,
-                            PhoneNumber: this.editPhoneNumber,
-                            SecondPhoneNumber: this.editSecondPhoneNumber,
-                            Fax: this.editFax,
-                            EmailAddress: this.editEmailAddress,
-                            WebAddress: this.editWebAddress,
-                            Description: this.editDescription
+                    CustomerId: this.editCustomerId,
+                    InvoiceAddress: this.editInvoiceAddress,
+                    SecondInvoiceAddress: this.editSecondInvoiceAddress,
+                    ZipCode: this.editZipCode,
+                    City: this.editCity,
+                    Country: this.editCountry,
+                    OrganisationNumber: this.editOrganisationNumber,
+                    PhoneNumber: this.editPhoneNumber,
+                    SecondPhoneNumber: this.editSecondPhoneNumber,
+                    Fax: this.editFax,
+                    EmailAddress: this.editEmailAddress,
+                    WebAddress: this.editWebAddress,
+                    Description: this.editDescription
                 });
             }, // UPDATE customer END -------
 
             showCustomerDetails(item) {
                 this.customerId = item.customerId,
-                CustomerAPI.GetCustomerByCustomerId({ CustomerId: item.customerId }).then((response) => {
-                                this.editName = response.name,
-                                this.editCustomerId = response.customerId,
-                                this.editInvoiceAddress = response.invoiceAddress,
-                                this.editSecondInvoiceAddress = response.secondInvoiceAddress,
-                                this.editZipCode = response.zipCode,
-                                this.editCity = response.city,
-                                this.editCountry = response.country,
-                                this.editOrganisationNumber = response.organisationNumber,
-                                this.editPhoneNumber = response.phoneNumber,
-                                this.editSecondPhoneNumber = response.secondPhoneNumber,
-                                this.editFax = response.fax,
-                                this.editEmailAddress = response.emailAddress,
-                                this.editWebAddress = response.webAddress,
-                                this.editDescription = response.description
-                });
+                    CustomerAPI.GetCustomerByCustomerId({ CustomerId: item.customerId }).then((response) => {
+                        this.editName = response.name,
+                            this.editCustomerId = response.customerId,
+                            this.editInvoiceAddress = response.invoiceAddress,
+                            this.editSecondInvoiceAddress = response.secondInvoiceAddress,
+                            this.editZipCode = response.zipCode,
+                            this.editCity = response.city,
+                            this.editCountry = response.country,
+                            this.editOrganisationNumber = response.organisationNumber,
+                            this.editPhoneNumber = response.phoneNumber,
+                            this.editSecondPhoneNumber = response.secondPhoneNumber,
+                            this.editFax = response.fax,
+                            this.editEmailAddress = response.emailAddress,
+                            this.editWebAddress = response.webAddress,
+                            this.editDescription = response.description
+                    });
                 this.selectedCustomerDialog = true
             },
             searchOnKeyup() {
@@ -392,7 +612,7 @@
                                 this.emailAddress = '',
                                 this.webAddress = '',
                                 this.description = ''
-                    }
+                        }
                     }),
 
                     this.productAddedDialog();
