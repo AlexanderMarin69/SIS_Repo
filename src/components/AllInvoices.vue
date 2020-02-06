@@ -139,7 +139,7 @@
                     <v-card-text>
                         <v-container>
                             <v-row>
-                              
+
                             </v-row>
                         </v-container>
 
@@ -252,60 +252,64 @@
 
 
                                 <v-text-field class="pa-2 mt-4" label="Lägg till produkter" placeholder="Sök produkter" v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
-                                <div>
-                                    <!--<v-list-item-group>-->
-                                    <v-row>
-                                        <template v-for="(item, index) in productsToChoose">
-                                            <div :key="item.name" @click="showCustomerDetails(item)">
-                                                <!--<v-list-item-content>-->
-                                                <!--<v-list-item-subtitle v-text="item.phoneNumber"></v-list-item-subtitle>
+                                <!--<v-list-item-group>-->
+                                <template v-for="(item, index) in productsToChoose">
+                                    <v-col cols="3" sm="6" md="4" :key="item.name" @click="showCustomerDetails(item)">
+                                        <!--<v-list-item-content>-->
+                                        <!--<v-list-item-subtitle v-text="item.phoneNumber"></v-list-item-subtitle>
             <v-list-item-title v-text="item.name" style="font-weight: bold;"></v-list-item-title>
             <v-list-item-subtitle class="text--primary" v-text="item.emailAddress"></v-list-item-subtitle>
             <v-list-item-subtitle class="text--primary" v-text="item.city"></v-list-item-subtitle>-->
-                                                <v-col cols="12" sm="6" md="4">
-                                                    <v-card>
+                                        <v-card>
+                                            <p>item.phoneNumber</p>
+                                            <p style="font-weight: bold;">item.name</p>
+                                            <p>item.emailAddress</p>
+                                            <p>item.city</p>
+                                        </v-card>
 
-                                                        <p>item.phoneNumber</p>
-
-                                                        <p style="font-weight: bold;">item.name</p>
-
-                                                        <p>item.emailAddress</p>
-
-                                                        <p>item.city</p>
+                                    </v-col>
+                                    <v-divider v-if="index + 1 < listOfProducts.length"
+                                               :key="index"></v-divider>
+                                </template>
+                                <!--</v-list-item-group>-->
 
 
-                                                    </v-card>
-                                                </v-col>
-                                            </div>
+                                <v-list two-line>
+                                    <v-list-item-group>
+                                        <template v-for="(item, index) in productsToChoose">
+                                            <v-list-item :key="item.name" @click="showCustomerDetails(item)">
+                                                <template>
+                                                    <v-list-item-content>
+                                                        <v-list-item-subtitle v-text="item.phoneNumber" class="pa-1"></v-list-item-subtitle>
+                                                        <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
+                                                        <v-list-item-subtitle class="text--primary pa-1" v-text="item.emailAddress"></v-list-item-subtitle>
+                                                        <v-list-item-subtitle class="text--primary pa-1" v-text="item.city"></v-list-item-subtitle>
+                                                    </v-list-item-content>
+                                                    <v-list-item-action>
+                                                        <v-col cols="12" sm="6" md="4">
+                                                            <v-text-field v-model="editZipCode" label="Pris"></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="12" sm="6" md="4">
+                                                            <v-text-field v-model="editZipCode" label="Antal"></v-text-field>
+                                                        </v-col>
+                                                    </v-list-item-action>
+                                                </template>
+                                            </v-list-item>
                                             <v-divider v-if="index + 1 < listOfProducts.length"
                                                        :key="index"></v-divider>
                                         </template>
-                                    </v-row>
-                                    <!--</v-list-item-group>-->
-                                </div>
-
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-card>hello</v-card>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-card>hello</v-card>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-card>hello</v-card>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-card>hello</v-card>
-                                </v-col>
+                                    </v-list-item-group>
+                                </v-list>
 
 
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editZipCode" label="Postnr"></v-text-field>
+                                    <v-text-field v-model="editZipCode" label="Fakturatext"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editCity" label="Ort"></v-text-field>
+                                    <v-text-field v-model="editCity" label="Fraktavgift"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editCountry" label="Land"></v-text-field>
+                                    <v-text-field v-model="editCountry" label="Fakturaavgift"></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field v-model="editOrganisationNumber" label="Organisationsnummer"></v-text-field>
@@ -417,19 +421,19 @@
                     emailAddress: 'alexander@hotmail.com',
                     name: 'Produktnamnet'
                 },
-                 {
+                {
                     phoneNumber: '0761952005',
                     city: 'Värnamo',
                     emailAddress: 'alexander@hotmail.com',
                     name: 'Produktnamn2'
                 },
-                  {
+                {
                     phoneNumber: '0761952005',
                     city: 'Värnamo',
                     emailAddress: 'alexander@hotmail.com',
                     name: 'Produktnamn3'
                 },
-                   {
+                {
                     phoneNumber: '0761952005',
                     city: 'Värnamo',
                     emailAddress: 'alexander@hotmail.com',
