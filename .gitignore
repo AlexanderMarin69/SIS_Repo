@@ -1,0 +1,30 @@
+.vs/
+.DS_Store
+node_modules
+/dist	
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+/bin/Debug/netcoreapp2.2/Properties
+/bin/Debug/netcoreapp2.2/appsettings.Development.json
+/bin/Debug/netcoreapp2.2/appsettings.json
+/bin/Debug/netcoreapp2.2/package-lock.json
+/bin/Debug/netcoreapp2.2/package.json
+/UsersPdfInvoices/temporaryRemoved
+/UsersPdfInvoices/8dc84856-b83e-4948-b4dc-5bc9ebae3224.pdf
+/UsersPdfInvoices/edf4a6cd-e17d-4a81-848d-412e24ede11d.pdf
