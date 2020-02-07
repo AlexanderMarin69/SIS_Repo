@@ -10,7 +10,7 @@
                     <v-icon>mdi-magnify</v-icon>
                     sök
                 </v-btn>-->
-                <v-btn color="black" @click="addNewCustomerDialog = !addNewCustomerDialog" class="ml-3">
+                <v-btn color="black" @click="createNewInvoiceDialog = !createNewInvoiceDialog" class="ml-3">
                     Skapa ny
                 </v-btn>
             </v-toolbar>
@@ -180,13 +180,11 @@
 
 
         <v-row justify="center">
-            <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-                <template v-slot:activator="{ on }">
-                    <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
-                </template>
+            <v-dialog v-model="createNewInvoiceDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+               
                 <v-card>
                     <v-toolbar dark color="primary">
-                        <v-btn icon dark @click="dialog = false">
+                        <v-btn icon dark @click="createNewInvoiceDialog = false">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
                         <v-toolbar-title>Ny faktura</v-toolbar-title>
@@ -196,11 +194,11 @@
 
 
                         <v-toolbar-items>
-                            <v-btn dark text @click="dialog = false">Spara</v-btn>
+                            <v-btn dark text @click="createNewInvoiceDialog = false">Spara</v-btn>
                         </v-toolbar-items>
                     </v-toolbar>
                     <v-list three-line subheader>
-                        <v-subheader>User Controls</v-subheader>
+                        <v-subheader style="font-size: 20px;" class="mt-1">Fakturauppgifter</v-subheader>
                         <v-list-item>
                             <v-list-item-content>
 
@@ -257,9 +255,9 @@
                                     <v-col cols="3" sm="6" md="4" :key="item.name" @click="showCustomerDetails(item)">
                                         <!--<v-list-item-content>-->
                                         <!--<v-list-item-subtitle v-text="item.phoneNumber"></v-list-item-subtitle>
-            <v-list-item-title v-text="item.name" style="font-weight: bold;"></v-list-item-title>
-            <v-list-item-subtitle class="text--primary" v-text="item.emailAddress"></v-list-item-subtitle>
-            <v-list-item-subtitle class="text--primary" v-text="item.city"></v-list-item-subtitle>-->
+                        <v-list-item-title v-text="item.name" style="font-weight: bold;"></v-list-item-title>
+                        <v-list-item-subtitle class="text--primary" v-text="item.emailAddress"></v-list-item-subtitle>
+                        <v-list-item-subtitle class="text--primary" v-text="item.city"></v-list-item-subtitle>-->
                                         <v-card>
                                             <p>item.phoneNumber</p>
                                             <p style="font-weight: bold;">item.name</p>
@@ -277,7 +275,7 @@
                                 <v-list two-line>
                                     <v-list-item-group>
                                         <template v-for="(item, index) in productsToChoose">
-                                            <v-list-item :key="item.name" @click="showCustomerDetails(item)">
+                                            <v-list-item :key="item.name">
                                                 <template>
                                                     <v-list-item-content>
                                                         <v-list-item-subtitle v-text="item.phoneNumber" class="pa-1"></v-list-item-subtitle>
@@ -301,77 +299,77 @@
                                     </v-list-item-group>
                                 </v-list>
 
-
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editZipCode" label="Fakturatext"></v-text-field>
-                                </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="editCity" label="Fraktavgift"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="editCountry" label="Fakturaavgift"></v-text-field>
                                 </v-col>
-                                <v-col cols="12">
-                                    <v-text-field v-model="editOrganisationNumber" label="Organisationsnummer"></v-text-field>
-                                </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editPhoneNumber" label="Telefonnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editSecondPhoneNumber" label="Andra telefonnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editFax" label="Fax"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editEmailAddress" label="E-post"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editWebAddress" label="Webbadress"></v-text-field>
+                                    <v-spacer></v-spacer>
+                                    <v-card class="pa-5">
+                                        <h3>Summa: 2 472 sek</h3>
+                                    </v-card>
                                 </v-col>
                                 <v-col cols="12" sm="12" md="12">
-                                    <v-text-field v-model="editDescription" label="Beskrivning / egna anteckningar"></v-text-field>
+                                    <v-text-field v-model="editDescription" label="Fakturatext"></v-text-field>
                                 </v-col>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
+                  
+                        <v-spacer></v-spacer>
+                        <v-card-actions>
+                            <v-btn icon
+                                   @click="show = !show">
+                                Skicka som <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                            </v-btn>
 
+                            <v-expand-transition>
+                                <div v-show="show">
 
-
-                    <v-divider></v-divider>
-
-
-
-                    <v-list three-line subheader>
-                        <v-subheader>General</v-subheader>
-                        <v-list-item>
-                            <v-list-item-action>
-                                <v-checkbox v-model="notifications"></v-checkbox>
-                            </v-list-item-action>
-                            <v-list-item-content>
-                                <v-list-item-title>Notifications</v-list-item-title>
-                                <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item>
-                            <v-list-item-action>
-                                <v-checkbox v-model="sound"></v-checkbox>
-                            </v-list-item-action>
-                            <v-list-item-content>
-                                <v-list-item-title>Sound</v-list-item-title>
-                                <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item>
-                            <v-list-item-action>
-                                <v-checkbox v-model="widgets"></v-checkbox>
-                            </v-list-item-action>
-                            <v-list-item-content>
-                                <v-list-item-title>Auto-add widgets</v-list-item-title>
-                                <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
+                                    <v-list-item>
+                                        <v-list-item-action>
+                                            <v-radio v-model="notifications"></v-radio>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+                                            <v-list-item-title>Faktura</v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                    <v-list-item>
+                                        <v-list-item-action>
+                                            <v-radio v-model="sound"></v-radio>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+                                            <v-list-item-title>Påminnelse</v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                    <v-list-item>
+                                        <v-list-item-action>
+                                            <v-radio v-model="widgets"></v-radio>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+                                            <v-list-item-title>Offert</v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </div>
+                            </v-expand-transition>
+                        </v-card-actions>
+                   
+                  
+                        <v-card-actions>
+                            <v-btn disabled color="primary" class="mt-3 mr-5">
+                                Skicka
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn color="primary" class="ma-3">
+                                Spara
+                            </v-btn>
+                        </v-card-actions>
+                        <p class="pa-5" style="font-size:14px; font-weight: 300;">
+                           Välj först ovanför vad du vill skicka som.
+                        </p>
+                  
                 </v-card>
             </v-dialog>
         </v-row>
@@ -394,8 +392,8 @@
             notifications: false,
             sound: true,
             widgets: false,
-
-
+    createNewInvoiceDialog: false,
+    show: false,
 
 
 
@@ -412,7 +410,6 @@
             invoicePayDateMenu: false,
             invoicePayDateModal: false,
 
-
             productsToChoose: [
 
                 {
@@ -420,36 +417,8 @@
                     city: 'Värnamo',
                     emailAddress: 'alexander@hotmail.com',
                     name: 'Produktnamnet'
-                },
-                {
-                    phoneNumber: '0761952005',
-                    city: 'Värnamo',
-                    emailAddress: 'alexander@hotmail.com',
-                    name: 'Produktnamn2'
-                },
-                {
-                    phoneNumber: '0761952005',
-                    city: 'Värnamo',
-                    emailAddress: 'alexander@hotmail.com',
-                    name: 'Produktnamn3'
-                },
-                {
-                    phoneNumber: '0761952005',
-                    city: 'Värnamo',
-                    emailAddress: 'alexander@hotmail.com',
-                    name: 'Produktnamn4'
-                },
-
+                }
             ],
-
-
-
-
-
-
-
-
-
 
             //create customer v-models start------------
             name: '',
