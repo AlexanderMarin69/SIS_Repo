@@ -58,12 +58,12 @@ namespace vueproject.Controllers
 
                     var NewInvoice = new Invoice();
             NewInvoice.DateCreated = DateTime.Now;
-            NewInvoice.EmailFrom = vm.EmailFrom;
-            NewInvoice.EmailTo = vm.EmailTo;
+            //NewInvoice.EmailFrom = vm.EmailFrom; due to changed viewmodel.........
+            //NewInvoice.EmailTo = vm.EmailTo;
             NewInvoice.InvoicePdfGuid = fileName;
             NewInvoice.InvoiceProducts = vm.InvoiceProducts;
             NewInvoice.MessageText = vm.MessageText;
-            NewInvoice.UserName = "TestUserName";
+           //NewInvoice.UserName = "TestUserName";
             
             //TODO: real invoice has receiveraddress deliver adress etc etc, add by time after testing
             

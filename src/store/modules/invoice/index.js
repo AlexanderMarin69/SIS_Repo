@@ -4,14 +4,8 @@ import mutations from "./mutations";
 export default {
     namespaced: true,
     state: {
-        InvoiceProducts: [
-            //{
-            //ANR,
-            //Price,
-            //Name
-            //}
-        ],
-        InvoiceId: ''
+        allUserInvoices: [],
+        InvoiceProducts: [],
     },
     actions,
     mutations

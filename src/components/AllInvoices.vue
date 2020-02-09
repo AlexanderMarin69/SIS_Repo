@@ -591,8 +591,8 @@
                     this.productAddedDialog();
             },
             ...mapActions({
-                getAllCustomers: 'customer/GET_ALL_CUSTOMERS',
-                searchCustomers: 'customer/SEARCH_CUSTOMERS',
+                getAllInvoices: 'customer/GET_ALL_INVOICES',
+                searchInvoices: 'customer/SEARCH_INVOICES',
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;
@@ -600,11 +600,11 @@
         },
         computed: {
             ...mapState({
-                allUserCustomersToDisplay: state => state.customer.allUserCustomers
+                allUserInvoicesToDisplay: state => state.customer.allUserInvoices
             }),
         },
         beforeMount() {
-            this.getAllCustomers();
+            this.getAllInvoices();
         }
     }
 

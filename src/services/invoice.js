@@ -7,7 +7,6 @@ export default {
     GeneratePdfInvoice: (vm) => {
         return axios.post('/api/CreateInvoice/GenerateInvoicePdf', vm);
     },
-
     SendInvoiceViaMail: (vm) => {
         return axios.post('/api/CreateInvoice/SendInvoiceViaMail', vm)
             .then(result => {
@@ -17,6 +16,12 @@ export default {
             }).catch(result => { console.log(result, 'error mannen'); })
 
             ;
+    },
+    GetAllInvoices: () => {
+        return axios.get('/api/customers/GetAllCustomers')
+            .then(result => {
+                return result.data;
+            });
     },
 
     

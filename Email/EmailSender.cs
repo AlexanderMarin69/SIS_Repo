@@ -27,7 +27,7 @@ namespace vueproject.Email
             var apiKey = _appSettings.SENDGRID_API_KEY;
             var client = new SendGridClient(apiKey);
 
-            var from = new EmailAddress(vm.EmailFrom, vm.UserName);
+            var from = new EmailAddress(vm.EmailFrom, "someUserNameFIXXX");
             var to = new EmailAddress(vm.EmailTo, "TestToMustFix");
 
             string FNR = "2";
