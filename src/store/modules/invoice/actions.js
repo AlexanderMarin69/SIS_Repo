@@ -1,7 +1,7 @@
 ﻿import InvoiceAPI from '@/services/invoice'
 export default {
     GET_ALL_INVOICES({ commit }) {
-        return CustomerAPI.GetAllInvoices()
+        return InvoiceAPI.GetAllInvoices()
             .then(result => {
 
                 // custom console
@@ -24,7 +24,7 @@ export default {
     //},
 
     SEARCH_CUSTOMERS({ commit }, data) {
-        return CustomerAPI.SearchCustomers(data)
+        return InvoiceAPI.SearchCustomers(data)
             .then(result => {
                 // custom console
                 // eslint-disable-next-line no-console
