@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using vueproject.DB;
 using vueproject.Models;
@@ -14,50 +15,53 @@ namespace vueproject.Controllers
     public class InvoiceController : Controller
     {
         private vueprojectDatabaseContext ctx;
-        public InvoiceController(vueprojectDatabaseContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public InvoiceController(vueprojectDatabaseContext context,
+            UserManager<IdentityUser> UserManager)
         {
+            _userManager = UserManager;
             ctx = context;
 
         }
         [HttpPost]
-        public async Task<IActionResult> CreateNewInvoice(CreateCustomerViewModel vm)
+        public async Task<IActionResult> CreateNewInvoice(InvoiceViewModel vm)
         {
-            var existingCustomerId = ctx.Customers.Where(x => x.CustomerId == vm.CustomerId).FirstOrDefault();
-            if (existingCustomerId != null)
-            {
-                var ErrorMessage = "Det finns redan en produkt med detta kundnummret, välj ett annat.";
-                return Ok(ErrorMessage);
-            }
-            else
-            {
-                try
-                {
-                    var NewCustomer = new Customer();
-                    NewCustomer.Name = vm.Name;
-                    NewCustomer.CustomerId = vm.CustomerId;
-                    NewCustomer.InvoiceAddress = vm.InvoiceAddress;
-                    NewCustomer.SecondInvoiceAddress = vm.SecondInvoiceAddress;
-                    NewCustomer.ZipCode = vm.ZipCode;
-                    NewCustomer.City = vm.City;
-                    NewCustomer.Country = vm.Country;
-                    NewCustomer.OrganisationNumber = vm.OrganisationNumber;
-                    NewCustomer.Fax = vm.Fax;
-                    NewCustomer.PhoneNumber = vm.PhoneNumber;
-                    NewCustomer.SecondPhoneNumber = vm.SecondPhoneNumber;
-                    NewCustomer.EmailAddress = vm.EmailAddress;
-                    NewCustomer.WebAddress = vm.WebAddress;
-                    NewCustomer.Description = vm.Description;
+            var userData = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
 
-                    ctx.Customers.Add(NewCustomer);
-                    await ctx.SaveChangesAsync();
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-                return Ok();
-            }
+            var Customer = ctx.Customers.Where(x => x.CustomerId == vm.AssociatedCustomerId).FirstOrDefault();
 
+            try
+            {
+                var NewInvoice = new Invoice();
+                NewInvoice.AssociatedUserId = user.UserId;
+                NewInvoice.InvoiceProducts = vm.InvoiceProducts;
+                NewInvoice.EmailFrom = user.EmailAddress;
+                NewInvoice.EmailTo = Customer.EmailAddress;
+
+                NewInvoice.CustomerInvoiceAddress = Customer.InvoiceAddress;
+                NewInvoice.CustomerZipCode = Customer.ZipCode;
+                NewInvoice.CustomerCity = Customer.City;
+                NewInvoice.CustomerCountry = Customer.Country;
+
+                NewInvoice.UserInvoiceAddress = user.InvoiceAddress;
+                NewInvoice.UserZipCode = user.ZipCode;
+                NewInvoice.UserCity = user.City;
+                NewInvoice.UserCountry = user.Country;
+
+                NewInvoice.InvoiceDate = vm.InvoiceDate;
+                NewInvoice.InvoicePayDate = vm.InvoicePayDate;
+                NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
+                NewInvoice.InvoicecPastDuePercentageFee = vm.InvoicecPastDuePercentageFee;
+
+                ctx.Invoices.Add(NewInvoice);
+                await ctx.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return Ok();
         }
 
         //[HttpPost]

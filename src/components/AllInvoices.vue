@@ -362,7 +362,7 @@
                                 Skicka
                             </v-btn>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary" class="ma-3">
+                            <v-btn color="primary" class="ma-3" onclick="saveInvoice()">
                                 Spara
                             </v-btn>
                         </v-card-actions>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ namespace vueproject.Models
 {
     public class Customer : BaseModel
     {
+        public string AssociatedUser { get; set; }
         public string CustomerId { get; set; }
         public string InvoiceAddress { get; set; }
         public string SecondInvoiceAddress { get; set; }

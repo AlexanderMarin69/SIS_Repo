@@ -34,8 +34,8 @@ namespace vueproject.Email
 
             var subject = $"Faktura {FNR}";
 
-            var plainTextContent = vm.MessageText;
-            var htmlContent = vm.MessageText;
+            var plainTextContent = vm.InvoiceMessageText;
+            var htmlContent = vm.InvoiceMessageText;
 
             var msg = MailHelper.CreateSingleEmail(
                 from,

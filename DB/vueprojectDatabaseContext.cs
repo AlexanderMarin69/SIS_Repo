@@ -27,6 +27,7 @@ namespace vueproject.DB
         //public DbSet<Models.Subcategory> Subcategories { get; set; }
         public DbSet<Models.Invoice> Invoices { get; set; }
         public DbSet<Models.Customer> Customers { get; set; }
+        public DbSet<Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
 
