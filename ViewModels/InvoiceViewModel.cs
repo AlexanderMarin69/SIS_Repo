@@ -34,5 +34,9 @@ namespace vueproject.ViewModels
         public DateTime InvoicePayDate { get; set; }
         public string InvoiceMessageText { get; set; }
         public string InvoicecPastDuePercentageFee { get; set; }
+        public string deliveryFee { get; set; }
+        public string InvoiceFee { get; set; }
+        public string OptionalReminderFee { get; set; }
+        public string InvoiceTypeToSend { get; set; }
     }
 }

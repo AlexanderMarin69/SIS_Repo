@@ -23,7 +23,9 @@ namespace vueproject.Controllers
         private vueprojectDatabaseContext ctx;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public CreateInvoiceController(UserManager<IdentityUser> userManager, EmailSender Email, vueprojectDatabaseContext context)
+        public CreateInvoiceController(UserManager<IdentityUser> userManager, 
+            EmailSender Email, 
+            vueprojectDatabaseContext context)
         {
             mail = Email;
             ctx = context;

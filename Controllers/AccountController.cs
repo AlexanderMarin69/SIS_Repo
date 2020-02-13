@@ -11,6 +11,7 @@ using vueproject.Models;
 using AutoMapper;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using vueproject.DB;
 
 namespace vueproject.Controllers
 {
@@ -21,15 +22,19 @@ namespace vueproject.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private vueprojectDatabaseContext ctx;
 
         public AccountController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            vueprojectDatabaseContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            ctx = context;
+
         }
 
-       [HttpGet]
+        [HttpGet]
         public IActionResult IsUserLoggedIn()
         {
             if (User.Identity.IsAuthenticated)
@@ -192,9 +197,16 @@ namespace vueproject.Controllers
 
                 if (result.Succeeded)
                 {
-                    //TODO: add role choose some role mannen
-                    //await _userManager.AddToRoleAsync(user, "player");
                     await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    var NewApplicationUser = new ApplicationUser();
+                    NewApplicationUser.EmailAddress = vm.Email;
+                    NewApplicationUser.Name = vm.FirstName;
+                    NewApplicationUser.LastName = vm.LastName;
+                    NewApplicationUser.UserId = user.Id;
+                    await ctx.ApplicationUsers.AddAsync(NewApplicationUser);
+                    await ctx.SaveChangesAsync();
+
                     return Ok();
                 }
 

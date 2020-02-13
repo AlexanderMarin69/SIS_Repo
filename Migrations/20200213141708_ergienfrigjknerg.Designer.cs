@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vueproject.DB;
 
 namespace vueproject.Migrations
 {
     [DbContext(typeof(vueprojectDatabaseContext))]
-    partial class vueprojectDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200213141708_ergienfrigjknerg")]
+    partial class ergienfrigjknerg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,8 +247,6 @@ namespace vueproject.Migrations
 
                     b.Property<string>("ZipCode");
 
-                    b.Property<string>("descriptiveDataForSelectList");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
@@ -311,8 +311,6 @@ namespace vueproject.Migrations
 
                     b.Property<string>("ArticleNumber");
 
-                    b.Property<string>("AssociatedUserId");
-
                     b.Property<decimal>("CostPerItem");
 
                     b.Property<DateTime>("DateCreated");
@@ -329,6 +327,8 @@ namespace vueproject.Migrations
 
                     b.Property<string>("ManufacturerSku");
 
+                    b.Property<string>("ModifiedById");
+
                     b.Property<string>("Name");
 
                     b.Property<decimal>("Price");
@@ -342,6 +342,8 @@ namespace vueproject.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("InvoiceId");
+
+                    b.HasIndex("ModifiedById");
 
                     b.ToTable("Products");
                 });
@@ -410,6 +412,10 @@ namespace vueproject.Migrations
                     b.HasOne("vueproject.Models.Invoice")
                         .WithMany("InvoiceProducts")
                         .HasForeignKey("InvoiceId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "ModifiedBy")
+                        .WithMany()
+                        .HasForeignKey("ModifiedById");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using vueproject.DB;
@@ -15,14 +16,22 @@ namespace vueproject.Controllers
     public class CustomersController : Controller
     {
         private vueprojectDatabaseContext ctx;
-        public CustomersController(vueprojectDatabaseContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public CustomersController(vueprojectDatabaseContext context,
+             UserManager<IdentityUser> UserManager)
         {
             ctx = context;
+            _userManager = UserManager;
 
         }
         [HttpPost]
         public async Task<IActionResult> CreateNewCustomer(CreateCustomerViewModel vm)
         {
+            var userData = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
+
+
             var existingCustomerId = ctx.Customers.Where(x => x.CustomerId == vm.CustomerId).FirstOrDefault();
             if (existingCustomerId != null)
             {
@@ -48,6 +57,8 @@ namespace vueproject.Controllers
                     NewCustomer.EmailAddress = vm.EmailAddress;
                     NewCustomer.WebAddress = vm.WebAddress;
                     NewCustomer.Description = vm.Description;
+                    NewCustomer.AssociatedUserId = user.UserId;
+                    NewCustomer.descriptiveDataForSelectList = $"{NewCustomer.CustomerId} - {vm.Name} - {vm.City} - {vm.EmailAddress}";
 
                     ctx.Customers.Add(NewCustomer);
                     await ctx.SaveChangesAsync();
@@ -111,7 +122,10 @@ namespace vueproject.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllCustomers()
         {
-            var allCustomers = await ctx.Customers.ToListAsync();
+            var userData = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
+
+            var allCustomers = await ctx.Customers.Where(x => x.AssociatedUserId == user.UserId).ToListAsync();
             return Ok(allCustomers);
         }
         [HttpPost]

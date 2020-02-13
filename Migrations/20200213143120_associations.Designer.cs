@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vueproject.DB;
 
 namespace vueproject.Migrations
 {
     [DbContext(typeof(vueprojectDatabaseContext))]
-    partial class vueprojectDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200213143120_associations")]
+    partial class associations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,8 +246,6 @@ namespace vueproject.Migrations
                     b.Property<string>("WebAddress");
 
                     b.Property<string>("ZipCode");
-
-                    b.Property<string>("descriptiveDataForSelectList");
 
                     b.HasKey("Id");
 

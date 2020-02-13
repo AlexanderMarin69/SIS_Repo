@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using vueproject.DB;
@@ -16,14 +17,20 @@ namespace vueproject.Controllers
     {
 
         private vueprojectDatabaseContext ctx;
-        public ProductController(vueprojectDatabaseContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public ProductController(vueprojectDatabaseContext context,
+             UserManager<IdentityUser> UserManager)
         {
             ctx = context;
-
+            _userManager = UserManager;
         }
         [HttpPost]
         public async Task<IActionResult> CreateNewProduct(CreateNewProductViewModel vm)
         {
+            var userData = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
+
             var existingProductSku = ctx.Products.Where(x => x.ArticleNumber == vm.ArticleNumber).FirstOrDefault();
             if (existingProductSku != null)
             {
@@ -48,6 +55,7 @@ namespace vueproject.Controllers
                     NewProduct.CostPerItem = vm.CostPerItem;
                     NewProduct.StockBalance = vm.StockBalance;
                     NewProduct.ProductType = vm.ProductType;
+                    NewProduct.AssociatedUserId = user.UserId;
 
                     ctx.Products.Add(NewProduct);
                     await ctx.SaveChangesAsync();
@@ -109,7 +117,10 @@ namespace vueproject.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
-            var allProducts = await ctx.Products.ToListAsync();
+            var userData = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
+
+            var allProducts = await ctx.Products.Where(x => x.AssociatedUserId == user.UserId).ToListAsync();
             return Ok(allProducts);
         }
         [HttpPost]

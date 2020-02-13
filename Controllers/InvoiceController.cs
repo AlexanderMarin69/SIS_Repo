@@ -35,6 +35,7 @@ namespace vueproject.Controllers
             {
                 var NewInvoice = new Invoice();
                 NewInvoice.AssociatedUserId = user.UserId;
+                //NewInvoice.AssociatedCustomerId = Customer.Id; add rest of the null tables from ssms
                 NewInvoice.InvoiceProducts = vm.InvoiceProducts;
                 NewInvoice.EmailFrom = user.EmailAddress;
                 NewInvoice.EmailTo = Customer.EmailAddress;

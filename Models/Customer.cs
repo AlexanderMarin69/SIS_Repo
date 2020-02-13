@@ -8,7 +8,7 @@ namespace vueproject.Models
 {
     public class Customer : BaseModel
     {
-        public string AssociatedUser { get; set; }
+        public string AssociatedUserId { get; set; }
         public string CustomerId { get; set; }
         public string InvoiceAddress { get; set; }
         public string SecondInvoiceAddress { get; set; }
@@ -22,5 +22,6 @@ namespace vueproject.Models
         public string EmailAddress { get; set; }
         public string WebAddress { get; set; }
         public string Description { get; set; }
+        public string descriptiveDataForSelectList { get; set; }
     }
 }

@@ -24,6 +24,10 @@ export default {
             });
     },
 
+    CreateNewInvoice: (vm) => {
+        return axios.post('/api/Invoice/CreateNewInvoice', vm);
+    },
+
     
 /* eslint-enable no-console */
 }

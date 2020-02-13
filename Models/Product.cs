@@ -8,7 +8,7 @@ namespace vueproject.Models
 {
     public class Product : BaseModel
     {
-        public IdentityUser ModifiedBy { get; set; }
+        public string AssociatedUserId { get; set; }
         public string ArticleNumber { get; set; }
         public decimal Price { get; set; }
         public DateTime DateCreated { get; set; }

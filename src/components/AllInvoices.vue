@@ -60,7 +60,7 @@
                     <v-card-text>
                         <v-container>
                             <v-row>
-                                <v-col cols="12" sm="6" md="4">
+                                <!--<v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="name" label="Namn"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
@@ -101,7 +101,7 @@
                                 </v-col>
                                 <v-col cols="12" sm="12" md="12">
                                     <v-text-field v-model="description" label="Beskrivning / egna anteckningar"></v-text-field>
-                                </v-col>
+                                </v-col>-->
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -202,9 +202,17 @@
                         <v-list-item>
                             <v-list-item-content>
 
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editName" label="HÄMTA LISTA PÅ KUNDER OCH FYLL INVOICE V-MODELS"></v-text-field>
-                                </v-col>
+
+                                <v-select v-model="select"
+                                          :hint="`${select.name}, ${select.city}, ${select.phoneNumber}, ${select.emailAddress}, ${select.customerId}`"
+                                          :items="items"
+                                          item-text="descriptiveDataForSelectList"
+                                          item-value="customerId"
+                                          label="Välj kund"
+                                          persistent-hint
+                                          return-object
+                                          single-line></v-select>
+
                                 <v-col cols="12" sm="6" md="4">
                                     <v-menu ref="invoiceDateMenu"
                                             v-model="invoiceDateMenu"
@@ -249,15 +257,93 @@
                                 </v-col>
 
 
-                                <v-text-field class="pa-2 mt-4" label="Lägg till produkter" placeholder="Sök produkter" v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
+
+
+
+
+
+
+
+
+
+
+
+
+                                <v-select v-model="selectedFruits"
+                                          :items="fruits"
+                                          label="Favorite Fruits"
+                                          multiple>
+                                    <template v-slot:prepend-item>
+                                        <v-list-item ripple
+                                                     @click="toggle">
+                                            <v-list-item-action>
+                                                <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                                            </v-list-item-action>
+                                            <v-list-item-content>
+                                                <v-list-item-title>Select All</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                        <v-divider class="mt-2"></v-divider>
+                                    </template>
+                                    <template v-slot:append-item>
+                                        <v-divider class="mb-2"></v-divider>
+                                        <v-list-item disabled>
+                                            <v-list-item-avatar color="grey lighten-3">
+                                                <v-icon>mdi-food-apple</v-icon>
+                                            </v-list-item-avatar>
+
+                                            <v-list-item-content v-if="likesAllFruit">
+                                                <v-list-item-title>Holy smokes, someone call the fruit police!</v-list-item-title>
+                                            </v-list-item-content>
+
+                                            <v-list-item-content v-else-if="likesSomeFruit">
+                                                <v-list-item-title>Fruit Count</v-list-item-title>
+                                                <v-list-item-subtitle>{{ selectedFruits.length }}</v-list-item-subtitle>
+                                            </v-list-item-content>
+
+                                            <v-list-item-content v-else>
+                                                <v-list-item-title>
+                                                    How could you not like fruit?
+                                                </v-list-item-title>
+                                                <v-list-item-subtitle>
+                                                    Go ahead, make a selection above!
+                                                </v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </template>
+                                </v-select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <!--<v-list-item-group>-->
                                 <template v-for="(item, index) in productsToChoose">
                                     <v-col cols="3" sm="6" md="4" :key="item.name" @click="showCustomerDetails(item)">
                                         <!--<v-list-item-content>-->
                                         <!--<v-list-item-subtitle v-text="item.phoneNumber"></v-list-item-subtitle>
-                        <v-list-item-title v-text="item.name" style="font-weight: bold;"></v-list-item-title>
-                        <v-list-item-subtitle class="text--primary" v-text="item.emailAddress"></v-list-item-subtitle>
-                        <v-list-item-subtitle class="text--primary" v-text="item.city"></v-list-item-subtitle>-->
+            <v-list-item-title v-text="item.name" style="font-weight: bold;"></v-list-item-title>
+            <v-list-item-subtitle class="text--primary" v-text="item.emailAddress"></v-list-item-subtitle>
+            <v-list-item-subtitle class="text--primary" v-text="item.city"></v-list-item-subtitle>-->
                                         <v-card>
                                             <p>item.phoneNumber</p>
                                             <p style="font-weight: bold;">item.name</p>
@@ -300,10 +386,13 @@
                                 </v-list>
 
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editCity" label="Fraktavgift"></v-text-field>
+                                    <v-text-field v-model="deliveryFee" label="Fraktavgift"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editCountry" label="Fakturaavgift"></v-text-field>
+                                    <v-text-field v-model="customerId" label="customerId"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="InvoiceFee" label="Fakturaavgift"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-spacer></v-spacer>
@@ -312,7 +401,7 @@
                                     </v-card>
                                 </v-col>
                                 <v-col cols="12" sm="12" md="12">
-                                    <v-text-field v-model="editDescription" label="Fakturatext"></v-text-field>
+                                    <v-text-field v-model="invoiceMessageText" label="Fakturatext"></v-text-field>
                                 </v-col>
                             </v-list-item-content>
                         </v-list-item>
@@ -362,7 +451,7 @@
                                 Skicka
                             </v-btn>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary" class="ma-3" onclick="saveInvoice()">
+                            <v-btn color="primary" class="ma-3" @click="saveInvoice()">
                                 Spara
                             </v-btn>
                         </v-card-actions>
@@ -386,8 +475,86 @@
     /* eslint-disable no-console */
     import { mapState, mapActions } from 'vuex';
     import CustomerAPI from '@/services/Customer'
+    import InvoiceAPI from '@/services/invoice'
     export default {
         data: () => ({
+
+
+
+
+
+            //actions on click push list selectedFruits to vuex array and then finally on save push get array in object and push to api 
+
+            fruits: [
+        'Apples',
+        'Apricots',
+        'Avocado',
+        'Bananas',
+        'Blueberries',
+        'Blackberries',
+        'Boysenberries',
+        'Bread fruit',
+        'Cantaloupes (cantalope)',
+        'Cherries',
+        'Cranberries',
+        'Cucumbers',
+        'Currants',
+        'Dates',
+        'Eggplant',
+        'Figs',
+        'Grapes',
+        'Grapefruit',
+        'Guava',
+        'Honeydew melons',
+        'Huckleberries',
+        'Kiwis',
+        'Kumquat',
+        'Lemons',
+        'Limes',
+        'Mangos',
+        'Mulberries',
+        'Muskmelon',
+        'Nectarines',
+        'Olives',
+        'Oranges',
+        'Papaya',
+        'Peaches',
+        'Pears',
+        'Persimmon',
+        'Pineapple',
+        'Plums',
+        'Pomegranate',
+        'Raspberries',
+        'Rose Apple',
+        'Starfruit',
+        'Strawberries',
+        'Tangerines',
+        'Tomatoes',
+        'Watermelons',
+        'Zucchini',
+      ],
+            selectedFruits: [],
+
+
+
+
+
+
+
+
+
+            //TO FIX
+            searchCustomers: '',
+            showCustomerIdErrorMessage: false,
+            searchProducts: '',
+            allUserCustomersToDisplay: '',
+
+            select: { phoneNumber: '',
+                    city: '',
+                    emailAddress: '',
+                name: 'Välj kund',
+            customerId: ''},
+
             dialog: false,
             notifications: false,
             sound: true,
@@ -420,24 +587,14 @@
                 }
             ],
 
-            //create customer v-models start------------
-            name: '',
+            //create invoice v-models start------------
+            deliveryFee: '',
+            InvoiceFee: '',
+            optionalReminderFee: '',
+            invoiceTypeToSend: '',
+            invoiceMessageText: '',
             customerId: '',
-            invoiceAddress: '',
-            secondInvoiceAddress: '',
-            zipCode: '',
-            city: '',
-            country: '',
-            organisationNumber: '',
-            phoneNumber: '',
-            secondPhoneNumber: '',
-            fax: '',
-            emailAddress: '',
-            webAddress: '',
-            description: '',
-
-            showCustomerIdErrorMessage: false,
-            //create customer v-models end---------------
+            //create invoice v-models end---------------
 
             //--------------------------
 
@@ -547,52 +704,39 @@
                 this.productSuccessfullyAddedDialog = true;
                 setTimeout(() => (this.productSuccessfullyAddedDialog = false), 2000)
             },
-            createNewCustomer() {
+            saveInvoice() {
                 this.showCustomerIdErrorMessage = false,
-                    CustomerAPI.CreateNewCustomer(
+                    InvoiceAPI.CreateNewInvoice(
                         {
-                            Name: this.name,
-                            CustomerId: this.customerId,
-                            InvoiceAddress: this.invoiceAddress,
-                            SecondInvoiceAddress: this.secondInvoiceAddress,
-                            ZipCode: this.zipCode,
-                            City: this.city,
-                            Country: this.country,
-                            OrganisationNumber: this.organisationNumber,
-                            PhoneNumber: this.phoneNumber,
-                            SecondPhoneNumber: this.secondPhoneNumber,
-                            Fax: this.fax,
-                            EmailAddress: this.emailAddress,
-                            WebAddress: this.webAddress,
-                            Description: this.description
-
+                            InvoiceDate: this.invoiceDate,
+                            InvoicePayDate: this.invoicePayDate,
+                            DeliveryFee: this.deliveryFee,
+                            InvoiceFee: this.invoiceFee,
+                            OptionalReminderFee: this.optionalReminderFee,
+                            InvoiceTypeToSend: this.invoiceTypeToSend,
+                            InvoiceMessageText: this.invoiceMessageText,
+                            AssociatedCustomerId: this.select.customerId
                         },
                     ).then(result => {
                         if (result == 'Det finns redan en produkt med detta kundnummret, välj ett annat.') {
                             this.showCustomerIdErrorMessage = true
                         } else {
-                            this.name = '',
-                                this.customerId = '',
-                                this.invoiceAddress = '',
-                                this.secondInvoiceAddress = '',
-                                this.zipCode = '',
-                                this.city = '',
-                                this.country = '',
-                                this.organisationNumber = '',
-                                this.phoneNumber = '',
-                                this.secondPhoneNumber = '',
-                                this.fax = '',
-                                this.emailAddress = '',
-                                this.webAddress = '',
-                                this.description = ''
+                             this.invoiceDate = '',
+                                this.invoicePayDate = '',
+                                this.deliveryFee = '',
+                                this.invoiceFee = '',
+                                this.optionalReminderFee = '',
+                                this.invoiceTypeToSend = '',
+                                this.invoiceMessageText = ''
                         }
                     }),
 
                     this.productAddedDialog();
             },
             ...mapActions({
-                getAllInvoices: 'customer/GET_ALL_INVOICES',
-                searchInvoices: 'customer/SEARCH_INVOICES',
+                //getAllInvoices: 'customer/GET_ALL_INVOICES',
+                //searchInvoices: 'customer/SEARCH_INVOICES',
+                getAllCustomers: 'customer/GET_ALL_CUSTOMERS',
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;
@@ -600,11 +744,13 @@
         },
         computed: {
             ...mapState({
-                allUserInvoicesToDisplay: state => state.customer.allUserInvoices
+                //allUserInvoicesToDisplay: state => state.customer.allUserInvoices,
+                items: state => state.customer.allUserCustomers
             }),
         },
         beforeMount() {
-            this.getAllInvoices();
+            //this.getAllInvoices();
+            this.getAllCustomers();
         }
     }
 
