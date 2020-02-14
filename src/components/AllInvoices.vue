@@ -181,7 +181,7 @@
 
         <v-row justify="center">
             <v-dialog v-model="createNewInvoiceDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-               
+
                 <v-card>
                     <v-toolbar dark color="primary">
                         <v-btn icon dark @click="createNewInvoiceDialog = false">
@@ -205,15 +205,14 @@
 
                                 <v-select v-model="select"
                                           :hint="`${select.name}, ${select.city}, ${select.phoneNumber}, ${select.emailAddress}, ${select.customerId}`"
-                                          :items="items"
+                                          :items="allCustomers"
                                           item-text="descriptiveDataForSelectList"
                                           item-value="customerId"
                                           label="Välj kund"
-                                          persistent-hint
                                           return-object
                                           single-line></v-select>
 
-                                <v-col cols="12" sm="6" md="4">
+                                <v-col cols="12" sm="6" md="6">
                                     <v-menu ref="invoiceDateMenu"
                                             v-model="invoiceDateMenu"
                                             :close-on-content-click="false"
@@ -223,18 +222,18 @@
                                             min-width="290px">
                                         <template v-slot:activator="{ on }">
                                             <v-text-field v-model="invoiceDate"
-                                                          label="Picker in invoiceDateMenu: "
+                                                          label="Fakturadatum"
                                                           readonly
                                                           v-on="on"></v-text-field>
                                         </template>
                                         <v-date-picker v-model="invoiceDate" no-title scrollable>
                                             <v-spacer></v-spacer>
-                                            <v-btn text color="primary" @click="invoiceDateMenu = false">Cancel</v-btn>
+                                            <v-btn text color="primary" @click="invoiceDateMenu = false">Avbryt</v-btn>
                                             <v-btn text color="primary" @click="$refs.invoiceDateMenu.save(invoiceDate)">OK</v-btn>
                                         </v-date-picker>
                                     </v-menu>
                                 </v-col>
-                                <v-col cols="12" sm="6" md="4">
+                                <v-col cols="12" sm="6" md="6">
                                     <v-menu ref="invoicePayDateMenu"
                                             v-model="invoicePayDateMenu"
                                             :close-on-content-click="false"
@@ -244,7 +243,7 @@
                                             min-width="290px">
                                         <template v-slot:activator="{ on }">
                                             <v-text-field v-model="invoicePayDate"
-                                                          label="Picker in invoicePayDateMenu: "
+                                                          label="Förfallodatum"
                                                           readonly
                                                           v-on="on"></v-text-field>
                                         </template>
@@ -258,107 +257,41 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-                                <v-select v-model="selectedFruits"
-                                          :items="fruits"
-                                          label="Favorite Fruits"
-                                          multiple>
-                                    <template v-slot:prepend-item>
-                                        <v-list-item ripple
-                                                     @click="toggle">
-                                            <v-list-item-action>
-                                                <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
-                                            </v-list-item-action>
-                                            <v-list-item-content>
-                                                <v-list-item-title>Select All</v-list-item-title>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                        <v-divider class="mt-2"></v-divider>
-                                    </template>
-                                    <template v-slot:append-item>
-                                        <v-divider class="mb-2"></v-divider>
-                                        <v-list-item disabled>
-                                            <v-list-item-avatar color="grey lighten-3">
-                                                <v-icon>mdi-food-apple</v-icon>
-                                            </v-list-item-avatar>
-
-                                            <v-list-item-content v-if="likesAllFruit">
-                                                <v-list-item-title>Holy smokes, someone call the fruit police!</v-list-item-title>
-                                            </v-list-item-content>
-
-                                            <v-list-item-content v-else-if="likesSomeFruit">
-                                                <v-list-item-title>Fruit Count</v-list-item-title>
-                                                <v-list-item-subtitle>{{ selectedFruits.length }}</v-list-item-subtitle>
-                                            </v-list-item-content>
-
-                                            <v-list-item-content v-else>
-                                                <v-list-item-title>
-                                                    How could you not like fruit?
-                                                </v-list-item-title>
-                                                <v-list-item-subtitle>
-                                                    Go ahead, make a selection above!
-                                                </v-list-item-subtitle>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                    </template>
-                                </v-select>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                <!--<v-list-item-group>-->
-                                <template v-for="(item, index) in productsToChoose">
-                                    <v-col cols="3" sm="6" md="4" :key="item.name" @click="showCustomerDetails(item)">
-                                        <!--<v-list-item-content>-->
-                                        <!--<v-list-item-subtitle v-text="item.phoneNumber"></v-list-item-subtitle>
-            <v-list-item-title v-text="item.name" style="font-weight: bold;"></v-list-item-title>
-            <v-list-item-subtitle class="text--primary" v-text="item.emailAddress"></v-list-item-subtitle>
-            <v-list-item-subtitle class="text--primary" v-text="item.city"></v-list-item-subtitle>-->
-                                        <v-card>
-                                            <p>item.phoneNumber</p>
-                                            <p style="font-weight: bold;">item.name</p>
-                                            <p>item.emailAddress</p>
-                                            <p>item.city</p>
-                                        </v-card>
-
-                                    </v-col>
-                                    <v-divider v-if="index + 1 < listOfProducts.length"
-                                               :key="index"></v-divider>
-                                </template>
-                                <!--</v-list-item-group>-->
-
+                                <v-text-field class="pa-2 mt-4" label="Välj produkter" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
 
                                 <v-list two-line>
+                                    <v-list-item-group>
+                                        <template v-for="(item, index) in warehouseProductsToDisplay">
+                                            <v-list-item :key="item.name">
+                                                <template>
+                                                    <v-list-item-content>
+                                                        <v-row>
+                                                            <v-col cols="12" sm="6" md="3">
+                                                                <h3>{{item.name}}</h3>
+                                                            </v-col>
+                                                            <v-col cols="12" sm="6" md="3">
+                                                                <h3><b>{{item.articleNumber}}</b></h3>
+                                                            </v-col>
+                                                            <v-col cols="12" sm="6" md="3">
+                                                                <v-btn color="error" @click="removeInvoiceProductList(item, 33)">Ta bort</v-btn>
+                                                            </v-col>
+                                                            <v-col cols="12" sm="6" md="3">
+                                                                <v-btn color="primary" @click="addToInvoiceProductList(item)">Lägg till +</v-btn>
+                                                            </v-col>
+                                                        </v-row>
+                                                    </v-list-item-content>
+                                                    <v-list-item-action>
+                                                        <!--<v-list-item-action-text v-text="item.price + ' kr'"></v-list-item-action-text>-->
+                                                    </v-list-item-action>
+                                                </template>
+                                            </v-list-item>
+                                            <v-divider v-if="index + 1 < listOfProducts.length"
+                                                       :key="index"></v-divider>
+                                        </template>
+                                    </v-list-item-group>
+                                </v-list>
+
+                                <!--<v-list two-line>
                                     <v-list-item-group>
                                         <template v-for="(item, index) in productsToChoose">
                                             <v-list-item :key="item.name">
@@ -370,10 +303,10 @@
                                                         <v-list-item-subtitle class="text--primary pa-1" v-text="item.city"></v-list-item-subtitle>
                                                     </v-list-item-content>
                                                     <v-list-item-action>
-                                                        <v-col cols="12" sm="6" md="4">
+                                                        <v-col cols="4" sm="6" md="12">
                                                             <v-text-field v-model="editZipCode" label="Pris"></v-text-field>
                                                         </v-col>
-                                                        <v-col cols="12" sm="6" md="4">
+                                                        <v-col cols="4" sm="6" md="12">
                                                             <v-text-field v-model="editZipCode" label="Antal"></v-text-field>
                                                         </v-col>
                                                     </v-list-item-action>
@@ -383,14 +316,15 @@
                                                        :key="index"></v-divider>
                                         </template>
                                     </v-list-item-group>
-                                </v-list>
+                                </v-list>-->
+
+
+
 
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="deliveryFee" label="Fraktavgift"></v-text-field>
                                 </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="customerId" label="customerId"></v-text-field>
-                                </v-col>
+
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="InvoiceFee" label="Fakturaavgift"></v-text-field>
                                 </v-col>
@@ -406,59 +340,59 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
-                  
+
+                    <v-spacer></v-spacer>
+                    <v-card-actions>
+                        <v-btn icon
+                               @click="show = !show">
+                            Skicka som <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                        </v-btn>
+
+                        <v-expand-transition>
+                            <div v-show="show">
+
+                                <v-list-item>
+                                    <v-list-item-action>
+                                        <v-radio v-model="notifications"></v-radio>
+                                    </v-list-item-action>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Faktura</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-action>
+                                        <v-radio v-model="sound"></v-radio>
+                                    </v-list-item-action>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Påminnelse</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-action>
+                                        <v-radio v-model="widgets"></v-radio>
+                                    </v-list-item-action>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Offert</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </div>
+                        </v-expand-transition>
+                    </v-card-actions>
+
+
+                    <v-card-actions>
+                        <v-btn disabled color="primary" class="mt-3 mr-5">
+                            Skicka
+                        </v-btn>
                         <v-spacer></v-spacer>
-                        <v-card-actions>
-                            <v-btn icon
-                                   @click="show = !show">
-                                Skicka som <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                            </v-btn>
+                        <v-btn color="primary" class="ma-3" @click="saveInvoice()">
+                            Spara
+                        </v-btn>
+                    </v-card-actions>
+                    <p class="pa-5" style="font-size:14px; font-weight: 300;">
+                        Välj först ovanför vad du vill skicka som.
+                    </p>
 
-                            <v-expand-transition>
-                                <div v-show="show">
-
-                                    <v-list-item>
-                                        <v-list-item-action>
-                                            <v-radio v-model="notifications"></v-radio>
-                                        </v-list-item-action>
-                                        <v-list-item-content>
-                                            <v-list-item-title>Faktura</v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                    <v-list-item>
-                                        <v-list-item-action>
-                                            <v-radio v-model="sound"></v-radio>
-                                        </v-list-item-action>
-                                        <v-list-item-content>
-                                            <v-list-item-title>Påminnelse</v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                    <v-list-item>
-                                        <v-list-item-action>
-                                            <v-radio v-model="widgets"></v-radio>
-                                        </v-list-item-action>
-                                        <v-list-item-content>
-                                            <v-list-item-title>Offert</v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </div>
-                            </v-expand-transition>
-                        </v-card-actions>
-                   
-                  
-                        <v-card-actions>
-                            <v-btn disabled color="primary" class="mt-3 mr-5">
-                                Skicka
-                            </v-btn>
-                            <v-spacer></v-spacer>
-                            <v-btn color="primary" class="ma-3" @click="saveInvoice()">
-                                Spara
-                            </v-btn>
-                        </v-card-actions>
-                        <p class="pa-5" style="font-size:14px; font-weight: 300;">
-                           Välj först ovanför vad du vill skicka som.
-                        </p>
-                  
                 </v-card>
             </v-dialog>
         </v-row>
@@ -480,64 +414,7 @@
         data: () => ({
 
 
-
-
-
-            //actions on click push list selectedFruits to vuex array and then finally on save push get array in object and push to api 
-
-            fruits: [
-        'Apples',
-        'Apricots',
-        'Avocado',
-        'Bananas',
-        'Blueberries',
-        'Blackberries',
-        'Boysenberries',
-        'Bread fruit',
-        'Cantaloupes (cantalope)',
-        'Cherries',
-        'Cranberries',
-        'Cucumbers',
-        'Currants',
-        'Dates',
-        'Eggplant',
-        'Figs',
-        'Grapes',
-        'Grapefruit',
-        'Guava',
-        'Honeydew melons',
-        'Huckleberries',
-        'Kiwis',
-        'Kumquat',
-        'Lemons',
-        'Limes',
-        'Mangos',
-        'Mulberries',
-        'Muskmelon',
-        'Nectarines',
-        'Olives',
-        'Oranges',
-        'Papaya',
-        'Peaches',
-        'Pears',
-        'Persimmon',
-        'Pineapple',
-        'Plums',
-        'Pomegranate',
-        'Raspberries',
-        'Rose Apple',
-        'Starfruit',
-        'Strawberries',
-        'Tangerines',
-        'Tomatoes',
-        'Watermelons',
-        'Zucchini',
-      ],
-            selectedFruits: [],
-
-
-
-
+            //actions on click push list selectedFruits to vuex array and then finally on save push get array in object and push to api
 
 
 
@@ -549,18 +426,20 @@
             searchProducts: '',
             allUserCustomersToDisplay: '',
 
-            select: { phoneNumber: '',
-                    city: '',
-                    emailAddress: '',
+            select: {
+                phoneNumber: '',
+                city: '',
+                emailAddress: '',
                 name: 'Välj kund',
-            customerId: ''},
+                customerId: ''
+            },
 
             dialog: false,
             notifications: false,
             sound: true,
             widgets: false,
-    createNewInvoiceDialog: false,
-    show: false,
+            createNewInvoiceDialog: false,
+            show: false,
 
 
 
@@ -637,7 +516,15 @@
             placeholderArrayForProducts: [],
             listOfProducts: [],
         }),
+
         methods: {
+            removeInvoiceProductList(id, number) {
+                this.removeInvoiceProductListAction({ id, number });
+            },
+            addToInvoiceProductList(item) {
+                console.log(item);
+                this.addToInvoiceProductListAction(item);
+            },
             // DELETE customer START -------
             deleteCustomer() {
                 this.deleteCustomerDialog = false,
@@ -648,7 +535,6 @@
 
                     );
             },   // DELETE customer START -------
-
 
             // UPDATE customer START -------
             updateExistingCustomer() {
@@ -721,7 +607,7 @@
                         if (result == 'Det finns redan en produkt med detta kundnummret, välj ett annat.') {
                             this.showCustomerIdErrorMessage = true
                         } else {
-                             this.invoiceDate = '',
+                            this.invoiceDate = '',
                                 this.invoicePayDate = '',
                                 this.deliveryFee = '',
                                 this.invoiceFee = '',
@@ -737,6 +623,9 @@
                 //getAllInvoices: 'customer/GET_ALL_INVOICES',
                 //searchInvoices: 'customer/SEARCH_INVOICES',
                 getAllCustomers: 'customer/GET_ALL_CUSTOMERS',
+                getAllProducts: 'warehouse/GET_ALL_PRODUCTS',
+                addToInvoiceProductListAction: 'invoice/ADD_PRODUCT_TO_LIST',
+                removeInvoiceProductListAction: 'invoice/REMOVE_PRODUCT_FROM_LIST'
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;
@@ -745,12 +634,14 @@
         computed: {
             ...mapState({
                 //allUserInvoicesToDisplay: state => state.customer.allUserInvoices,
-                items: state => state.customer.allUserCustomers
+                allCustomers: state => state.customer.allUserCustomers,
+                warehouseProductsToDisplay: state => state.warehouse.warehouseProducts
             }),
         },
         beforeMount() {
             //this.getAllInvoices();
             this.getAllCustomers();
+            this.getAllProducts();
         }
     }
 
