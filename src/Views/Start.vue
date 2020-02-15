@@ -116,7 +116,7 @@
     import AllInvoices from '@/components/AllInvoices'
     import Login from '@/components/Login'
     import generic from '@/services/generic'
-    import axios from 'axios'
+    //import axios from 'axios'
     import { mapState, mapMutations, mapActions} from 'vuex';
     export default {
         components: {
@@ -195,14 +195,14 @@
                 setTimeout(() => { this.alertFunctionInitialize() }, 150)
             },
 
-            getAllTodos() {
-                axios.get('api/Home/GetConfigurations')
-                    .then((response) => {
-                        this.listOfTodos = response.data;
-                    }
-                ); 
-                this.loading = false
-            },
+            //getAllTodos() {
+            //    axios.get('api/Home/GetConfigurations')
+            //        .then((response) => {
+            //            this.listOfTodos = response.data;
+            //        }
+            //    ); 
+            //    this.loading = false
+            //},
             removeFromList(id) {
                 generic.delete('Home/DeleteById', id)
                     .then(() => this.getAllTodos() );
@@ -234,7 +234,7 @@
         },
         mounted() {
             //this.setUpPage();
-            this.getAllTodos();
+            //this.getAllTodos();
         }
     }
     

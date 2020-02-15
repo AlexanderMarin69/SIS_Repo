@@ -257,9 +257,10 @@
 
 
 
-                                <v-text-field class="pa-2 mt-4" label="Välj produkter" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
 
-                                <v-list two-line>
+
+
+                                <!--<v-list two-line>
                                     <v-list-item-group>
                                         <template v-for="(item, index) in warehouseProductsToDisplay">
                                             <v-list-item :key="item.name">
@@ -270,10 +271,10 @@
                                                                 <h3>{{item.name}}</h3>
                                                             </v-col>
                                                             <v-col cols="12" sm="6" md="3">
-                                                                <h3><b>{{item.articleNumber}}</b></h3>
+                                                                <h3><b>Artikelnummer</b> {{item.articleNumber}}</h3>
                                                             </v-col>
                                                             <v-col cols="12" sm="6" md="3">
-                                                                <v-btn color="error" @click="removeInvoiceProductList(item, 33)">Ta bort</v-btn>
+                                                                <h3><b>A pris</b> {{item.price}}:-</h3>
                                                             </v-col>
                                                             <v-col cols="12" sm="6" md="3">
                                                                 <v-btn color="primary" @click="addToInvoiceProductList(item)">Lägg till +</v-btn>
@@ -281,34 +282,7 @@
                                                         </v-row>
                                                     </v-list-item-content>
                                                     <v-list-item-action>
-                                                        <!--<v-list-item-action-text v-text="item.price + ' kr'"></v-list-item-action-text>-->
-                                                    </v-list-item-action>
-                                                </template>
-                                            </v-list-item>
-                                            <v-divider v-if="index + 1 < listOfProducts.length"
-                                                       :key="index"></v-divider>
-                                        </template>
-                                    </v-list-item-group>
-                                </v-list>
-
-                                <!--<v-list two-line>
-                                    <v-list-item-group>
-                                        <template v-for="(item, index) in productsToChoose">
-                                            <v-list-item :key="item.name">
-                                                <template>
-                                                    <v-list-item-content>
-                                                        <v-list-item-subtitle v-text="item.phoneNumber" class="pa-1"></v-list-item-subtitle>
-                                                        <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
-                                                        <v-list-item-subtitle class="text--primary pa-1" v-text="item.emailAddress"></v-list-item-subtitle>
-                                                        <v-list-item-subtitle class="text--primary pa-1" v-text="item.city"></v-list-item-subtitle>
-                                                    </v-list-item-content>
-                                                    <v-list-item-action>
-                                                        <v-col cols="4" sm="6" md="12">
-                                                            <v-text-field v-model="editZipCode" label="Pris"></v-text-field>
-                                                        </v-col>
-                                                        <v-col cols="4" sm="6" md="12">
-                                                            <v-text-field v-model="editZipCode" label="Antal"></v-text-field>
-                                                        </v-col>
+                                                        
                                                     </v-list-item-action>
                                                 </template>
                                             </v-list-item>
@@ -317,6 +291,125 @@
                                         </template>
                                     </v-list-item-group>
                                 </v-list>-->
+
+
+
+
+
+
+
+
+
+                                <!-- dialog-->
+
+
+                                <v-dialog v-model="addProductsToInvoiceDialog" persistent max-width="290">
+                                    <template v-slot:activator="{ on }">
+                                        <v-btn color="primary" dark v-on="on">Lägg till produkter</v-btn>
+                                    </template>
+                                    <v-card>
+                                        <!--<v-card max-width="500"
+                                                class="mx-auto">
+                                            <v-toolbar color="primary"
+                                                       dark>
+                                                <v-toolbar-title>Hela lagret</v-toolbar-title>
+                                                <v-spacer></v-spacer>
+                                               
+                                                <v-btn color="black" @click="addNewProductDialog = !addNewProductDialog" class="ml-3">
+                                                    Skapa ny
+                                                </v-btn>
+                                            </v-toolbar>
+                                            <v-card color="grey lighten-4" flat>
+                                                <v-toolbar dense>
+                                                    <v-text-field class="pa-2 mt-4" placeholder="Hitta..." v-model="searchInputForProducts" @keyup="searchProductsOnKeyup"></v-text-field>
+                                                    <v-btn icon>
+                                                        <v-icon>mdi-dots-vertical</v-icon>
+                                                    </v-btn>
+                                                </v-toolbar>
+                                            </v-card>
+                                            <v-list two-line>
+                                                <v-list-item-group>
+                                                    <template v-for="(item, index) in warehouseProductsToDisplay">
+                                                        <v-list-item :key="item.name" @click="showProductDetails(item)">
+                                                            <template>
+                                                                <v-list-item-content>
+                                                                    <v-list-item-subtitle v-text="item.articleNumber" class="pa-1"></v-list-item-subtitle>
+                                                                    <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
+                                                                    <v-list-item-subtitle class="text--primary pa-1" v-text="item.description"></v-list-item-subtitle>
+                                                                </v-list-item-content>
+                                                                <v-list-item-action>
+                                                                    <v-list-item-action-text v-text="item.price + ' kr'"></v-list-item-action-text>
+                                                                </v-list-item-action>
+                                                            </template>
+                                                        </v-list-item>
+                                                        <v-divider v-if="index + 1 < listOfProducts.length"
+                                                                   :key="index"></v-divider>
+                                                    </template>
+                                                </v-list-item-group>
+                                            </v-list>
+                                        </v-card>-->
+
+                                        <AllProductsForInvoice></AllProductsForInvoice>
+
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="green darken-1" text @click="addProductsToInvoiceDialog = false">Disagree</v-btn>
+                                            <v-btn color="green darken-1" text @click="addProductsToInvoiceDialog = false">Agree</v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+
+
+                                <!-- dialog-->
+
+
+
+
+
+
+
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+                                <v-list two-line>
+                                    <v-list-item-group>
+                                        <template v-for="(item, index) in InvoiceProductsToDisplay">
+                                            <v-list-item :key="item.name">
+                                                <template>
+                                                    <v-list-item-content v-if="InvoiceProductsToDisplay.length < 1">
+
+                                                    </v-list-item-content>
+                                                    <v-list-item-content>
+                                                        <v-list-item-subtitle v-text="item.articleNumber" class="pa-1"></v-list-item-subtitle>
+                                                        <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
+                                                        <v-list-item-subtitle class="text--primary pa-1" v-text="item.name"></v-list-item-subtitle>
+                                                        <v-list-item-subtitle class="text--primary pa-1"></v-list-item-subtitle>
+                                                    </v-list-item-content>
+                                                    <v-list-item-action>
+                                                        <v-col cols="4" sm="6" md="12">
+                                                            <v-text-field v-model="item.price" @keyup="updateInvoiceProductPriceData(item.articleNumber, item.price)" label="Välj pris"></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="4" sm="6" md="12">
+                                                            <v-text-field v-model="item.quantity" @keyup="updateInvoiceProductQuantityData(item.articleNumber, item.quantity)" label="Välj antal"></v-text-field>
+                                                        </v-col>
+                                                    </v-list-item-action>
+                                                </template>
+                                            </v-list-item>
+                                            <v-divider v-if="index + 1 < InvoiceProductsToDisplay.length"
+                                                       :key="index"></v-divider>
+                                        </template>
+                                    </v-list-item-group>
+                                </v-list>
 
 
 
@@ -343,40 +436,11 @@
 
                     <v-spacer></v-spacer>
                     <v-card-actions>
-                        <v-btn icon
-                               @click="show = !show">
-                            Skicka som <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                        </v-btn>
-
-                        <v-expand-transition>
-                            <div v-show="show">
-
-                                <v-list-item>
-                                    <v-list-item-action>
-                                        <v-radio v-model="notifications"></v-radio>
-                                    </v-list-item-action>
-                                    <v-list-item-content>
-                                        <v-list-item-title>Faktura</v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-action>
-                                        <v-radio v-model="sound"></v-radio>
-                                    </v-list-item-action>
-                                    <v-list-item-content>
-                                        <v-list-item-title>Påminnelse</v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-action>
-                                        <v-radio v-model="widgets"></v-radio>
-                                    </v-list-item-action>
-                                    <v-list-item-content>
-                                        <v-list-item-title>Offert</v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </div>
-                        </v-expand-transition>
+                        <v-overflow-btn class="my-2"
+                                        :items="dropdown_icon"
+                                        label="Skicka som"
+                                        segmented
+                                        target="#dropdown-example"></v-overflow-btn>
                     </v-card-actions>
 
 
@@ -410,9 +474,22 @@
     import { mapState, mapActions } from 'vuex';
     import CustomerAPI from '@/services/Customer'
     import InvoiceAPI from '@/services/invoice'
+    import AllProductsForInvoice from '@/components/AllProductsForInvoice'
     export default {
+          components: {
+            AllProductsForInvoice
+        },
         data: () => ({
 
+         
+            addProductsToInvoiceDialog: false,
+
+
+            dropdown_icon: [
+        { text: 'Faktura', callback: () => console.log('list') },
+        { text: 'Påminnelse', callback: () => console.log('favorite') },
+        { text: 'Offert', callback: () => console.log('delete') },
+      ],
 
             //actions on click push list selectedFruits to vuex array and then finally on save push get array in object and push to api
 
@@ -433,6 +510,7 @@
                 name: 'Välj kund',
                 customerId: ''
             },
+           
 
             dialog: false,
             notifications: false,
@@ -507,6 +585,7 @@
             selectedProductForEdit: {},
 
             searchInput: '',
+            
 
             addNewCustomerDialog: false,
             productSuccessfullyAddedDialog: false,
@@ -517,14 +596,38 @@
             listOfProducts: [],
         }),
 
+
+
+
+
+
+
         methods: {
+            
+            updateInvoiceProductPriceData(articleNumber, price) {
+                 setTimeout(() => (
+
+                    this.removeInvoiceProductListAction({ articleNumber, price })
+
+                ), 3000)
+                
+            },
+            updateInvoiceProductQuantityData(articleNumber, quantity) {
+                setTimeout(() => (
+
+                    this.removeInvoiceProductListAction({ articleNumber, quantity })
+
+                ), 3000)
+                
+            },
+
             removeInvoiceProductList(id, number) {
                 this.removeInvoiceProductListAction({ id, number });
             },
             addToInvoiceProductList(item) {
-                console.log(item);
                 this.addToInvoiceProductListAction(item);
             },
+
             // DELETE customer START -------
             deleteCustomer() {
                 this.deleteCustomerDialog = false,
@@ -625,7 +728,8 @@
                 getAllCustomers: 'customer/GET_ALL_CUSTOMERS',
                 getAllProducts: 'warehouse/GET_ALL_PRODUCTS',
                 addToInvoiceProductListAction: 'invoice/ADD_PRODUCT_TO_LIST',
-                removeInvoiceProductListAction: 'invoice/REMOVE_PRODUCT_FROM_LIST'
+                removeInvoiceProductListAction: 'invoice/REMOVE_PRODUCT_FROM_LIST',
+                searchWarehouse: 'warehouse/SEARCH_WAREHOUSE'
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;
@@ -635,7 +739,8 @@
             ...mapState({
                 //allUserInvoicesToDisplay: state => state.customer.allUserInvoices,
                 allCustomers: state => state.customer.allUserCustomers,
-                warehouseProductsToDisplay: state => state.warehouse.warehouseProducts
+                warehouseProductsToDisplay: state => state.warehouse.warehouseProducts,
+                InvoiceProductsToDisplay: state => state.invoice.InvoiceProducts
             }),
         },
         beforeMount() {

@@ -6,11 +6,6 @@ export default {
         commit('SET_NEW_PRODUCT_TO_LIST', item);
     },
     REMOVE_PRODUCT_FROM_LIST({ commit }, object ) {
-    /*eslint no-debugger: */
-        //debugger;
-        // custom console
-        // eslint-disable-next-line no-console
-        console.log(object, 'inserted object');
         commit('REMOVE_PRODUCT_FROM_LIST', object)
     },
     GET_ALL_INVOICES({ commit }) {
