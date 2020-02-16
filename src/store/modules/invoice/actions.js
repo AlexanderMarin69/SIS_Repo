@@ -5,7 +5,13 @@ export default {
         //debugger;
         commit('SET_NEW_PRODUCT_TO_LIST', item);
     },
-    REMOVE_PRODUCT_FROM_LIST({ commit }, object ) {
+    UPDATE_PRODUCT_PRICE_FROM_LIST({ commit }, object ) {
+        commit('UPDATE_PRODUCT_PRICE_FROM_LIST', object)
+    },
+    UPDATE_PRODUCT_QUANTITY_FROM_LIST({ commit }, object) {
+        commit('UPDATE_PRODUCT_QUANTITY_FROM_LIST', object)
+    },
+    REMOVE_PRODUCT_FROM_LIST({ commit }, object) {
         commit('REMOVE_PRODUCT_FROM_LIST', object)
     },
     GET_ALL_INVOICES({ commit }) {

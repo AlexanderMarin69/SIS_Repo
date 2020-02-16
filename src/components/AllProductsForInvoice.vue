@@ -49,20 +49,10 @@
 </template>
 
 <script>
-    /* eslint-disable no-console */
     import { mapState, mapActions } from 'vuex';
-    //import ProductAPI from '@/services/Product'
     export default {
         data: () => ({
-
-            
-
             searchInput: '',
-
-         
-
-            
-
             placeholderArrayForProducts: [],
             listOfProducts: [],
         }),
@@ -91,15 +81,9 @@
                 warehouseProductsToDisplay: state => state.warehouse.warehouseProducts
             }),
         },
-        beforeMount() {
-            //this.getAllProducts();
-        }
     }
 
-
-    /* eslint-enable no-console */
 </script>
-
 <style scoped>
     .articleNumberErrorMessage {
         font-size: 14px;

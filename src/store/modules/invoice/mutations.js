@@ -30,8 +30,7 @@
     //        }
     //    }
     //},
-    REMOVE_PRODUCT_FROM_LIST(state, product) {
-
+    UPDATE_PRODUCT_PRICE_FROM_LIST(state, product) {
         for (var i = 0; i < state.InvoiceProducts.length; i++) {
 
             if (state.InvoiceProducts[i].articleNumber === product.articleNumber) {
@@ -52,6 +51,40 @@
                 }
                 )
                 return false;
+            }
+        }
+    },
+    UPDATE_PRODUCT_QUANTITY_FROM_LIST(state, product) {
+
+        for (var i = 0; i < state.InvoiceProducts.length; i++) {
+
+            if (state.InvoiceProducts[i].articleNumber === product.articleNumber) {
+                var kanin = {
+                    articleNumber: state.InvoiceProducts[i].articleNumber,
+                    name: state.InvoiceProducts[i].name,
+                    price: state.InvoiceProducts[i].price,
+                    quantity: state.InvoiceProducts[i].quantity
+                };
+
+                state.InvoiceProducts.splice(state.InvoiceProducts.findIndex(x => x.articleNumber === product.articleNumber), 1);
+
+                state.InvoiceProducts.unshift({
+                    articleNumber: kanin.articleNumber,
+                    name: kanin.name,
+                    price: kanin.price,
+                    quantity: product.quantity
+                }
+                )
+                return false;
+            }
+        }
+    },
+    REMOVE_PRODUCT_FROM_LIST(state, product) {
+
+        for (var i = 0; i < state.InvoiceProducts.length; i++) {
+
+            if (state.InvoiceProducts[i].articleNumber === product.articleNumber) {
+                state.InvoiceProducts.splice(state.InvoiceProducts.findIndex(x => x.articleNumber === product.articleNumber), 1);
             }
         }
     },
