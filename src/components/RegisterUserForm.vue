@@ -6,7 +6,7 @@
                 <v-card>
                     <v-card-title class="headline grey lighten-2"
                                   primary-title>
-                        Terms of use
+                        Vilkor
                     </v-card-title>
 
                     <v-card-text>
@@ -17,10 +17,10 @@
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary"
+                        <v-btn color="indigo"
                                text
                                @click="agreementDialog = !agreementDialog">
-                            I accept
+                            Jag godkänner
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -30,7 +30,7 @@
 
 
         <h1 class="">
-            <v-icon large>mdi-account-plus</v-icon> Register
+            <v-icon large>mdi-account-plus</v-icon> Registrera dig
         </h1>
         <v-form class="" ref="form"
                 v-model="valid"
@@ -39,44 +39,44 @@
             <v-layout class="pa-3" row wrap>
                 <v-flex class="px-2" xs12 sm12 md6 lg6 xl6>
                     <v-text-field v-model="firstName"
-                                  label="First name"
-                                  placeholder="First name"
+                                  label="Namn"
+                                  placeholder="Namn"
                                   :counter="40"
                                   :rules="firstNameRules"
                                   required></v-text-field>
 
                     <v-text-field v-model="lastName"
-                                  label="Last name"
-                                  placeholder="Last name"
+                                  label="Efternamn"
+                                  placeholder="Éfternamn"
                                   :counter="40"
                                   :rules="lastNameRules"
                                   required></v-text-field>
 
                     <v-text-field v-model="email"
-                                  label="E-mail address"
-                                  placeholder="E-mail address"
+                                  label="E-postadress"
+                                  placeholder="E-postadress"
                                   :rules="emailRules"
                                   required></v-text-field>
                 </v-flex>
                 <v-flex class="px-2" xs12 sm12 md6 lg6 xl6>
 
                     <v-text-field v-model="password"
-                                  label="Password"
-                                  placeholder="Password"
+                                  label="Lösenord"
+                                  placeholder="Lösenord"
                                   :counter="15"
                                   :rules="passwordRules"
                                   required></v-text-field>
 
                     <v-text-field v-model="retypedPassword"
-                                  label="Retype password"
-                                  placeholder="Retype password"
+                                  label="Skriv lösenordet igen"
+                                  placeholder="Skriv lösenordet igen"
                                   :counter="15"
                                   :rules="retypedPasswordRules"
                                   required></v-text-field>
                     <v-checkbox color="primary" v-model="agreed" 
                                 label="
-                               I agree to the terms of use."></v-checkbox>
-                    <v-btn text color="primary" @click="agreementDialog = !agreementDialog">Terms of use</v-btn>
+                              Jag godkänner användarvillkoren"></v-checkbox>
+                    <v-btn text color="primary" @click="agreementDialog = !agreementDialog">Användarvillkor</v-btn>
                 </v-flex>
             </v-layout>
         </v-form>
@@ -85,7 +85,7 @@
             <v-btn :disabled="!valid"
                    color="success"
                    @click="register()">
-                Skicka
+                Registrera
             </v-btn>
         </v-card-actions>
 

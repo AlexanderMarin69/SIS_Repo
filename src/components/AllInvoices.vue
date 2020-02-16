@@ -1,21 +1,20 @@
 ﻿<template>
-    <div>
-        <v-card max-width="500"
+    <div class="pl-1 pr-1">
+        <v-card max-width="500" raised shaped
                 class="mx-auto">
-            <v-toolbar color="primary"
-                       dark>
-                <v-toolbar-title>Alla Fakturor</v-toolbar-title>
+            <v-toolbar light>
+                <v-toolbar-title color="black">Alla Fakturor</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <!--<v-btn icon class="ml-3 mr-3">
                     <v-icon>mdi-magnify</v-icon>
                     sök
                 </v-btn>-->
-                <v-btn color="black" @click="activateCreateNewInvoiceDialog()" class="ml-3">
-                    Skapa ny
+                <v-btn color="indigo" style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
+                    Skapa ny +
                 </v-btn>
             </v-toolbar>
-            <v-card color="grey lighten-4" flat>
-                <v-toolbar dense>
+            <v-card color="grey lighten-4" outlined>
+                <v-toolbar dense style="box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0), 0px 0px 0px 0px rgba(0, 0, 0, 0.0), 0px 0px 0px 0px rgba(0, 0, 0, 0.0);">
                     <!--<v-toolbar-title>Title</v-toolbar-title>-->
                     <v-text-field class="pa-2 mt-4" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
                 </v-toolbar>
@@ -261,18 +260,17 @@
                                 <!-- dialog ------------------------ start-->
 
 
-                                <v-dialog v-model="addProductsToInvoiceDialog" persistent max-width="290">
+                                <v-dialog v-model="addProductsToInvoiceDialog" max-width="290">
                                     <template v-slot:activator="{ on }">
                                         <v-btn color="primary" dark v-on="on">Lägg till produkter</v-btn>
                                     </template>
-                                    <v-card>
+                                    <v-card raised shaped>
 
                                         <AllProductsForInvoice></AllProductsForInvoice>
 
                                         <v-card-actions>
                                             <v-spacer></v-spacer>
-                                            <v-btn color="green darken-1" text @click="addProductsToInvoiceDialog = false">Disagree</v-btn>
-                                            <v-btn color="green darken-1" text @click="addProductsToInvoiceDialog = false">Agree</v-btn>
+                                            <v-btn color="indigo" text @click="addProductsToInvoiceDialog = false">Stäng</v-btn>
                                         </v-card-actions>
                                     </v-card>
                                 </v-dialog>

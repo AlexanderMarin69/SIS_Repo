@@ -2,9 +2,8 @@
     <div>
         <v-card max-width="500"
                 class="mx-auto">
-            <v-toolbar color="primary"
-                       dark>
-                <v-toolbar-title>Hela lagret</v-toolbar-title>
+            <v-toolbar light>
+                <v-toolbar-title color="black">Hela lagret</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <!--<v-btn icon class="ml-3 mr-3">
                 <v-icon>mdi-magnify</v-icon>
@@ -13,7 +12,7 @@
                
             </v-toolbar>
             <v-card color="grey lighten-4" flat>
-                <v-toolbar dense>
+                <v-toolbar dense style="box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0), 0px 0px 0px 0px rgba(0, 0, 0, 0.0), 0px 0px 0px 0px rgba(0, 0, 0, 0.0);">
                     <!--<v-toolbar-title>Title</v-toolbar-title>-->
                     <v-text-field class="pa-2 mt-4" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
                     <v-btn icon>

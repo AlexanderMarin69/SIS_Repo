@@ -113,22 +113,21 @@
         </v-dialog>-->
 
         <!--<CreateInvoice></CreateInvoice>-->
-        
+       
 
     </div>
 </template>
 
 <script>
-    //import CreateInvoice from '@/components/CreateInvoice'
-    //import Todos from '@/components/Todos'
+
     import AllInvoices from '@/components/AllInvoices'
     import Login from '@/components/Login'
     import generic from '@/services/generic'
-    //import axios from 'axios'
+   
     import { mapState, mapMutations, mapActions} from 'vuex';
     export default {
         components: {
-            //Todos,
+         
             Login,
             //CreateInvoice,
             AllInvoices
