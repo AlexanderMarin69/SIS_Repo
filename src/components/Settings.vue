@@ -4,11 +4,10 @@
             max-width="500">
 
 
-        <v-toolbar color="indigo"
-                   dark>
+        <v-toolbar light>
 
 
-            <v-toolbar-title><v-icon class="mr-1">mdi-account</v-icon> Mitt Konto</v-toolbar-title>
+            <v-toolbar-title flat><v-icon class="mr-1">mdi-account</v-icon> Mitt Konto</v-toolbar-title>
 
             <v-spacer></v-spacer>
 
