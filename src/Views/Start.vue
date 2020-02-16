@@ -11,36 +11,36 @@
                     <v-card>
                         <Login></Login>
                         <!--<v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
-                            <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
-                        </v-card-actions>-->
+                        <v-spacer></v-spacer>
+                        <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
+                        <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
+                    </v-card-actions>-->
                     </v-card>
                 </v-dialog>
             </v-row>
         </template>
 
         <!--<v-card shaped raised class="mt-5 pa-3 mx-auto"
-                max-width="344">
-            <v-text-field type="text"
-                          v-model="newTodo.title"
-                          placeholder="Add a new todo"
-                          @keyup.enter="add()">
-            </v-text-field>
-            <v-btn tile color="accent" elevation="10" @click="add()" :loading="loading">
-                <v-icon class="pr-3">mdi-plus-circle</v-icon> Lägg till Todo
-            </v-btn>
-        </v-card>--------------------------->
+            max-width="344">
+        <v-text-field type="text"
+                      v-model="newTodo.title"
+                      placeholder="Add a new todo"
+                      @keyup.enter="add()">
+        </v-text-field>
+        <v-btn tile color="accent" elevation="10" @click="add()" :loading="loading">
+            <v-icon class="pr-3">mdi-plus-circle</v-icon> Lägg till Todo
+        </v-btn>
+    </v-card>--------------------------->
         <!--<v-btn @click="showCart"><h1>{{title}} {{cart.length}}</h1></v-btn>-->
         <!--<Todos :listOfTodos="listOfTodos" @addToCart="addToCart" @openRemoveDialog="openRemoveDialogModal" @done="markAsDone"></Todos>------------------------------>
         <!--REMOVE CONFIRMATION MODAL-->
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
         <v-dialog v-model="showRemoveDialog"
                   max-width="310">
@@ -65,55 +65,130 @@
         </v-dialog>
         <!--CART MODAL-->
         <!--<v-dialog v-model="showCartDialog"
-                  max-width="400">
-            <v-card>
-                <v-card-title class="headline">Kundvagn</v-card-title>
-                <v-card-text>
-                    <div v-for="(product, index) in cart" v-bind:key="index" class="pa-1">
-                        hello
+              max-width="400">
+        <v-card>
+            <v-card-title class="headline">Kundvagn</v-card-title>
+            <v-card-text>
+                <div v-for="(product, index) in cart" v-bind:key="index" class="pa-1">
+                    hello
 
-                        <div style="color: black; font-weight: bold; font-size: 24px; padding: 10px;">
-                            <v-layout wrap>
-                                <v-flex>
-                                    <v-card class="pa-2">
-                                        <p class="subtitle-2 font-weight-thin">Artnr. {{product.id}}</p>
-                                        <p class="display-1" style="text-transform: uppercase; font-weight: normal;">{{product.name}}</p>
-                                        <p class="subtitle-2">Tillgänglighet:  {{product.published}}</p>
-                                        <v-card max-width="190">
-                                            <v-card-actions>
-                                                <v-btn text small color="error"><v-icon>mdi-plus-circle</v-icon></v-btn>
-                                                <v-btn text small disabled color="error">{{product.id - 50}}</v-btn>
-                                                <v-btn text small color="error"><v-icon>mdi-minus-circle</v-icon></v-btn>
-                                            </v-card-actions>
-                                        </v-card>
+                    <div style="color: black; font-weight: bold; font-size: 24px; padding: 10px;">
+                        <v-layout wrap>
+                            <v-flex>
+                                <v-card class="pa-2">
+                                    <p class="subtitle-2 font-weight-thin">Artnr. {{product.id}}</p>
+                                    <p class="display-1" style="text-transform: uppercase; font-weight: normal;">{{product.name}}</p>
+                                    <p class="subtitle-2">Tillgänglighet:  {{product.published}}</p>
+                                    <v-card max-width="190">
                                         <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn text small @click="removeProduct(index)" color="error">Ta bort</v-btn>
+                                            <v-btn text small color="error"><v-icon>mdi-plus-circle</v-icon></v-btn>
+                                            <v-btn text small disabled color="error">{{product.id - 50}}</v-btn>
+                                            <v-btn text small color="error"><v-icon>mdi-minus-circle</v-icon></v-btn>
                                         </v-card-actions>
                                     </v-card>
-                                </v-flex>
-                            </v-layout>
-                        </div>
-
-                       
-
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn text small @click="removeProduct(index)" color="error">Ta bort</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-flex>
+                        </v-layout>
                     </div>
-                </v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn text
-                           color="secondary">
-                        fortsätt handla
-                    </v-btn>
-                    <v-btn color="orange" style="color:white;">
-                        <v-icon class="pr-1">mdi-delete-circle</v-icon> till kassan
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>-->
 
+
+
+                </div>
+            </v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn text
+                       color="secondary">
+                    fortsätt handla
+                </v-btn>
+                <v-btn color="orange" style="color:white;">
+                    <v-icon class="pr-1">mdi-delete-circle</v-icon> till kassan
+                </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>-->
         <!--<CreateInvoice></CreateInvoice>-->
-       
+
+
+
+
+
+
+    <v-row>
+
+        <v-col cols="12" sm="6" md="6">
+            <v-card class="mx-auto" raised shaped
+                    max-width="344">
+                <v-list-item three-line>
+                    <v-list-item-content>
+                        <div class="overline mb-4">Information</div>
+                        <v-list-item-title class="headline mb-1">Försäljning</v-list-item-title>
+                        <v-list-item-subtitle>Du har sålt för 33 476:- hittils denna månaden</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-avatar raised
+                                        size="80"
+                                        color="success">
+                        <v-icon large color="white">mdi-arrow-up</v-icon>
+                    </v-list-item-avatar>
+                </v-list-item>
+
+                <!--<v-card-actions>
+                <v-btn text>Button</v-btn>
+                <v-btn text>Button</v-btn>
+            </v-card-actions>-->
+            </v-card>
+        </v-col>
+
+        <v-col cols="12" sm="6" md="6">
+            <v-card class="mx-auto" raised shaped
+                    max-width="344">
+                <v-list-item three-line>
+                    <v-list-item-content>
+                        <div class="overline mb-4">Information</div>
+                        <v-list-item-title class="headline mb-1">Obetalda fakturor</v-list-item-title>
+                        <v-list-item-subtitle>Du har 2 kunder som inte har betalat sina fakturor i tid</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-avatar raised
+                                        size="80"
+                                        color="error">
+                        <v-icon large color="white">mdi-alert-circle-outline</v-icon>
+                    </v-list-item-avatar>
+                </v-list-item>
+
+                <!--<v-card-actions>
+                <v-btn text>Button</v-btn>
+                <v-btn text>Button</v-btn>
+            </v-card-actions>-->
+            </v-card>
+        </v-col>
+
+    </v-row>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </div>
 </template>

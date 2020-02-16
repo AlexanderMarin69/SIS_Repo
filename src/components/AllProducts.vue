@@ -9,7 +9,7 @@
                 <v-icon>mdi-magnify</v-icon>
                 sök
             </v-btn>-->
-                <v-btn color="indigo" style="color: white;" @click="addNewProductDialog = !addNewProductDialog" class="ml-3">
+                <v-btn color="indigo" rounded  style="color: white;" @click="addNewProductDialog = !addNewProductDialog" class="ml-3">
                     Skapa ny +
                 </v-btn>
             </v-toolbar>

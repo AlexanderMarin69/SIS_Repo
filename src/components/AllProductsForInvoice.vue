@@ -30,7 +30,7 @@
                                     <v-list-item-subtitle class="text--primary pa-1" v-text="item.description"></v-list-item-subtitle>
                                 </v-list-item-content>
                                 <v-list-item-action>
-                                    <v-btn color="primary" small @click="addToInvoiceProductList(item)">Lägg till +</v-btn>
+                                    <v-btn color="primary" small rounded @click="addToInvoiceProductList(item)">Lägg till +</v-btn>
                                 </v-list-item-action>
                             </template>
                         </v-list-item>
