@@ -14,6 +14,9 @@ export default {
     REMOVE_PRODUCT_FROM_LIST({ commit }, object) {
         commit('REMOVE_PRODUCT_FROM_LIST', object)
     },
+    RESET_INVOICE_PRODUCT_LIST_ON_ENTER({ commit }) {
+        commit('RESET_INVOICE_PRODUCT_LIST')
+    },
     GET_ALL_INVOICES({ commit }) {
         return InvoiceAPI.GetAllInvoices()
             .then(result => {

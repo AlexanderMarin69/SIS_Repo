@@ -10,7 +10,7 @@
                     <v-icon>mdi-magnify</v-icon>
                     sök
                 </v-btn>-->
-                <v-btn color="black" @click="createNewInvoiceDialog = !createNewInvoiceDialog" class="ml-3">
+                <v-btn color="black" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny
                 </v-btn>
             </v-toolbar>
@@ -18,9 +18,6 @@
                 <v-toolbar dense>
                     <!--<v-toolbar-title>Title</v-toolbar-title>-->
                     <v-text-field class="pa-2 mt-4" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
-                    <v-btn icon>
-                        <v-icon>mdi-dots-vertical</v-icon>
-                    </v-btn>
                 </v-toolbar>
             </v-card>
             <v-list two-line>
@@ -500,6 +497,10 @@
         }),
 
         methods: {
+            activateCreateNewInvoiceDialog() {
+                this.resetInvoiceProductListAction();
+                    this.createNewInvoiceDialog = true
+            },
             updateInvoiceProductPriceData(articleNumber, price) {
                  setTimeout(() => (
 
@@ -625,7 +626,8 @@
                 updateProductPriceListAction: 'invoice/UPDATE_PRODUCT_PRICE_FROM_LIST',
                 updateProductQuantityListAction: 'invoice/UPDATE_PRODUCT_QUANTITY_FROM_LIST',
                 removeInvoiceProductListAction: 'invoice/REMOVE_PRODUCT_FROM_LIST',
-                searchWarehouse: 'warehouse/SEARCH_WAREHOUSE'
+                searchWarehouse: 'warehouse/SEARCH_WAREHOUSE',
+                resetInvoiceProductListAction: 'invoice/RESET_INVOICE_PRODUCT_LIST_ON_ENTER'
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;

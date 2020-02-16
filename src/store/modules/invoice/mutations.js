@@ -7,6 +7,11 @@
             quantity: 1
         })
     },
+    RESET_INVOICE_PRODUCT_LIST(state) {
+        for (var i = 0; i < state.InvoiceProducts.length; i++) {
+            state.InvoiceProducts.splice(0, state.InvoiceProducts.length);
+        }
+    },
     //REMOVE_PRODUCT_FROM_LIST(state, product) {
 
     //    for (var i = 0; i < state.InvoiceProducts.length; i++) {

@@ -6,6 +6,7 @@ import store from '../store/index'
 import Start from '@/Views/Start'
 import Products from '@/Views/Products'
 import Customers from '@/Views/Customers'
+import Settings from '@/Views/Settings'
 
 import RegisterUserForm from '../components/RegisterUserForm'
 import Login from '@/components/Login'
@@ -63,6 +64,11 @@ const router = new Router({
             path: '/customers',
             name: 'customers',
             component: Customers
+        },
+        {
+            path: '/settings',
+            name: 'settings',
+            component: Settings
         },
         //{
         //    path: '/details/:id',

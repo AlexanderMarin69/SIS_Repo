@@ -1,6 +1,8 @@
 ﻿<template>
     <div>
-        
+
+        <br />
+
         <AllInvoices></AllInvoices>
 
         <template>
@@ -29,9 +31,17 @@
                 <v-icon class="pr-3">mdi-plus-circle</v-icon> Lägg till Todo
             </v-btn>
         </v-card>--------------------------->
-        <v-btn @click="showCart"><h1>{{title}} {{cart.length}}</h1></v-btn>
+        <!--<v-btn @click="showCart"><h1>{{title}} {{cart.length}}</h1></v-btn>-->
         <!--<Todos :listOfTodos="listOfTodos" @addToCart="addToCart" @openRemoveDialog="openRemoveDialogModal" @done="markAsDone"></Todos>------------------------------>
         <!--REMOVE CONFIRMATION MODAL-->
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
         <v-dialog v-model="showRemoveDialog"
                   max-width="310">
             <v-card>
@@ -54,7 +64,7 @@
             </v-card>
         </v-dialog>
         <!--CART MODAL-->
-        <v-dialog v-model="showCartDialog"
+        <!--<v-dialog v-model="showCartDialog"
                   max-width="400">
             <v-card>
                 <v-card-title class="headline">Kundvagn</v-card-title>
@@ -85,9 +95,7 @@
                             </v-layout>
                         </div>
 
-                        <!--<div v-if="cart.length < 1" style="color: black; font-weight: bold; font-size: 24px; padding: 10px;">
-                        <h6>cart is empty :)</h6>
-                    </div>-->
+                       
 
                     </div>
                 </v-card-text>
@@ -102,16 +110,16 @@
                     </v-btn>
                 </v-card-actions>
             </v-card>
-        </v-dialog>
+        </v-dialog>-->
 
-        <CreateInvoice></CreateInvoice>
+        <!--<CreateInvoice></CreateInvoice>-->
         
 
     </div>
 </template>
 
 <script>
-    import CreateInvoice from '@/components/CreateInvoice'
+    //import CreateInvoice from '@/components/CreateInvoice'
     //import Todos from '@/components/Todos'
     import AllInvoices from '@/components/AllInvoices'
     import Login from '@/components/Login'
@@ -122,7 +130,7 @@
         components: {
             //Todos,
             Login,
-            CreateInvoice,
+            //CreateInvoice,
             AllInvoices
         },
         data: function () {

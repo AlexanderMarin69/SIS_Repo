@@ -18,9 +18,6 @@
                 <v-toolbar dense>
                     <!--<v-toolbar-title>Title</v-toolbar-title>-->
                     <v-text-field class="pa-2 mt-4" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
-                    <v-btn icon>
-                        <v-icon>mdi-dots-vertical</v-icon>
-                    </v-btn>
                 </v-toolbar>
             </v-card>
             <v-list two-line>
