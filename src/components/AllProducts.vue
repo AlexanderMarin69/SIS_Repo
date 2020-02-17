@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="pl-1 pr-1">
-        <v-card max-width="500" raised shaped 
+        <v-card max-width="1000" raised shaped 
                 class="mx-auto">
             <v-toolbar  light>
                 <v-toolbar-title color="black">Hela lagret</v-toolbar-title>
@@ -25,12 +25,13 @@
                         <v-list-item :key="item.name" @click="showProductDetails(item)">
                             <template>
                                 <v-list-item-content>
-                                    <v-list-item-subtitle v-text="item.articleNumber" class="pa-1"></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-text="'Artnr ' + item.articleNumber" class="pa-1"></v-list-item-subtitle>
                                     <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
                                     <v-list-item-subtitle class="text--primary pa-1" v-text="item.description"></v-list-item-subtitle>
                                 </v-list-item-content>
                                 <v-list-item-action>
-                                    <v-list-item-action-text v-text="item.price + ' kr'"></v-list-item-action-text>
+                                    <v-list-item-action-text class="mt-5" v-text="item.price + ' kr'"></v-list-item-action-text>
+                                    <v-list-item-action-text class="mb-5" v-text="item.stockBalance + ' i lager'"></v-list-item-action-text>
                                 </v-list-item-action>
                             </template>
                         </v-list-item>
@@ -42,10 +43,17 @@
         </v-card>
         <!--ADD NEW PRODUCT DIALOG ------- START -->
         <v-row justify="center">
-            <v-dialog v-model="addNewProductDialog" persistent max-width="600px">
+            <v-dialog v-model="addNewProductDialog" persistent max-width="1000px">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Skapa ny artikel</span>
+                        <v-spacer></v-spacer>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="closeDialog">Stäng</v-btn>
+                            <v-btn color="blue darken-1" text @click="createNewProduct()">Skapa</v-btn>
+                        </v-card-actions>
                         <v-card flat v-if="showArticleNumberErrorMessage">
                             <p class="articleNumberErrorMessage">
                                 Det finns redan en produkt med ditt valda artikelnumret, välj ett annat.
@@ -118,10 +126,14 @@
         <!--   PRODUCT SUCCESSFULLY ADDED DIALOG --------- END     -->
         <!--  SELECTED PRODUCT DIALOG ------- START -->
         <v-row justify="center">
-            <v-dialog v-model="selectedProductDialog" persistent max-width="600px">
+            <v-dialog v-model="selectedProductDialog" persistent max-width="1000px">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Ändra din produkt</span>
+                        <v-spacer></v-spacer>
+                        <v-card-actions>
+                            <v-btn color="blue darken-1" text @click="selectedProductDialog = false">Stäng</v-btn>
+                        </v-card-actions>
                     </v-card-title>
                     <v-card-text>
                         <v-container>

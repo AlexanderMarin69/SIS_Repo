@@ -110,7 +110,8 @@
             ...mapState({
                 loginViewModel: state => state.login.loginViewModel,
                 errors: state => state.login.errors,
-                redirectUrl: state => state.login.redirectUrl
+                redirectUrl: state => state.login.redirectUrl,
+                IsUserLoggedInVariable: state => state.login.isUserLoggedIn
             }),
             password: {
                 get() {

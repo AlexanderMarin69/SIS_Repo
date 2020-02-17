@@ -9,11 +9,11 @@ export default {
             .then(() => {
                 //commit('SET_LOADING', false, { root: true });
                 commit('SET_AS_LOGGED_IN', true);
-                //if (data.redirectUrl != '') {
-                //    router.push(data.redirectUrl);
-                //} else {
-                //    router.push('/');
-                //}
+                if (data.redirectUrl != '') {
+                    router.push(data.redirectUrl);
+                } else {
+                    router.push('/');
+                }
             }).catch((result) => {
                 //commit('SET_ERRORS', result);
                 console.log(result);
@@ -94,6 +94,9 @@ export default {
             }).catch(() => {
                 commit('SET_AS_LOGGED_IN', true);
             })
+    },
+    SET_LOGGED_IN_STATE_FALSE({ commit }) {
+                commit('SET_AS_LOGGED_IN', false);
     },
     GET_USERDATA({ commit }) {
         return AccountService.getUser().then((result) => {

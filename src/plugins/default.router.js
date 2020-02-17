@@ -86,7 +86,7 @@ const router = new Router({
                     next()
                 }
 
-                if (!hasPermission) {
+                if (hasPermission == false) {
                     //TODO: Might send user to the configurator instead of login
                     next({
                         name: "login", // back to safety route //

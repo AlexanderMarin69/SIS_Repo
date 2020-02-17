@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="pl-1 pr-1">
-        <v-card max-width="500" raised shaped
+        <v-card max-width="1000px" raised shaped
                 class="mx-auto">
             <v-toolbar light>
                 <v-toolbar-title color="black">Alla Fakturor</v-toolbar-title>

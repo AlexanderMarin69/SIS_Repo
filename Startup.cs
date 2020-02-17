@@ -32,6 +32,7 @@ namespace vueproject
         }
 
         public IConfiguration Configuration { get; }
+        public TimeSpan ExpireTimeSpan { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -57,10 +58,14 @@ namespace vueproject
                 options.Password.RequiredLength = 3;
             });
 
+            
+                
+            
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = new PathString("/");
-
+                options.Cookie.Name = "Dina_Fakturor";
                 options.Events.OnRedirectToLogin = context =>
                 {
                     if (context.Request.Path.StartsWithSegments("/api"))

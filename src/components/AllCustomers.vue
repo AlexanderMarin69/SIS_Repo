@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="pl-1 pr-1">
-        <v-card max-width="500" raised shaped
+        <v-card max-width="1000" raised shaped
                 class="mx-auto">
             <v-toolbar 
                        light>
@@ -26,16 +26,16 @@
                         <v-list-item :key="item.name" @click="showCustomerDetails(item)">
                             <template>
                                 <v-list-item-content>
+                                    <v-list-item-subtitle v-text="'Kundnr '+ item.customerId" class="pa-1"></v-list-item-subtitle>
                                     <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
-                                    <v-list-item-subtitle v-text="item.phoneNumber" class="pa-1"></v-list-item-subtitle>
-                                    <v-list-item-subtitle v-text="item.emailAddress" class="pa-1"></v-list-item-subtitle>
-                                    <!--<v-list-item-subtitle v-text="item.description" class="pa-1"></v-list-item-subtitle>-->
-                                    <!--<v-list-item-subtitle class="text--primary pa-1" v-text="item.invoiceAddress"></v-list-item-subtitle>-->
+                                    <v-list-item-subtitle v-text="'Org-/Persnr ' + item.organisationNumber" class="pa-1" ></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-text="'Tel ' + item.phoneNumber" class="pa-1"></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-text="'E-post ' + item.emailAddress" class="pa-1"></v-list-item-subtitle>
                                 </v-list-item-content>
                                 <v-list-item-action>
-                                    <!--<v-list-item-action-text v-text="item.price + ' kr'"></v-list-item-action-text>-->
-                                    <v-list-item-action-text class="text--primary mt-5" v-text="item.invoiceAddress"></v-list-item-action-text>
-                                    <v-list-item-action-text class="text--primary mb-5" v-text="item.zipCode + ' ' +  item.city"></v-list-item-action-text>
+                                    <v-list-item-action-text class="text--primary mt-10" v-text="item.invoiceAddress"></v-list-item-action-text>
+                                    <v-list-item-action-text class="text--primary" v-text="item.zipCode + ' ' +  item.city"></v-list-item-action-text>
+                                    <v-list-item-action-text class="text--primary mb-10" v-text="item.country"></v-list-item-action-text>
                                 </v-list-item-action>
                             </template>
                         </v-list-item>
@@ -47,10 +47,17 @@
         </v-card>
         <!--ADD NEW PRODUCT DIALOG ------- START -->
         <v-row justify="center">
-            <v-dialog v-model="addNewCustomerDialog" persistent max-width="600px">
+            <v-dialog v-model="addNewCustomerDialog" persistent max-width="1000px">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Skapa ny kund</span>
+                        <v-spacer></v-spacer>
+
+                        <v-card-actions>
+                            
+                            <v-btn color="blue darken-1" text @click="closeDialog">Stäng</v-btn>
+                            <v-btn color="blue darken-1" text @click="createNewCustomer()">Skapa</v-btn>
+                        </v-card-actions>
                         <v-card flat v-if="showCustomerIdErrorMessage">
                             <p class="customerIdErrorMessage">
                                 Det finns redan en produkt med detta kundnummret, välj ett annat.
@@ -131,10 +138,15 @@
         <!--   PRODUCT SUCCESSFULLY ADDED DIALOG --------- END     -->
         <!--  SELECTED PRODUCT DIALOG ------- START -->
         <v-row justify="center">
-            <v-dialog v-model="selectedCustomerDialog" persistent max-width="600px">
+            <v-dialog v-model="selectedCustomerDialog" persistent max-width="1000px">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Ändra kundinformation</span>
+                        <v-spacer></v-spacer>
+
+                        <v-card-actions>
+                            <v-btn color="blue darken-1" text small @click="selectedCustomerDialog = false">Stäng</v-btn>
+                        </v-card-actions>
                     </v-card-title>
                     <v-card-text>
                         <v-container>

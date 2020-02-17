@@ -16,7 +16,7 @@ export default {
         return axios.get('/api/account/isuserloggedin', { withCredentials: true });
     },
     logout: () => {
-        return axios.post('/api/account/logout', { withCredentials: true });
+        return axios.post('/api/Account/logout', { withCredentials: true });
     },
     getUser: () => {
         return axios.get('/api/account/GetLoggedUser', { withCredentials: true });
