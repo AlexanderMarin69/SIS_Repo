@@ -2,6 +2,7 @@
     <v-app>
         <v-navigation-drawer v-model="drawer"
                              app>
+            <img src="../public/images/icons/icon-128x128.png" class="ml-10" alt="Alternate Text" />
             <v-list dense>
 
                 <v-list-item>
@@ -30,13 +31,12 @@
                     <v-list-item-content>
                         <router-link class="linkStyle" to="/">
                             <v-list-item-title>
-
                                 <v-btn text color="indigo">Dina Fakturor</v-btn>
                                 <!--<v-btn text> <router-link to="/Products">Artiklar</router-link></v-btn>
-                    <v-btn text> <router-link to="/Customers">Kunder</router-link></v-btn>
-                    <v-btn text> <router-link to="/Settings">Konto</router-link></v-btn>
-                    <v-btn text> <router-link to="/Settings">Kontakta oss</router-link></v-btn>
-                    <v-btn text> <router-link to="/Login">Logga in</router-link></v-btn>-->
+    <v-btn text> <router-link to="/Customers">Kunder</router-link></v-btn>
+    <v-btn text> <router-link to="/Settings">Konto</router-link></v-btn>
+    <v-btn text> <router-link to="/Settings">Kontakta oss</router-link></v-btn>
+    <v-btn text> <router-link to="/Login">Logga in</router-link></v-btn>-->
                             </v-list-item-title>
                         </router-link>
                     </v-list-item-content>
@@ -103,6 +103,9 @@
                    color="indigo"
                    dark>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <img src="../public/images/icons/icon-128x128.png" width="60" height="60" class="ml-10" alt="Alternate Text" />
+
+
             <v-toolbar-title>Dina Fakturor</v-toolbar-title>
         </v-app-bar>
 

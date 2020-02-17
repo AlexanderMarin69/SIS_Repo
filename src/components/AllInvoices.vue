@@ -1,14 +1,31 @@
 ﻿<template>
     <div class="pl-1 pr-1">
+        <br />
+        <br />
+        <br />
+        <br />
+        <h1>
+            Weather PWA
+            <a href="https://darksky.net/poweredby/" class="powered-by">
+                Powered by Dark Sky
+            </a>
+        </h1>
+        <v-btn color="yellow" id="butInstall" aria-label="Install" hidden>install</v-btn>
+        <v-btn color="yellow" id="butRefresh" aria-label="Refresh">refresh</v-btn>
+
+        <br />
+        <br />
+        <br />
+        <br />
         <v-card max-width="1000px" raised shaped
                 class="mx-auto">
             <v-toolbar light>
                 <v-toolbar-title color="black">Alla Fakturor</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <!--<v-btn icon class="ml-3 mr-3">
-                    <v-icon>mdi-magnify</v-icon>
-                    sök
-                </v-btn>-->
+                <v-icon>mdi-magnify</v-icon>
+                sök
+            </v-btn>-->
                 <v-btn color="indigo" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
@@ -57,47 +74,47 @@
                         <v-container>
                             <v-row>
                                 <!--<v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="name" label="Namn"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="customerId" label="Kundnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="invoiceAddress" label="Fakturaadress"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="secondInvoiceAddress" label="Fakturaadress 2"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="zipCode" label="Postnr"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="city" label="Ort"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="country" label="Land"></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field v-model="organisationNumber" label="Organisationsnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="phoneNumber" label="Telefonnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="secondPhoneNumber" label="Andra telefonnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="fax" label="Fax"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="emailAddress" label="E-post"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="webAddress" label="Webbadress"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="12">
-                                    <v-text-field v-model="description" label="Beskrivning / egna anteckningar"></v-text-field>
-                                </v-col>-->
+                                <v-text-field v-model="name" label="Namn"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="customerId" label="Kundnummer"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="invoiceAddress" label="Fakturaadress"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="secondInvoiceAddress" label="Fakturaadress 2"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="zipCode" label="Postnr"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="city" label="Ort"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="country" label="Land"></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field v-model="organisationNumber" label="Organisationsnummer"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="phoneNumber" label="Telefonnummer"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="secondPhoneNumber" label="Andra telefonnummer"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="fax" label="Fax"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="emailAddress" label="E-post"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field v-model="webAddress" label="Webbadress"></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="12" md="12">
+                                <v-text-field v-model="description" label="Beskrivning / egna anteckningar"></v-text-field>
+                            </v-col>-->
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -208,126 +225,126 @@
                                               return-object
                                               single-line></v-select>
                                 </v-col>
-                                    <v-col cols="12" sm="6" md="6">
-                                        <v-menu ref="invoiceDateMenu"
-                                                v-model="invoiceDateMenu"
-                                                :close-on-content-click="false"
-                                                :return-value.sync="invoiceDate"
-                                                transition="scale-transition"
-                                                offset-y
-                                                min-width="290px">
-                                            <template v-slot:activator="{ on }">
-                                                <v-text-field v-model="invoiceDate"
-                                                              label="Fakturadatum"
-                                                              readonly
-                                                              v-on="on"></v-text-field>
-                                            </template>
-                                            <v-date-picker v-model="invoiceDate" no-title scrollable>
-                                                <v-spacer></v-spacer>
-                                                <v-btn text color="primary" @click="invoiceDateMenu = false">Avbryt</v-btn>
-                                                <v-btn text color="primary" @click="$refs.invoiceDateMenu.save(invoiceDate)">OK</v-btn>
-                                            </v-date-picker>
-                                        </v-menu>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="6">
-                                        <v-menu ref="invoicePayDateMenu"
-                                                v-model="invoicePayDateMenu"
-                                                :close-on-content-click="false"
-                                                :return-value.sync="invoicePayDate"
-                                                transition="scale-transition"
-                                                offset-y
-                                                min-width="290px">
-                                            <template v-slot:activator="{ on }">
-                                                <v-text-field v-model="invoicePayDate"
-                                                              label="Förfallodatum"
-                                                              readonly
-                                                              v-on="on"></v-text-field>
-                                            </template>
-                                            <v-date-picker v-model="invoicePayDate" no-title scrollable>
-                                                <v-spacer></v-spacer>
-                                                <v-btn text color="primary" @click="invoiceDatePayMenu = false">Cancel</v-btn>
-                                                <v-btn text color="primary" @click="$refs.invoicePayDateMenu.save(invoicePayDate)">OK</v-btn>
-                                            </v-date-picker>
-                                        </v-menu>
-                                    </v-col>
-
-
-
-
-
-
-
-                                    <!-- dialog ------------------------ start-->
-
-
-                                    <v-dialog v-model="addProductsToInvoiceDialog" max-width="290">
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-menu ref="invoiceDateMenu"
+                                            v-model="invoiceDateMenu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="invoiceDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px">
                                         <template v-slot:activator="{ on }">
-                                            <v-btn color="primary" rounded dark v-on="on">Lägg till produkter</v-btn>
+                                            <v-text-field v-model="invoiceDate"
+                                                          label="Fakturadatum"
+                                                          readonly
+                                                          v-on="on"></v-text-field>
                                         </template>
-                                        <v-card raised shaped>
-
-                                            <AllProductsForInvoice></AllProductsForInvoice>
-
-                                            <v-card-actions>
-                                                <v-spacer></v-spacer>
-                                                <v-btn color="indigo" text @click="addProductsToInvoiceDialog = false">Stäng</v-btn>
-                                            </v-card-actions>
-                                        </v-card>
-                                    </v-dialog>
-
-
-                                    <!-- dialog ------------------------ end -->
-
-                                    <v-list two-line>
-                                        <v-list-item-group>
-                                            <template v-for="(item, index) in InvoiceProductsToDisplay">
-                                                <v-list-item :key="item.name">
-                                                    <template>
-                                                        <v-list-item-content v-if="InvoiceProductsToDisplay.length < 1">
-
-                                                        </v-list-item-content>
-                                                        <v-list-item-content>
-                                                            <v-list-item-subtitle v-text="item.articleNumber" class="pa-1"></v-list-item-subtitle>
-                                                            <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
-                                                            <v-list-item-subtitle class="text--primary pa-1" v-text="item.name"></v-list-item-subtitle>
-                                                            <v-list-item-subtitle class="text--primary pa-1"></v-list-item-subtitle>
-                                                            <div><v-btn color="red" small @click="removeProductFromInvoiceList(item.articleNumber)">ta bort</v-btn></div>
-                                                        </v-list-item-content>
-                                                        <v-list-item-action>
-                                                            <v-col cols="4" sm="6" md="12">
-                                                                <v-text-field v-model="item.price" @keyup="updateInvoiceProductPriceData(item.articleNumber, item.price)" label="Välj pris"></v-text-field>
-                                                            </v-col>
-                                                            <v-col cols="4" sm="6" md="12">
-                                                                <v-text-field v-model="item.quantity" @keyup="updateInvoiceProductQuantityData(item.articleNumber, item.quantity)" label="Välj antal"></v-text-field>
-                                                            </v-col>
-                                                        </v-list-item-action>
-                                                    </template>
-                                                </v-list-item>
-                                                <v-divider v-if="index + 1 < InvoiceProductsToDisplay.length"
-                                                           :key="index"></v-divider>
-                                            </template>
-                                        </v-list-item-group>
-                                    </v-list>
+                                        <v-date-picker v-model="invoiceDate" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="invoiceDateMenu = false">Avbryt</v-btn>
+                                            <v-btn text color="primary" @click="$refs.invoiceDateMenu.save(invoiceDate)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-menu ref="invoicePayDateMenu"
+                                            v-model="invoicePayDateMenu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="invoicePayDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px">
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field v-model="invoicePayDate"
+                                                          label="Förfallodatum"
+                                                          readonly
+                                                          v-on="on"></v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="invoicePayDate" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="invoiceDatePayMenu = false">Cancel</v-btn>
+                                            <v-btn text color="primary" @click="$refs.invoicePayDateMenu.save(invoicePayDate)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-col>
 
 
 
 
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="deliveryFee" label="Fraktavgift"></v-text-field>
-                                    </v-col>
 
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="InvoiceFee" label="Fakturaavgift"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-spacer></v-spacer>
-                                        <v-card class="pa-5">
-                                            <h3>Summa: 2 472 sek</h3>
-                                        </v-card>
-                                    </v-col>
-                                    <v-col cols="12" sm="12" md="12">
-                                        <v-text-field v-model="invoiceMessageText" label="Fakturatext"></v-text-field>
-                                    </v-col>
+
+
+                                <!-- dialog ------------------------ start-->
+
+
+                                <v-dialog v-model="addProductsToInvoiceDialog" max-width="290">
+                                    <template v-slot:activator="{ on }">
+                                        <v-btn color="primary" rounded dark v-on="on">Lägg till produkter</v-btn>
+                                    </template>
+                                    <v-card raised shaped>
+
+                                        <AllProductsForInvoice></AllProductsForInvoice>
+
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="indigo" text @click="addProductsToInvoiceDialog = false">Stäng</v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+
+
+                                <!-- dialog ------------------------ end -->
+
+                                <v-list two-line>
+                                    <v-list-item-group>
+                                        <template v-for="(item, index) in InvoiceProductsToDisplay">
+                                            <v-list-item :key="item.name">
+                                                <template>
+                                                    <v-list-item-content v-if="InvoiceProductsToDisplay.length < 1">
+
+                                                    </v-list-item-content>
+                                                    <v-list-item-content>
+                                                        <v-list-item-subtitle v-text="item.articleNumber" class="pa-1"></v-list-item-subtitle>
+                                                        <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
+                                                        <v-list-item-subtitle class="text--primary pa-1" v-text="item.name"></v-list-item-subtitle>
+                                                        <v-list-item-subtitle class="text--primary pa-1"></v-list-item-subtitle>
+                                                        <div><v-btn color="red" small @click="removeProductFromInvoiceList(item.articleNumber)">ta bort</v-btn></div>
+                                                    </v-list-item-content>
+                                                    <v-list-item-action>
+                                                        <v-col cols="4" sm="6" md="12">
+                                                            <v-text-field v-model="item.price" @keyup="updateInvoiceProductPriceData(item.articleNumber, item.price)" label="Välj pris"></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="4" sm="6" md="12">
+                                                            <v-text-field v-model="item.quantity" @keyup="updateInvoiceProductQuantityData(item.articleNumber, item.quantity)" label="Välj antal"></v-text-field>
+                                                        </v-col>
+                                                    </v-list-item-action>
+                                                </template>
+                                            </v-list-item>
+                                            <v-divider v-if="index + 1 < InvoiceProductsToDisplay.length"
+                                                       :key="index"></v-divider>
+                                        </template>
+                                    </v-list-item-group>
+                                </v-list>
+
+
+
+
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="deliveryFee" label="Fraktavgift"></v-text-field>
+                                </v-col>
+
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="InvoiceFee" label="Fakturaavgift"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-spacer></v-spacer>
+                                    <v-card class="pa-5">
+                                        <h3>Summa: 2 472 sek</h3>
+                                    </v-card>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12">
+                                    <v-text-field v-model="invoiceMessageText" label="Fakturatext"></v-text-field>
+                                </v-col>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
@@ -656,4 +673,9 @@
         color: #e46b6b;
         padding: 10px;
     }
+    @media all and (display-mode: standalone) {
+  body {
+    background-color: yellow;
+  }
+}
 </style>
