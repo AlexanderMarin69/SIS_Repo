@@ -26,13 +26,16 @@
                         <v-list-item :key="item.name" @click="showCustomerDetails(item)">
                             <template>
                                 <v-list-item-content>
-                                    <v-list-item-subtitle v-text="item.phoneNumber" class="pa-1"></v-list-item-subtitle>
                                     <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
-                                    <v-list-item-subtitle class="text--primary pa-1" v-text="item.emailAddress"></v-list-item-subtitle>
-                                    <v-list-item-subtitle class="text--primary pa-1" v-text="item.city"></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-text="item.phoneNumber" class="pa-1"></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-text="item.emailAddress" class="pa-1"></v-list-item-subtitle>
+                                    <!--<v-list-item-subtitle v-text="item.description" class="pa-1"></v-list-item-subtitle>-->
+                                    <!--<v-list-item-subtitle class="text--primary pa-1" v-text="item.invoiceAddress"></v-list-item-subtitle>-->
                                 </v-list-item-content>
                                 <v-list-item-action>
                                     <!--<v-list-item-action-text v-text="item.price + ' kr'"></v-list-item-action-text>-->
+                                    <v-list-item-action-text class="text--primary mt-5" v-text="item.invoiceAddress"></v-list-item-action-text>
+                                    <v-list-item-action-text class="text--primary mb-5" v-text="item.zipCode + ' ' +  item.city"></v-list-item-action-text>
                                 </v-list-item-action>
                             </template>
                         </v-list-item>

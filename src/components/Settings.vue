@@ -1,7 +1,7 @@
 ﻿<template>
     <div class="pl-1 pr-1">
     <v-card class="mx-auto" raised shaped
-            max-width="500">
+            max-width="1000">
 
 
         <v-toolbar light>
@@ -15,8 +15,8 @@
         </v-toolbar>
 
         <v-container fluid>
-            <v-row dense>
-                <v-col cols="12" sm="12" md="12">
+            <v-row>
+                <v-col cols="12" sm="12" md="3">
                     <v-card shaped>
 
                         <v-icon class="ml-3 mt-3">mdi-account-cog-outline</v-icon>
@@ -40,7 +40,7 @@
                     </v-card>
                 </v-col>
 
-                <v-col cols="12" sm="12" md="12">
+                <v-col cols="12" sm="12" md="3">
                     <v-card shaped>
                         <v-icon class="ml-3 mt-3">mdi-card-plus-outline</v-icon>
                         <v-card-title v-text="extraSettingsTitle"></v-card-title>
@@ -58,7 +58,7 @@
                     </v-card>
                 </v-col>
 
-                <v-col cols="12" sm="12" md="12">
+                <v-col cols="12" sm="12" md="3">
                     <v-card shaped>
 
                         <v-icon class="ml-3 mt-3">mdi-card-text-outline</v-icon>
@@ -77,7 +77,7 @@
                     </v-card>
                 </v-col>
 
-                <v-col cols="12" sm="12" md="12">
+                <v-col cols="12" sm="12" md="3">
                     <v-card shaped>
                         <v-icon class="ml-3 mt-3">mdi-head-lightbulb-outline</v-icon>
                         <v-card-title v-text="feedbackSettingsTitle"></v-card-title>
@@ -94,7 +94,7 @@
                     </v-card>
                 </v-col>
 
-                <p class="mt-5">Dina Fakturor v 0.1.0</p>
+                <p class="mt-5 ml-3">Dina Fakturor v 0.1.0</p>
 
             </v-row>
         </v-container>
