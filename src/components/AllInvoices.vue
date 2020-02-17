@@ -1,22 +1,5 @@
 ﻿<template>
     <div class="pl-1 pr-1">
-        <br />
-        <br />
-        <br />
-        <br />
-        <h1>
-            Weather PWA
-            <a href="https://darksky.net/poweredby/" class="powered-by">
-                Powered by Dark Sky
-            </a>
-        </h1>
-        <v-btn color="yellow" id="butInstall" aria-label="Install" hidden>install</v-btn>
-        <v-btn color="yellow" id="butRefresh" aria-label="Refresh">refresh</v-btn>
-
-        <br />
-        <br />
-        <br />
-        <br />
         <v-card max-width="1000px" raised shaped
                 class="mx-auto">
             <v-toolbar light>
@@ -26,7 +9,7 @@
                 <v-icon>mdi-magnify</v-icon>
                 sök
             </v-btn>-->
-                <v-btn color="indigo" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
+                <v-btn color="primary" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
             </v-toolbar>
@@ -287,7 +270,7 @@
 
                                         <v-card-actions>
                                             <v-spacer></v-spacer>
-                                            <v-btn color="indigo" text @click="addProductsToInvoiceDialog = false">Stäng</v-btn>
+                                            <v-btn color="primary" text @click="addProductsToInvoiceDialog = false">Stäng</v-btn>
                                         </v-card-actions>
                                     </v-card>
                                 </v-dialog>
@@ -674,8 +657,6 @@
         padding: 10px;
     }
     @media all and (display-mode: standalone) {
-  body {
-    background-color: yellow;
-  }
+  /*works*/
 }
 </style>

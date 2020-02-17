@@ -12,7 +12,7 @@
                         <router-link class="linkStyle" to="/Dashboard">
                             <v-list-item-title>
 
-                                <v-btn text color="indigo">
+                                <v-btn text color="primary">
                                     Hem
                                 </v-btn>
                                 <!--<v-btn text> <router-link to="/Products">Artiklar</router-link></v-btn>
@@ -31,7 +31,7 @@
                     <v-list-item-content>
                         <router-link class="linkStyle" to="/">
                             <v-list-item-title>
-                                <v-btn text color="indigo">Dina Fakturor</v-btn>
+                                <v-btn text color="primary">Dina Fakturor</v-btn>
                                 <!--<v-btn text> <router-link to="/Products">Artiklar</router-link></v-btn>
     <v-btn text> <router-link to="/Customers">Kunder</router-link></v-btn>
     <v-btn text> <router-link to="/Settings">Konto</router-link></v-btn>
@@ -47,7 +47,7 @@
                     <router-link class="linkStyle" to="/Products">
                         <v-list-item-content>
                             <v-list-item-title>
-                                <v-btn text color="indigo">
+                                <v-btn text color="primary">
                                     Artiklar
                                 </v-btn>
                             </v-list-item-title>
@@ -62,7 +62,7 @@
                     <router-link class="linkStyle" to="/Customers">
                         <v-list-item-content>
                             <v-list-item-title>
-                                <v-btn text color="indigo">
+                                <v-btn text color="primary">
                                     Kunder
                                 </v-btn>
                             </v-list-item-title>
@@ -74,7 +74,7 @@
                     <router-link class="linkStyle" to="/Settings">
                         <v-list-item-content>
                             <v-list-item-title>
-                                <v-btn text color="indigo">
+                                <v-btn text color="primary">
                                     Konto
                                 </v-btn>
                             </v-list-item-title>
@@ -100,19 +100,22 @@
         </v-navigation-drawer>
 
         <v-app-bar app
-                   color="indigo"
+                   color="primary"
                    dark>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <img src="../public/images/icons/icon-128x128.png" width="60" height="60" class="ml-10" alt="Alternate Text" />
 
 
             <v-toolbar-title>Dina Fakturor</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn color="yellow" id="butInstall" aria-label="Install" hidden>Installera</v-btn>
+
         </v-app-bar>
 
         <v-content>
             <router-view></router-view>
         </v-content>
-        <v-footer color="indigo"
+        <v-footer color="primary"
                   app>
             <span class="white--text">Dina Fakturor &copy; 2019</span>
         </v-footer>
