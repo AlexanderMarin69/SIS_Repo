@@ -7,5 +7,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAHcumat3zf0mkAK8JRGfnpQAAAAACAAAAAAAQZgAAAAEAACAAAADnzkvUh8WD/2hRqvTFnF6FD37GtI3/Rwp4vsMdas9nAQAAAAAOgAAAAAIAACAAAAARBFWJAwGTMhOjniWAi9ZjmKhjnCDW/HAS3Kh636jX44AAAAADsRyuX40g1Q8ZAgZAKR4LootNSwktKLrsvWNIZ7aSsWTPryhkgByIlqldFEnW//tSlQ0vm0sKWdeaEh9OQlZycT8/mvlyLABDaEg1JJW+XjmMb2jk5FhBwvuydSo5UuU2IYNBzSY1/xSVuwoN5AwjJD/NOQuJMjfj2Eq04fQXxkAAAAAzDdJowr/ogaOE7s+4Sqa66yOltXuAN47SqLqVKxfnH4U4lrh8YHFHJmtzO0PWlJovq3OXreQYAjWBuF+EIRGz</EncryptedPassword>
+    <_PublishTargetUrl>C:\Users\alexa\Desktop\dinafakturor_PUBLISH_LOCAL</_PublishTargetUrl>
   </PropertyGroup>
 </Project>
