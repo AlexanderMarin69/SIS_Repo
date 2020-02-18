@@ -6,6 +6,10 @@
             price: product.price,
             quantity: 1
         })
+        state.totalInvoiceItemsPrice = 0;
+        for (var i = 0; i < state.InvoiceProducts.length; i++) {
+            state.totalInvoiceItemsPrice += state.InvoiceProducts[i].price;
+        }
     },
     RESET_INVOICE_PRODUCT_LIST(state) {
         for (var i = 0; i < state.InvoiceProducts.length; i++) {
@@ -48,10 +52,12 @@
 
                 state.InvoiceProducts.splice(state.InvoiceProducts.findIndex(x => x.articleNumber === product.articleNumber), 1);
 
+               
+
                 state.InvoiceProducts.unshift({
                     articleNumber: kanin.articleNumber,
                     name: kanin.name,
-                    price: product.price,
+                    price: kanin.price = parseInt(product.price),
                     quantity: kanin.quantity
                 }
                 )
@@ -77,13 +83,13 @@
                     articleNumber: kanin.articleNumber,
                     name: kanin.name,
                     price: kanin.price,
-                    quantity: product.quantity
+                    quantity: kanin.price = parseInt(product.quantity)
                 }
                 )
                 return false;
             }
         }
-    },
+    }, 
     REMOVE_PRODUCT_FROM_LIST(state, product) {
 
         for (var i = 0; i < state.InvoiceProducts.length; i++) {
@@ -91,6 +97,12 @@
             if (state.InvoiceProducts[i].articleNumber === product.articleNumber) {
                 state.InvoiceProducts.splice(state.InvoiceProducts.findIndex(x => x.articleNumber === product.articleNumber), 1);
             }
+        }
+    },
+    CALCULATE_TOTAL_INVOICE_ITEMS_PRICE(state) {
+        state.totalInvoiceItemsPrice = 0;
+        for (var i = 0; i < state.InvoiceProducts.length; i++) {
+            state.totalInvoiceItemsPrice += state.InvoiceProducts[i].price;
         }
     },
 }

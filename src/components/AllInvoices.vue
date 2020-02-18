@@ -295,10 +295,10 @@
                                                     </v-list-item-content>
                                                     <v-list-item-action>
                                                         <v-col cols="4" sm="6" md="12">
-                                                            <v-text-field v-model="item.price" @keyup="updateInvoiceProductPriceData(item.articleNumber, item.price)" label="Välj pris"></v-text-field>
+                                                            <v-text-field v-model="item.price" type="number" @keyup="updateInvoiceProductPriceData(item.articleNumber, item.price)" label="Välj pris"></v-text-field>
                                                         </v-col>
                                                         <v-col cols="4" sm="6" md="12">
-                                                            <v-text-field v-model="item.quantity" @keyup="updateInvoiceProductQuantityData(item.articleNumber, item.quantity)" label="Välj antal"></v-text-field>
+                                                            <v-text-field v-model="item.quantity" type="number" @keyup="updateInvoiceProductQuantityData(item.articleNumber, item.quantity)" label="Välj antal"></v-text-field>
                                                         </v-col>
                                                     </v-list-item-action>
                                                 </template>
@@ -322,7 +322,9 @@
                                 <v-col cols="12" sm="6" md="4">
                                     <v-spacer></v-spacer>
                                     <v-card class="pa-5">
-                                        <h3>Summa: 2 472 sek</h3>
+                                        <h3 style="color:black;">
+                                            Summa: {{totalInvoiceItemsPriceToDisplay}}
+                                        </h3>
                                     </v-card>
                                 </v-col>
                                 <v-col cols="12" sm="12" md="12">
@@ -331,7 +333,6 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
-
                     <v-spacer></v-spacer>
                     <v-card-actions>
                         <v-overflow-btn class="my-2"
@@ -340,8 +341,6 @@
                                         segmented
                                         target="#dropdown-example"></v-overflow-btn>
                     </v-card-actions>
-
-
                     <v-card-actions>
                         <v-btn disabled color="primary" large rounded class="mt-3 mr-5">
                             Skicka
@@ -354,19 +353,11 @@
                     <p class="pa-5" style="font-size:14px; font-weight: 300;">
                         Välj först ovanför vad du vill skicka som.
                     </p>
-
                 </v-card>
             </v-dialog>
         </v-row>
     </div>
-
-
-
-
-
-
 </template>
-
 <script>
     /* eslint-disable no-console */
     import { mapState, mapActions } from 'vuex';
@@ -378,29 +369,18 @@
             AllProductsForInvoice
         },
         data: () => ({
-
-         
             addProductsToInvoiceDialog: false,
-
-
             dropdown_icon: [
         { text: 'Faktura', callback: () => console.log('list') },
         { text: 'Påminnelse', callback: () => console.log('favorite') },
         { text: 'Offert', callback: () => console.log('delete') },
       ],
-
             //actions on click push list selectedFruits to vuex array and then finally on save push get array in object and push to api
-
-
-
-
-
             //TO FIX
             searchCustomers: '',
             showCustomerIdErrorMessage: false,
             searchProducts: '',
             allUserCustomersToDisplay: '',
-
             select: {
                 phoneNumber: '',
                 city: '',
@@ -408,32 +388,19 @@
                 name: 'Välj kund',
                 customerId: ''
             },
-           
-
             dialog: false,
             notifications: false,
             sound: true,
             widgets: false,
             createNewInvoiceDialog: false,
             show: false,
-
-
-
-
-
-
-
-
             invoiceDate: new Date().toISOString().substr(0, 10),
             invoiceDateMenu: false,
             invoiceDateModal: false,
-
             invoicePayDate: new Date().toISOString().substr(0, 10),
             invoicePayDateMenu: false,
             invoicePayDateModal: false,
-
             productsToChoose: [
-
                 {
                     phoneNumber: '0761952005',
                     city: 'Värnamo',
@@ -441,7 +408,6 @@
                     name: 'Produktnamnet'
                 }
             ],
-
             //create invoice v-models start------------
             deliveryFee: '',
             InvoiceFee: '',
@@ -450,9 +416,7 @@
             invoiceMessageText: '',
             customerId: '',
             //create invoice v-models end---------------
-
             //--------------------------
-
             //edit customer v-models start-----------------
             editName: '',
             editCustomerId: '',
@@ -469,31 +433,17 @@
             editWebAddress: '',
             editDescription: '',
             //edit customer v-models end --------------------
-
-
             //delete customer v-models start-----------------
-
             deleteCustomerDialog: false,
-
-
             //delete customer v-models start-----------------
-
-
             selectedCustomerDialog: false,
             selectedProductForEdit: {},
-
             searchInput: '',
-            
-
             addNewCustomerDialog: false,
             productSuccessfullyAddedDialog: false,
-
-
-
             placeholderArrayForProducts: [],
             listOfProducts: [],
         }),
-
         methods: {
             activateCreateNewInvoiceDialog() {
                 this.resetInvoiceProductListAction();
@@ -501,25 +451,29 @@
             },
             updateInvoiceProductPriceData(articleNumber, price) {
                  setTimeout(() => (
-
                     this.updateProductPriceListAction({ articleNumber, price })
+                 ), 3000)
+              
+                  setTimeout(() => (
+                                    this.calculateTotalPriceAction()
 
-                ), 3000)
-                
+                ), 5000)
             },
             updateInvoiceProductQuantityData(articleNumber, quantity) {
                 setTimeout(() => (
-
                     this.updateProductQuantityListAction({ articleNumber, quantity })
-
                 ), 3000)
-                
+               
+                  setTimeout(() => (
+                                    this.calculateTotalPriceAction()
+
+                ), 5000)
             },
             removeProductFromInvoiceList(articleNumber) {
                 this.removeInvoiceProductListAction({ articleNumber });
             },
             addToInvoiceProductList(item) {
-                this.addToInvoiceProductListAction(item);
+                this.addToInvoiceProductListAction(item)
             },
             // DELETE customer START -------
             deleteCustomer() {
@@ -528,10 +482,8 @@
                         {
                             CustomerId: this.customerId
                         }
-
                     );
             },   // DELETE customer START -------
-
             // UPDATE customer START -------
             updateExistingCustomer() {
                 CustomerAPI.UpdateExistingCustomer({
@@ -551,7 +503,6 @@
                     Description: this.editDescription
                 });
             }, // UPDATE customer END -------
-
             showCustomerDetails(item) {
                 this.customerId = item.customerId,
                     CustomerAPI.GetCustomerByCustomerId({ CustomerId: item.customerId }).then((response) => {
@@ -574,12 +525,10 @@
             },
             searchOnKeyup() {
                 setTimeout(() => (
-
                     this.searchCustomers(
                         {
                             SearchWords: this.searchInput
                         })
-
                 ), 1500)
             },
             productAddedDialog() {
@@ -612,7 +561,6 @@
                                 this.invoiceMessageText = ''
                         }
                     }),
-
                     this.productAddedDialog();
             },
             ...mapActions({
@@ -625,7 +573,8 @@
                 updateProductQuantityListAction: 'invoice/UPDATE_PRODUCT_QUANTITY_FROM_LIST',
                 removeInvoiceProductListAction: 'invoice/REMOVE_PRODUCT_FROM_LIST',
                 searchWarehouse: 'warehouse/SEARCH_WAREHOUSE',
-                resetInvoiceProductListAction: 'invoice/RESET_INVOICE_PRODUCT_LIST_ON_ENTER'
+                resetInvoiceProductListAction: 'invoice/RESET_INVOICE_PRODUCT_LIST_ON_ENTER',
+                calculateTotalPriceAction: 'invoice/CALCULATE_TOTAL_INVOICE_ITEMS_PRICE',
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;
@@ -636,20 +585,19 @@
                 //allUserInvoicesToDisplay: state => state.customer.allUserInvoices,
                 allCustomers: state => state.customer.allUserCustomers,
                 warehouseProductsToDisplay: state => state.warehouse.warehouseProducts,
-                InvoiceProductsToDisplay: state => state.invoice.InvoiceProducts
+                InvoiceProductsToDisplay: state => state.invoice.InvoiceProducts,
+                totalInvoiceItemsPriceToDisplay: state => state.invoice.totalInvoiceItemsPrice
             }),
         },
         beforeMount() {
             //this.getAllInvoices();
             this.getAllCustomers();
             this.getAllProducts();
+            this.calculateTotalPriceAction();
         }
     }
-
-
     /* eslint-enable no-console */
 </script>
-
 <style scoped>
     .customerIdErrorMessage {
         font-size: 14px;

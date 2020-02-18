@@ -17,6 +17,9 @@ export default {
     RESET_INVOICE_PRODUCT_LIST_ON_ENTER({ commit }) {
         commit('RESET_INVOICE_PRODUCT_LIST')
     },
+    CALCULATE_TOTAL_INVOICE_ITEMS_PRICE({ commit }) {
+        commit('CALCULATE_TOTAL_INVOICE_ITEMS_PRICE')
+    }, 
     GET_ALL_INVOICES({ commit }) {
         return InvoiceAPI.GetAllInvoices()
             .then(result => {

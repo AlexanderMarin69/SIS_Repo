@@ -6,6 +6,7 @@ export default {
     state: {
         InvoiceProducts: [],
     },
+    totalInvoiceItemsPrice: 0,
     actions,
     mutations
 }
