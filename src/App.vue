@@ -103,9 +103,6 @@
                    color="primary"
                    dark>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            <img src="../public/images/icons/icon-128x128.png" width="60" height="60" class="ml-10" alt="Alternate Text" />
-
-
             <v-toolbar-title>Dina Fakturor</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn color="yellow" id="butInstall" aria-label="Install" hidden>Installera</v-btn>
@@ -116,7 +113,7 @@
             <router-view></router-view>
         </v-content>
         <v-footer color="primary"
-                  app>
+                  >
             <span class="white--text">Dina Fakturor &copy; 2019</span>
         </v-footer>
         <!--<v-content>

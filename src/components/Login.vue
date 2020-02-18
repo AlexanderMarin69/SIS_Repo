@@ -8,7 +8,7 @@
                         sm8
                         md4>
                     <v-card class="elevation-12">
-                        <v-toolbar color="indigo"
+                        <v-toolbar color="primary"
                                    dark
                                    flat>
                             <v-toolbar-title>Logga in till Dina Fakturor</v-toolbar-title>
