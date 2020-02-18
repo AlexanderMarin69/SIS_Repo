@@ -8,7 +8,7 @@
         })
         state.totalInvoiceItemsPrice = 0;
         for (var i = 0; i < state.InvoiceProducts.length; i++) {
-            state.totalInvoiceItemsPrice += state.InvoiceProducts[i].price;
+            state.totalInvoiceItemsPrice += state.InvoiceProducts[i].price * state.InvoiceProducts[i].quantity 
         }
     },
     RESET_INVOICE_PRODUCT_LIST(state) {
@@ -102,7 +102,7 @@
     CALCULATE_TOTAL_INVOICE_ITEMS_PRICE(state) {
         state.totalInvoiceItemsPrice = 0;
         for (var i = 0; i < state.InvoiceProducts.length; i++) {
-            state.totalInvoiceItemsPrice += state.InvoiceProducts[i].price;
+            state.totalInvoiceItemsPrice += state.InvoiceProducts[i].price * state.InvoiceProducts[i].quantity 
         }
     },
 }

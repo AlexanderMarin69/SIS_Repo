@@ -295,10 +295,10 @@
                                                     </v-list-item-content>
                                                     <v-list-item-action>
                                                         <v-col cols="4" sm="6" md="12">
-                                                            <v-text-field v-model="item.price" type="number" @keyup="updateInvoiceProductPriceData(item.articleNumber, item.price)" label="Välj pris"></v-text-field>
+                                                            <v-text-field v-model="item.price" @keyup="updateInvoiceProductPriceData(item.articleNumber, item.price)" label="Välj pris"></v-text-field>
                                                         </v-col>
                                                         <v-col cols="4" sm="6" md="12">
-                                                            <v-text-field v-model="item.quantity" type="number" @keyup="updateInvoiceProductQuantityData(item.articleNumber, item.quantity)" label="Välj antal"></v-text-field>
+                                                            <v-text-field v-model="item.quantity" @keyup="updateInvoiceProductQuantityData(item.articleNumber, item.quantity)" label="Välj antal"></v-text-field>
                                                         </v-col>
                                                     </v-list-item-action>
                                                 </template>
@@ -313,17 +313,18 @@
 
 
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="deliveryFee" label="Fraktavgift"></v-text-field>
+                                    <v-text-field v-model="deliveryFee" type="number" label="Fraktavgift"></v-text-field>
                                 </v-col>
 
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="InvoiceFee" label="Fakturaavgift"></v-text-field>
+                                    <v-text-field v-model="InvoiceFee" type="number" label="Fakturaavgift"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-spacer></v-spacer>
                                     <v-card class="pa-5">
                                         <h3 style="color:black;">
-                                            Summa: {{totalInvoiceItemsPriceToDisplay}}
+                                            <v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>
+                                            {{totalInvoiceItemsPriceToDisplay}}
                                         </h3>
                                     </v-card>
                                 </v-col>
@@ -453,27 +454,26 @@
                  setTimeout(() => (
                     this.updateProductPriceListAction({ articleNumber, price })
                  ), 3000)
-              
-                  setTimeout(() => (
-                                    this.calculateTotalPriceAction()
 
-                ), 5000)
+                 setTimeout(() => (
+                     this.calculateTotalPriceAction()
+                ), 3000)
             },
             updateInvoiceProductQuantityData(articleNumber, quantity) {
                 setTimeout(() => (
                     this.updateProductQuantityListAction({ articleNumber, quantity })
                 ), 3000)
-               
-                  setTimeout(() => (
-                                    this.calculateTotalPriceAction()
 
-                ), 5000)
+                 setTimeout(() => (
+                    this.calculateTotalPriceAction()
+                ), 3000)
             },
             removeProductFromInvoiceList(articleNumber) {
                 this.removeInvoiceProductListAction({ articleNumber });
             },
             addToInvoiceProductList(item) {
                 this.addToInvoiceProductListAction(item)
+                this.calculateTotalPriceAction();
             },
             // DELETE customer START -------
             deleteCustomer() {
@@ -586,7 +586,7 @@
                 allCustomers: state => state.customer.allUserCustomers,
                 warehouseProductsToDisplay: state => state.warehouse.warehouseProducts,
                 InvoiceProductsToDisplay: state => state.invoice.InvoiceProducts,
-                totalInvoiceItemsPriceToDisplay: state => state.invoice.totalInvoiceItemsPrice
+                totalInvoiceItemsPriceToDisplay: state => state.invoice.totalInvoiceItemsPrice,
             }),
         },
         beforeMount() {
