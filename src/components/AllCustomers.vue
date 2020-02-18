@@ -28,7 +28,7 @@
                                 <v-list-item-content>
                                     <v-list-item-subtitle v-text="'Kundnr '+ item.customerId" class="pa-1"></v-list-item-subtitle>
                                     <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
-                                    <v-list-item-subtitle v-text="'Org-/Persnr ' + item.organisationNumber" class="pa-1" ></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-text="'Org-/Persnr ' + item.organisationNumber" class="pa-1"></v-list-item-subtitle>
                                     <v-list-item-subtitle v-text="'Tel ' + item.phoneNumber" class="pa-1"></v-list-item-subtitle>
                                     <v-list-item-subtitle v-text="'E-post ' + item.emailAddress" class="pa-1"></v-list-item-subtitle>
                                 </v-list-item-content>
@@ -36,6 +36,7 @@
                                     <v-list-item-action-text class="text--primary mt-10" v-text="item.invoiceAddress"></v-list-item-action-text>
                                     <v-list-item-action-text class="text--primary" v-text="item.zipCode + ' ' +  item.city"></v-list-item-action-text>
                                     <v-list-item-action-text class="text--primary mb-10" v-text="item.country"></v-list-item-action-text>
+                                    <v-btn text outlined color="primary">visa</v-btn>
                                 </v-list-item-action>
                             </template>
                         </v-list-item>

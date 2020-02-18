@@ -32,6 +32,7 @@
                                 <v-list-item-action>
                                     <v-list-item-action-text class="mt-5" v-text="item.price + ' kr'"></v-list-item-action-text>
                                     <v-list-item-action-text class="mb-5" v-text="item.stockBalance + ' i lager'"></v-list-item-action-text>
+                                    <v-btn text outlined color="primary">visa</v-btn>
                                 </v-list-item-action>
                             </template>
                         </v-list-item>

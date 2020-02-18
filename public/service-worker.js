@@ -6,6 +6,7 @@ const CACHE_NAME = 'static-cache-v1';
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
     '/offline.html',
+    '/images/icon-128x128.png'
 ];
 
 self.addEventListener('install', (evt) => {
