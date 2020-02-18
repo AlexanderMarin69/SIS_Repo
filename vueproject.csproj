@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\app.46d6bb4f.js" />
+    <Content Remove="wwwroot\js\app.46d6bb4f.js.map" />
+    <Content Remove="wwwroot\js\app.js" />
+    <Content Remove="wwwroot\js\chunk-vendors.ca9778de.js" />
+    <Content Remove="wwwroot\js\chunk-vendors.ca9778de.js.map" />
+    <Content Remove="wwwroot\js\chunk-vendors.js" />
     <Content Remove="wwwroot\logo.png" />
   </ItemGroup>
 
@@ -30,6 +36,7 @@
   <ItemGroup>
     <Folder Include="UsersPdfInvoices\" />
     <Folder Include="src\store\modules\login\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>

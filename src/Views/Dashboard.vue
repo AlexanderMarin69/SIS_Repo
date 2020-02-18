@@ -106,6 +106,26 @@
                 </v-card>
             </v-col>
 
+            <v-col cols="12" sm="6" md="6">
+                <v-card class="mx-auto" raised shaped
+                        max-width="344">
+                    <v-list-item three-line>
+                        <v-list-item-content>
+                            <div class="overline mb-4">Information</div>
+                            <v-list-item-title class="headline mb-1">Fakturor</v-list-item-title>
+                            <v-list-item-subtitle>Du har skickat 24 fakturor sedan du började använda Dina Fakturor.</v-list-item-subtitle>
+                        </v-list-item-content>
+
+                        <v-list-item-avatar raised
+                                            size="80"
+                                            color="success">
+                            <v-icon large color="white">mdi-arrow-up</v-icon>
+                        </v-list-item-avatar>
+                    </v-list-item>
+
+                </v-card>
+            </v-col>
+
         </v-row>
 
 

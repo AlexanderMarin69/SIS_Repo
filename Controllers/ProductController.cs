@@ -134,7 +134,7 @@ namespace vueproject.Controllers
         public async Task<IActionResult> SearchProducts(SearchViewModel vm)
         {
             //TODO: does it 3 times??
-            var SearchResultProducts = await ctx.Products.Where(x => x.Name.Contains(vm.SearchWords)).ToListAsync();
+            var SearchResultProducts = await ctx.Products.Where(x => x.Name.Contains(vm.SearchWords) || x.ArticleNumber.Contains(vm.SearchWords)).ToListAsync();
             return Ok(SearchResultProducts);
         }
 
