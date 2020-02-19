@@ -6,9 +6,9 @@
                 <v-toolbar-title color="black">Alla Fakturor</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <!--<v-btn icon class="ml-3 mr-3">
-                <v-icon>mdi-magnify</v-icon>
-                sök
-            </v-btn>-->
+                    <v-icon>mdi-magnify</v-icon>
+                    sök
+                </v-btn>-->
                 <v-btn color="primary" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
@@ -57,47 +57,47 @@
                         <v-container>
                             <v-row>
                                 <!--<v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="name" label="Namn"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="customerId" label="Kundnummer"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="invoiceAddress" label="Fakturaadress"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="secondInvoiceAddress" label="Fakturaadress 2"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="zipCode" label="Postnr"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="city" label="Ort"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="country" label="Land"></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field v-model="organisationNumber" label="Organisationsnummer"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="phoneNumber" label="Telefonnummer"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="secondPhoneNumber" label="Andra telefonnummer"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="fax" label="Fax"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="emailAddress" label="E-post"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="4">
-                                <v-text-field v-model="webAddress" label="Webbadress"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="12">
-                                <v-text-field v-model="description" label="Beskrivning / egna anteckningar"></v-text-field>
-                            </v-col>-->
+                                    <v-text-field v-model="name" label="Namn"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="customerId" label="Kundnummer"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="invoiceAddress" label="Fakturaadress"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="secondInvoiceAddress" label="Fakturaadress 2"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="zipCode" label="Postnr"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="city" label="Ort"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="country" label="Land"></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-text-field v-model="organisationNumber" label="Organisationsnummer"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="phoneNumber" label="Telefonnummer"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="secondPhoneNumber" label="Andra telefonnummer"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="fax" label="Fax"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="emailAddress" label="E-post"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="webAddress" label="Webbadress"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12">
+                                    <v-text-field v-model="description" label="Beskrivning / egna anteckningar"></v-text-field>
+                                </v-col>-->
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -251,6 +251,26 @@
                                     </v-menu>
                                 </v-col>
 
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-container>
+                                        <p>Fakturatyp</p>
+                                        <v-radio-group v-model="invoiceType" :mandatory="false">
+                                            <v-radio label="Faktura" value="Faktura"></v-radio>
+                                            <v-radio label="Kontantfaktura" value="Kontantfaktura"></v-radio>
+                                        </v-radio-group>
+                                    </v-container>
+                                </v-col>
+
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-container>
+                                        <p>Kreditfaktura</p>
+                                        <v-radio-group v-model="invoiceIsCredit" :mandatory="false">
+                                            <v-radio label="Ja" value="Ja"></v-radio>
+                                            <v-radio label="Nej" value="Nej"></v-radio>
+                                        </v-radio-group>
+                                    </v-container>
+                                </v-col>
+
 
 
 
@@ -308,20 +328,56 @@
                                     </v-list-item-group>
                                 </v-list>
 
-                                <v-col cols="12" sm="6" md="4">
+                                <v-col cols="12" sm="6" md="3">
                                     <v-text-field v-model="deliveryFee" @keyup="kanin()" label="Fraktavgift"></v-text-field>
                                 </v-col>
 
-                                <v-col cols="12" sm="6" md="4">
+                                <v-col cols="12" sm="6" md="3">
                                     <v-text-field v-model="invoiceFee" @keyup="kanin()" label="Fakturaavgift"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="2">
+                                    <v-text-field v-model="optionalReminderFee" @keyup="kanin()" label="Påminnelseavgift"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-spacer></v-spacer>
-                                    <v-card class="pa-5">
-                                        <h3 style="color:black;">
-                                            <v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>
-                                            Total: {{totalTyp + totalInvoiceItemsPriceToDisplay}}
-                                        </h3>
+                                    <v-card class="pa-2">
+                                        <!--<v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>-->
+                                        <!--<p><b>Total exkl. moms</b> 2 003 kr</p>
+
+            <p><b>Moms 25%</b> 480 kr</p>
+
+            <p><b>Öresutjämning</b> 0,50 kr</p>-->
+
+                                        <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
+
+                                        <v-simple-table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Totalt exkl. moms</td>
+                                                    <td>{{totalTyp + totalInvoiceItemsPriceToDisplay}} kr</td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td>Moms 25%</td>
+                                                    <td>{{totalTyp * 1.25 - totalTyp + totalInvoiceItemsPriceToDisplay * 1.25 - totalInvoiceItemsPriceToDisplay}} kr</td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td>Öresutjämning</td>
+                                                    <td>{{totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25 - Math.round(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25)}} kr</td>
+                                                </tr>
+
+                                                <tr>
+
+                                                    <td><h3><b>Att belala</b></h3></td>
+                                                    <td><h3><b>{{Math.round(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25)}} kr</b></h3></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </v-simple-table>
+
                                     </v-card>
                                 </v-col>
                                 <v-col cols="12" sm="12" md="12">
@@ -330,16 +386,29 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
+                    <v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>
                     <v-spacer></v-spacer>
-                    <v-card-actions>
+                    <!--<v-card-actions>
                         <v-overflow-btn class="my-2"
                                         :items="dropdown_icon"
                                         label="Skicka som"
                                         segmented
                                         target="#dropdown-example"></v-overflow-btn>
-                    </v-card-actions>
+                    </v-card-actions>-->
+                    <v-col cols="12" sm="6" md="6">
+                        <v-container>
+                            <p>Skicka som</p>
+                            {{sendAs || null}}
+                        <v-radio-group v-model="sendAs" :mandatory="false">
+                            <v-radio label="Faktura" value="Faktura"></v-radio>
+                            <v-radio v-if="invoiceType == 'Faktura'" label="Offert" value="Offert"></v-radio>
+                            <v-radio v-if="invoiceType == 'Faktura'" label="Påminnelse" value="Påminnelse"></v-radio>
+
+                        </v-radio-group>
+                        </v-container>
+                    </v-col>
                     <v-card-actions>
-                        <v-btn disabled color="primary" large rounded class="mt-3 mr-5">
+                        <v-btn color="primary" large rounded class="mt-3 mr-5">
                             Skicka
                         </v-btn>
                         <v-spacer></v-spacer>
@@ -362,19 +431,17 @@
     import InvoiceAPI from '@/services/invoice'
     import AllProductsForInvoice from '@/components/AllProductsForInvoice'
     export default {
-          components: {
+        components: {
             AllProductsForInvoice
         },
         data: () => ({
+            invoiceType: 'Faktura',
+            invoiceIsCredit: 'Nej',
+            sendAs: 'Faktura',
 
             totalInvoiceCost: 0,
 
             addProductsToInvoiceDialog: false,
-            dropdown_icon: [
-        { text: 'Faktura', callback: () => console.log('list') },
-        { text: 'Påminnelse', callback: () => console.log('favorite') },
-        { text: 'Offert', callback: () => console.log('delete') },
-      ],
             //actions on click push list selectedFruits to vuex array and then finally on save push get array in object and push to api
             //TO FIX
             searchCustomers: '',
@@ -411,8 +478,7 @@
             //create invoice v-models start------------
             deliveryFee: 0,
             invoiceFee: 0,
-            optionalReminderFee: '',
-            invoiceTypeToSend: '',
+            optionalReminderFee: 0,
             invoiceMessageText: '',
             customerId: '',
             //create invoice v-models end---------------
@@ -446,12 +512,15 @@
             totalTyp: 0,
         }),
         methods: {
+            printPdf() {
+                InvoiceAPI.PrintPdf();
+            },
             kanin() {
-                this.totalTyp = parseInt(this.invoiceFee) + parseInt(this.deliveryFee)
+                this.totalTyp = parseInt(this.invoiceFee) + parseInt(this.optionalReminderFee) + parseInt(this.deliveryFee);
             },
             activateCreateNewInvoiceDialog() {
                 this.resetInvoiceProductListAction();
-                    this.createNewInvoiceDialog = true
+                this.createNewInvoiceDialog = true
             },
             //updateDeliveryFee(deliveryFee) {
             //     setTimeout(() => (
@@ -464,12 +533,12 @@
             //     ), 3000)
             //},
             updateInvoiceProductPriceData(articleNumber, price) {
-                 setTimeout(() => (
+                setTimeout(() => (
                     this.updateProductPriceListAction({ articleNumber, price })
-                 ), 3000)
+                ), 3000)
 
-                 setTimeout(() => (
-                     this.calculateTotalPriceAction()
+                setTimeout(() => (
+                    this.calculateTotalPriceAction()
                 ), 1000)
             },
             updateInvoiceProductQuantityData(articleNumber, quantity) {
@@ -477,7 +546,7 @@
                     this.updateProductQuantityListAction({ articleNumber, quantity })
                 ), 1000)
 
-                 setTimeout(() => (
+                setTimeout(() => (
                     this.calculateTotalPriceAction()
                 ), 1000)
             },
@@ -554,26 +623,19 @@
                         {
                             InvoiceDate: this.invoiceDate,
                             InvoicePayDate: this.invoicePayDate,
-                            DeliveryFee: this.deliveryFee,
+                            InvoiceTypeToSend: this.invoiceType,
+                            InvoiceIsCredit: this.invoiceIsCredit,
+                            InvoiceProducts: this.InvoiceProductsToDisplay,
                             InvoiceFee: this.invoiceFee,
+                            DeliveryFee: this.deliveryFee,
                             OptionalReminderFee: this.optionalReminderFee,
-                            InvoiceTypeToSend: this.invoiceTypeToSend,
                             InvoiceMessageText: this.invoiceMessageText,
-                            AssociatedCustomerId: this.select.customerId
+                            SendAs: this.sendAs,
+                            AssociatedCustomerId: this.select.customerId,
+                            ExtraInvoiceCosts = this.totalTyp,
+                            InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         },
-                    ).then(result => {
-                        if (result == 'Det finns redan en produkt med detta kundnummret, välj ett annat.') {
-                            this.showCustomerIdErrorMessage = true
-                        } else {
-                            this.invoiceDate = '',
-                                this.invoicePayDate = '',
-                                this.deliveryFee = '',
-                                this.invoiceFee = '',
-                                this.optionalReminderFee = '',
-                                this.invoiceTypeToSend = '',
-                                this.invoiceMessageText = ''
-                        }
-                    }),
+                    ),
                     this.productAddedDialog();
             },
             ...mapActions({
@@ -619,7 +681,8 @@
         color: #e46b6b;
         padding: 10px;
     }
+
     @media all and (display-mode: standalone) {
-  /*works*/
-}
+        /*works*/
+    }
 </style>

@@ -35,8 +35,9 @@ namespace vueproject.Controllers
             {
                 var NewInvoice = new Invoice();
                 NewInvoice.AssociatedUserId = user.UserId;
-                //NewInvoice.AssociatedCustomerId = Customer.Id; add rest of the null tables from ssms
-                NewInvoice.InvoiceProducts = vm.InvoiceProducts;
+                NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
+                NewInvoice.InvoicePdfGuid = new Guid().ToString();
+
                 NewInvoice.EmailFrom = user.EmailAddress;
                 NewInvoice.EmailTo = Customer.EmailAddress;
 
@@ -52,10 +53,32 @@ namespace vueproject.Controllers
 
                 NewInvoice.InvoiceDate = vm.InvoiceDate;
                 NewInvoice.InvoicePayDate = vm.InvoicePayDate;
+
                 NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
-                NewInvoice.InvoicecPastDuePercentageFee = vm.InvoicecPastDuePercentageFee;
+
+                NewInvoice.SendAs = vm.SendAs;
+                NewInvoice.InvoiceTypeToSend = vm.InvoiceTypeToSend;
+                NewInvoice.InvoiceIsCredit = vm.InvoiceIsCredit;
+
+                NewInvoice.OptionalReminderFee = vm.OptionalReminderFee;
+                NewInvoice.DeliveryFee = vm.DeliveryFee;
+
+                //fix costs
+
 
                 ctx.Invoices.Add(NewInvoice);
+                await ctx.SaveChangesAsync();
+
+                var NewInvoiceProducts = new List<InvoiceProduct>();
+                NewInvoiceProducts = vm.InvoiceProducts;
+                foreach (InvoiceProduct p in NewInvoiceProducts)
+                {
+                    p.AssociatedInvoicePdfGuid = NewInvoice.InvoicePdfGuid;
+                    p.AssociatedUserId = user.UserId;
+                    ctx.InvoiceProducts.Add(p);
+
+                }
+
                 await ctx.SaveChangesAsync();
             }
             catch (Exception e)

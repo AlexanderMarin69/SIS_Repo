@@ -41,3 +41,4 @@ C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcor
 C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\CreateInvoice\GenerateInquiryPdf.cshtml.g.cs
 C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ViewImports.cshtml.g.cs
 C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcoreapp2.2\public\manifest.json
+C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\CreateInvoice\PrintInvoicePdf.cshtml.g.cs

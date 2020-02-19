@@ -11,7 +11,6 @@ namespace vueproject.Models
         public int Id { get; set; }
         public string AssociatedUserId { get; set; }
         public string AssociatedCustomerId { get; set; }
-        public List<Product> InvoiceProducts { get; set; }
         public string InvoicePdfGuid { get; set; }
         public string EmailFrom { get; set; }
         public string EmailTo { get; set; }
@@ -29,9 +28,21 @@ namespace vueproject.Models
         public string UserCountry { get; set; }
 
         //GENERIC INVOICE DETAILS
+        public List<InvoiceProduct> InvoiceProducts { get; set; }
         public DateTime InvoiceDate { get; set; }
         public DateTime InvoicePayDate { get; set; }
         public string InvoiceMessageText{ get; set; }
-        public string InvoicecPastDuePercentageFee{ get; set; }
+        public string OptionalReminderFee { get; set; }
+        public string InvoiceTypeToSend { get; set; }
+        public string InvoiceIsCredit { get; set; }
+        public string SendAs { get; set; }
+
+        public string DeliveryFee { get; set; }
+        public string InvoiceFee { get; set; }
+
+        public decimal TotalCostWithoutTax { get; set; }
+        public decimal TotalCost { get; set; }
+        public decimal Tax { get; set; }
+        public decimal DecimalRoundUp { get; set; }
     }
 }

@@ -28,6 +28,10 @@ export default {
         return axios.post('/api/Invoice/CreateNewInvoice', vm);
     },
 
+    PrintPdf: () => {
+        return axios.post('/api/CreateInvoice/PrintInvoicePdf');
+    },
+
     
 /* eslint-enable no-console */
 }
