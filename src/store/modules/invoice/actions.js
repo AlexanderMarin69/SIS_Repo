@@ -8,6 +8,12 @@ export default {
     UPDATE_PRODUCT_PRICE_FROM_LIST({ commit }, object ) {
         commit('UPDATE_PRODUCT_PRICE_FROM_LIST', object)
     },
+    //UPDATE_INVOICE_FEE({ commit }, invoiceFee) {
+    //    commit('UPDATE_INVOICE_FEE', invoiceFee)
+    //},
+    //UPDATE_DELIVERY_FEE({ commit }, deliveryFee) {
+    //    commit('UPDATE_DELIVERY_FEE', deliveryFee)
+    //},
     UPDATE_PRODUCT_QUANTITY_FROM_LIST({ commit }, object) {
         commit('UPDATE_PRODUCT_QUANTITY_FROM_LIST', object)
     },

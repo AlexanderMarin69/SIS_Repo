@@ -259,7 +259,6 @@
 
                                 <!-- dialog ------------------------ start-->
 
-
                                 <v-dialog v-model="addProductsToInvoiceDialog" max-width="290">
                                     <template v-slot:activator="{ on }">
                                         <v-btn color="primary" rounded dark v-on="on">Lägg till produkter</v-btn>
@@ -309,22 +308,19 @@
                                     </v-list-item-group>
                                 </v-list>
 
-
-
-
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="deliveryFee" type="number" label="Fraktavgift"></v-text-field>
+                                    <v-text-field v-model="deliveryFee" @keyup="kanin()" label="Fraktavgift"></v-text-field>
                                 </v-col>
 
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="InvoiceFee" type="number" label="Fakturaavgift"></v-text-field>
+                                    <v-text-field v-model="invoiceFee" @keyup="kanin()" label="Fakturaavgift"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-spacer></v-spacer>
                                     <v-card class="pa-5">
                                         <h3 style="color:black;">
                                             <v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>
-                                            {{totalInvoiceItemsPriceToDisplay}}
+                                            Total: {{totalTyp + totalInvoiceItemsPriceToDisplay}}
                                         </h3>
                                     </v-card>
                                 </v-col>
@@ -370,6 +366,9 @@
             AllProductsForInvoice
         },
         data: () => ({
+
+            totalInvoiceCost: 0,
+
             addProductsToInvoiceDialog: false,
             dropdown_icon: [
         { text: 'Faktura', callback: () => console.log('list') },
@@ -410,8 +409,8 @@
                 }
             ],
             //create invoice v-models start------------
-            deliveryFee: '',
-            InvoiceFee: '',
+            deliveryFee: 0,
+            invoiceFee: 0,
             optionalReminderFee: '',
             invoiceTypeToSend: '',
             invoiceMessageText: '',
@@ -444,12 +443,26 @@
             productSuccessfullyAddedDialog: false,
             placeholderArrayForProducts: [],
             listOfProducts: [],
+            totalTyp: 0,
         }),
         methods: {
+            kanin() {
+                this.totalTyp = parseInt(this.invoiceFee) + parseInt(this.deliveryFee)
+            },
             activateCreateNewInvoiceDialog() {
                 this.resetInvoiceProductListAction();
                     this.createNewInvoiceDialog = true
             },
+            //updateDeliveryFee(deliveryFee) {
+            //     setTimeout(() => (
+            //        this.updateDeliveryFeeAction(deliveryFee)
+            //     ), 500)
+            //},
+            //updateInvoiceFee(invoiceFee) {
+            //     setTimeout(() => (
+            //        this.updateInvoiceFeeAction(invoiceFee)
+            //     ), 3000)
+            //},
             updateInvoiceProductPriceData(articleNumber, price) {
                  setTimeout(() => (
                     this.updateProductPriceListAction({ articleNumber, price })
@@ -457,16 +470,16 @@
 
                  setTimeout(() => (
                      this.calculateTotalPriceAction()
-                ), 3000)
+                ), 1000)
             },
             updateInvoiceProductQuantityData(articleNumber, quantity) {
                 setTimeout(() => (
                     this.updateProductQuantityListAction({ articleNumber, quantity })
-                ), 3000)
+                ), 1000)
 
                  setTimeout(() => (
                     this.calculateTotalPriceAction()
-                ), 3000)
+                ), 1000)
             },
             removeProductFromInvoiceList(articleNumber) {
                 this.removeInvoiceProductListAction({ articleNumber });
@@ -575,6 +588,8 @@
                 searchWarehouse: 'warehouse/SEARCH_WAREHOUSE',
                 resetInvoiceProductListAction: 'invoice/RESET_INVOICE_PRODUCT_LIST_ON_ENTER',
                 calculateTotalPriceAction: 'invoice/CALCULATE_TOTAL_INVOICE_ITEMS_PRICE',
+                //updateInvoiceFeeAction: 'invoice/UPDATE_INVOICE_FEE',
+                //updateDeliveryFeeAction: 'invoice/UPDATE_DELIVERY_FEE',
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;
