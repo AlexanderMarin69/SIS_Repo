@@ -632,7 +632,7 @@
                             InvoiceMessageText: this.invoiceMessageText,
                             SendAs: this.sendAs,
                             AssociatedCustomerId: this.select.customerId,
-                            ExtraInvoiceCosts = this.totalTyp,
+                            ExtraInvoiceCosts: this.totalTyp,
                             InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         },
                     ),

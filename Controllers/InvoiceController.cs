@@ -62,9 +62,17 @@ namespace vueproject.Controllers
 
                 NewInvoice.OptionalReminderFee = vm.OptionalReminderFee;
                 NewInvoice.DeliveryFee = vm.DeliveryFee;
+                NewInvoice.InvoiceFee = vm.InvoiceFee;
+                NewInvoice.Tax = vm.Tax;
 
-                //fix costs
+                ///// COST LOGIC NOT WORKING PROPERLY
 
+                decimal SumsToCombine = vm.Tax + vm.InvoiceFee + vm.DeliveryFee + vm.OptionalReminderFee + vm.InvoiceProductsTotalCost;
+                var TotalInvoiceCosts = Math.Round(SumsToCombine);
+
+                NewInvoice.TotalCost = TotalInvoiceCosts;
+                NewInvoice.TotalCostWithoutTax = TotalInvoiceCosts - vm.Tax;
+                NewInvoice.DecimalRoundUp = NewInvoice.TotalCost - Math.Round(NewInvoice.TotalCost);
 
                 ctx.Invoices.Add(NewInvoice);
                 await ctx.SaveChangesAsync();

@@ -274,11 +274,19 @@ namespace vueproject.Migrations
 
                     b.Property<string>("CustomerZipCode");
 
+                    b.Property<decimal>("DecimalRoundUp");
+
+                    b.Property<decimal>("DeliveryFee");
+
                     b.Property<string>("EmailFrom");
 
                     b.Property<string>("EmailTo");
 
                     b.Property<DateTime>("InvoiceDate");
+
+                    b.Property<decimal>("InvoiceFee");
+
+                    b.Property<string>("InvoiceIsCredit");
 
                     b.Property<string>("InvoiceMessageText");
 
@@ -286,7 +294,17 @@ namespace vueproject.Migrations
 
                     b.Property<string>("InvoicePdfGuid");
 
-                    b.Property<string>("InvoicecPastDuePercentageFee");
+                    b.Property<string>("InvoiceTypeToSend");
+
+                    b.Property<decimal>("OptionalReminderFee");
+
+                    b.Property<string>("SendAs");
+
+                    b.Property<decimal>("Tax");
+
+                    b.Property<decimal>("TotalCost");
+
+                    b.Property<decimal>("TotalCostWithoutTax");
 
                     b.Property<string>("UserCity");
 
@@ -301,6 +319,33 @@ namespace vueproject.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("vueproject.Models.InvoiceProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ArticleNumber");
+
+                    b.Property<string>("AssociatedInvoicePdfGuid");
+
+                    b.Property<string>("AssociatedUserId");
+
+                    b.Property<int?>("InvoiceId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Price");
+
+                    b.Property<string>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("InvoiceProducts");
                 });
 
             modelBuilder.Entity("vueproject.Models.Product", b =>
@@ -323,8 +368,6 @@ namespace vueproject.Migrations
 
                     b.Property<string>("EAN");
 
-                    b.Property<int?>("InvoiceId");
-
                     b.Property<string>("Manufacturer");
 
                     b.Property<string>("ManufacturerSku");
@@ -340,8 +383,6 @@ namespace vueproject.Migrations
                     b.Property<string>("Supplier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InvoiceId");
 
                     b.ToTable("Products");
                 });
@@ -405,7 +446,7 @@ namespace vueproject.Migrations
                         .HasForeignKey("ApplicationUserId");
                 });
 
-            modelBuilder.Entity("vueproject.Models.Product", b =>
+            modelBuilder.Entity("vueproject.Models.InvoiceProduct", b =>
                 {
                     b.HasOne("vueproject.Models.Invoice")
                         .WithMany("InvoiceProducts")

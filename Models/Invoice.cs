@@ -29,20 +29,22 @@ namespace vueproject.Models
 
         //GENERIC INVOICE DETAILS
         public List<InvoiceProduct> InvoiceProducts { get; set; }
+        //public List<InvoiceProduct> InvoiceProducts { get; set; }
         public DateTime InvoiceDate { get; set; }
         public DateTime InvoicePayDate { get; set; }
         public string InvoiceMessageText{ get; set; }
-        public string OptionalReminderFee { get; set; }
+        public decimal OptionalReminderFee { get; set; }
         public string InvoiceTypeToSend { get; set; }
         public string InvoiceIsCredit { get; set; }
         public string SendAs { get; set; }
 
-        public string DeliveryFee { get; set; }
-        public string InvoiceFee { get; set; }
+        public decimal DeliveryFee { get; set; }
+        public decimal InvoiceFee { get; set; }
 
         public decimal TotalCostWithoutTax { get; set; }
         public decimal TotalCost { get; set; }
         public decimal Tax { get; set; }
         public decimal DecimalRoundUp { get; set; }
+
     }
 }
