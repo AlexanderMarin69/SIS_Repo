@@ -5,6 +5,7 @@
             <v-toolbar light>
                 <v-toolbar-title color="black">Alla Fakturor</v-toolbar-title>
                 <v-spacer></v-spacer>
+                <button hidden id="kanin">helloooo</button>
                 <!--<v-btn icon class="ml-3 mr-3">
                     <v-icon>mdi-magnify</v-icon>
                     sök
@@ -43,7 +44,7 @@
         </v-card>
         <!--ADD NEW PRODUCT DIALOG ------- START -->
         <v-row justify="center">
-            <v-dialog v-model="addNewCustomerDialog" persistent max-width="600px">
+            <v-dialog v-model="addNewCustomerDialog" hidden id="mannen" persistent max-width="600px">
                 <v-card>
                     <v-card-title>
                         <span class="headline">Skapa ny kund</span>

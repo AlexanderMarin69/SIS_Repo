@@ -1,15 +1,15 @@
 ﻿<template>
     <div class="pl-1 pr-1">
-        <v-card max-width="1000" raised shaped 
+        <v-card max-width="1000" raised shaped
                 class="mx-auto">
-            <v-toolbar  light>
+            <v-toolbar light>
                 <v-toolbar-title color="black">Hela lagret</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <!--<v-btn icon class="ml-3 mr-3">
-                <v-icon>mdi-magnify</v-icon>
-                sök
-            </v-btn>-->
-                <v-btn color="primary" rounded  style="color: white;" @click="addNewProductDialog = !addNewProductDialog" class="ml-3">
+                    <v-icon>mdi-magnify</v-icon>
+                    sök
+                </v-btn>-->
+                <v-btn color="primary" rounded style="color: white;" @click="addNewProductDialog = !addNewProductDialog" class="ml-3">
                     Skapa ny +
                 </v-btn>
             </v-toolbar>
@@ -268,62 +268,78 @@
             addNewProductDialog: false,
             productSuccessfullyAddedDialog: false,
 
-            
+
 
             placeholderArrayForProducts: [],
             listOfProducts: [],
         }),
         methods: {
-              // DELETE PRODUCT START -------
+            // DELETE PRODUCT START -------
             deleteProduct() {
                 this.deleteProductDialog = false,
-            ProductAPI.DeleteProduct({
-            Name: this.editName,
-            ArticleNumber: this.editArticleNumer,
-            Price: this.editPrice,
-            EAN: this.editEan,
-            Manufacturer: this.editManufacturer,
-            ManufacturerSku: this.editManufacturerSku,
-            Supplier: this.editSupplier,
-            Description: this.editDescription,
-            CostPerItem: this.editCostPerItem,
-            StockBalance: this.editStockBalance,
-            ProductType: this.editProductType
-                });
+                    ProductAPI.DeleteProduct({
+                        Name: this.editName,
+                        ArticleNumber: this.editArticleNumer,
+                        Price: this.editPrice,
+                        EAN: this.editEan,
+                        Manufacturer: this.editManufacturer,
+                        ManufacturerSku: this.editManufacturerSku,
+                        Supplier: this.editSupplier,
+                        Description: this.editDescription,
+                        CostPerItem: this.editCostPerItem,
+                        StockBalance: this.editStockBalance,
+                        ProductType: this.editProductType
+                    }).then(() => {
+                        this.deleteProductFromStateList(this.editArticleNumer)
+                    });
+                    
+                
             },   // DELETE PRODUCT START -------
 
 
             // UPDATE PRODUCT START -------
             updateExistingProduct() {
-            ProductAPI.UpdateExistingProduct({
-            Name: this.editName,
-            ArticleNumber: this.editArticleNumer,
-            Price: this.editPrice,
-            EAN: this.editEan,
-            Manufacturer: this.editManufacturer,
-            ManufacturerSku: this.editManufacturerSku,
-            Supplier: this.editSupplier,
-            Description: this.editDescription,
-            CostPerItem: this.editCostPerItem,
-            StockBalance: this.editStockBalance,
-            ProductType: this.editProductType
-                });
+                ProductAPI.UpdateExistingProduct({
+                    Name: this.editName,
+                    ArticleNumber: this.editArticleNumer,
+                    Price: this.editPrice,
+                    EAN: this.editEan,
+                    Manufacturer: this.editManufacturer,
+                    ManufacturerSku: this.editManufacturerSku,
+                    Supplier: this.editSupplier,
+                    Description: this.editDescription,
+                    CostPerItem: this.editCostPerItem,
+                    StockBalance: this.editStockBalance,
+                    ProductType: this.editProductType
+                }).then(() => {
+                    this.updateProductListState(this.editArticleNumer)
+                      setTimeout(() => (
+                    this.getAllProducts()
+                ), 300)
+                    
+                    });
+                 // custom console
+                // eslint-disable-next-line no-console
+                console.log('whatsUp');
+                    this.getAllProducts()
             }, // UPDATE PRODUCT END -------
 
             showProductDetails(item) {
                 ProductAPI.GetProductById({ id: item.id }).then((response) => {
-            this.editName = response.name,
-            this.editArticleNumer = response.articleNumber,
-            this.editPrice = response.price,
-            this.editEan = response.ean,
-            this.editManufacturer = response.manufacturer,
-            this.editManufacturerSku = response.manufacturerSku,
-            this.editSupplier = response.supplier,
-            this.editDescription = response.description,
-            this.editCostPerItem = response.costPerItem,
-            this.editStockBalance = response.stockBalance,
-            this.editProductType = response.productType
-                    });
+                    this.editName = response.name,
+                        this.editArticleNumer = response.articleNumber,
+                        this.editPrice = response.price,
+                        this.editEan = response.ean,
+                        this.editManufacturer = response.manufacturer,
+                        this.editManufacturerSku = response.manufacturerSku,
+                        this.editSupplier = response.supplier,
+                        this.editDescription = response.description,
+                        this.editCostPerItem = response.costPerItem,
+                        this.editStockBalance = response.stockBalance,
+                        this.editProductType = response.productType
+                })
+                
+              
                 this.selectedProductDialog = true
             },
             searchOnKeyup() {
@@ -333,7 +349,7 @@
                         {
                             SearchWords: this.searchInput
                         })
-                        
+
                 ), 1500)
             },
             productAddedDialog() {
@@ -342,83 +358,84 @@
             },
             createNewProduct() {
                 this.showArticleNumberErrorMessage = false,
-                ProductAPI.CreateNewProduct(
-                    {
-                        Name: this.name,
-                        ArticleNumber: this.articleNumber,
-                        Price: this.price,
-                        EAN: this.ean,
-                        Manufacturer: this.manufacturer,
-                        ManufacturerSku: this.manufacturerSku,
-                        Supplier: this.supplier,
-                        Description: this.description,
-                        CostPerItem: this.costPerItem,
-                        StockBalance: this.stockBalance,
-                        ProductType: this.productType
+                    ProductAPI.CreateNewProduct(
+                        {
+                            Name: this.name,
+                            ArticleNumber: this.articleNumber,
+                            Price: this.price,
+                            EAN: this.ean,
+                            Manufacturer: this.manufacturer,
+                            ManufacturerSku: this.manufacturerSku,
+                            Supplier: this.supplier,
+                            Description: this.description,
+                            CostPerItem: this.costPerItem,
+                            StockBalance: this.stockBalance,
+                            ProductType: this.productType
 
-                    },
-                ).then(result => {
-                    if (result == 'Det finns redan en produkt med detta artikelnumret, välj ett annat artikelnumer.') {
-                        this.showArticleNumberErrorMessage = true
-                    } else {
-                         this.name = '',
-            this.articleNumber = '',
-            this.price = '',
-            this.ean = '',
-            this.manufacturer = '',
-            this.manufacturerSku = '',
-            this.supplier = '',
-            this.description = '',
-            this.costPerItem = '',
-            this.stockBalance = '',
-            this.productType = ''
-                    }
-                }),
-            
-
-
+                        },
+                    ).then(result => {
+                        if (result == 'Det finns redan en produkt med detta artikelnumret, välj ett annat artikelnumer.') {
+                            this.showArticleNumberErrorMessage = true
+                        } else {
+                            this.name = '',
+                                this.articleNumber = '',
+                                this.price = '',
+                                this.ean = '',
+                                this.manufacturer = '',
+                                this.manufacturerSku = '',
+                                this.supplier = '',
+                                this.description = '',
+                                this.costPerItem = '',
+                                this.stockBalance = '',
+                                this.productType = ''
+                        }
+                        this.getAllProducts();
+                    }),
 
 
-                //this.name,
-                //this.sku,
-                //this.price,
-                //this.ean,
-                //this.producer,
-                //this.manufacturer,
-                //this.supplier,
-                //this.description,
-                //this.costPerItem,
-                //this.inStock,
-                //this.productType
 
 
-                //TODO: works well with ProductAPI directly, loses all data when sending through actions
-                //this.createNewProducto(
-                //    {
-                //         name: 'hello',
-                //    sku: 'hello',
-                //    //name: this.name,
-                //    //sku: this.sku,
 
-                //     }
-                //);
+                    //this.name,
+                    //this.sku,
+                    //this.price,
+                    //this.ean,
+                    //this.producer,
+                    //this.manufacturer,
+                    //this.supplier,
+                    //this.description,
+                    //this.costPerItem,
+                    //this.inStock,
+                    //this.productType
 
 
-                //this.createNewProduct({
+                    //TODO: works well with ProductAPI directly, loses all data when sending through actions
+                    //this.createNewProducto(
+                    //    {
+                    //         name: 'hello',
+                    //    sku: 'hello',
+                    //    //name: this.name,
+                    //    //sku: this.sku,
 
-                //   Name: this.name,
-                //    SKU: this.sku,
-                //    Price: this.price,
-                //    EAN: this.ean,
-                //    Producer: this.producer,
-                //    Manufacturer: this.manufacturer,
-                //    Supplier: this.supplier,
-                //    Description: this.description,
-                //   CostPerItem: this.costPerItem,
-                //    InStock: this.inStock,
-                //    ProductType: this.productType
-                //});
-                this.productAddedDialog();
+                    //     }
+                    //);
+
+
+                    //this.createNewProduct({
+
+                    //   Name: this.name,
+                    //    SKU: this.sku,
+                    //    Price: this.price,
+                    //    EAN: this.ean,
+                    //    Producer: this.producer,
+                    //    Manufacturer: this.manufacturer,
+                    //    Supplier: this.supplier,
+                    //    Description: this.description,
+                    //   CostPerItem: this.costPerItem,
+                    //    InStock: this.inStock,
+                    //    ProductType: this.productType
+                    //});
+                    this.productAddedDialog();
 
                 //this.name = '';
                 //this.sku = '';
@@ -435,6 +452,8 @@
             ...mapActions({
                 getAllProducts: 'warehouse/GET_ALL_PRODUCTS',
                 searchWarehouse: 'warehouse/SEARCH_WAREHOUSE',
+                deleteProductFromStateList: 'warehouse/DELETE_PRODUCT_FROM_LIST',
+                updateProductListState: 'warehouse/UPDATE_PRODUCT_LIST_STATE',
             }),
             closeDialog() {
                 this.addNewProductDialog = false;

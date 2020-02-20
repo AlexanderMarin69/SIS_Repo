@@ -8,11 +8,19 @@ const FILES_TO_CACHE = [
     '/offline.html',
 ];
 
+//const installButton = document.getElementById('mannen');
+//const installButton2 = document.getElementById('kanin');
+//installButton.removeAttribute('hidden');
+
+//fic updates on actions in allinvoices etc on frontend and test reliability for service worker then
+
 self.addEventListener('install', (evt) => {
     console.log('[ServiceWorker] Install');
+
     caches.delete(CACHE_NAME).then(function (boolean) {
         console.log('ALL CACHE DEWLETED BOII');
     })
+
     // CODELAB: Precache static resources here.
     //evt.waitUntil(
     //    caches.open(CACHE_NAME).then((cache) => {
@@ -56,6 +64,7 @@ self.addEventListener('fetch', (event) => {
         })
     )
 });
+
 
     // ORIGINAL CODE
     //console.log('[ServiceWorker] Fetch', evt.request.url);

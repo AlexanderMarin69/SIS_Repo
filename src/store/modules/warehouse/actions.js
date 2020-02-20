@@ -6,6 +6,7 @@ export default {
 
                 // custom console
                 // eslint-disable-next-line no-console
+                console.log(result, 'AAAAA');
                 commit('SET_WAREHOUSE_PRODUCTS', result);
             }).catch(result => {
                 // eslint-disable-next-line no-console
@@ -36,6 +37,17 @@ export default {
 
             });
     },
+
+    DELETE_PRODUCT_FROM_LIST({ commit }, productArticleNumber) {
+        commit('DELETE_PRODUCT_FROM_LIST', productArticleNumber);
+    },
+
+    UPDATE_PRODUCT_LIST_STATE({ commit }, productArticleNumber) {
+        commit('UPDATE_PRODUCT_LIST_STATE', productArticleNumber);
+    },
+
+    
+    
 
     //GET_ALL_PRODUCTS({ commit }) {
     //    return ProductAPI.SearchProducts()
