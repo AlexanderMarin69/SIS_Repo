@@ -45,6 +45,7 @@ namespace vueproject.Controllers
                     var NewCustomer = new Customer();
                     NewCustomer.Name = vm.Name;
                     NewCustomer.CustomerId = vm.CustomerId;
+                    NewCustomer.CustomerReference = vm.CustomerReference;
                     NewCustomer.InvoiceAddress = vm.InvoiceAddress;
                     NewCustomer.SecondInvoiceAddress = vm.SecondInvoiceAddress;
                     NewCustomer.ZipCode = vm.ZipCode;
@@ -80,6 +81,7 @@ namespace vueproject.Controllers
             {
                 CustomerToUpdate.Name = vm.Name;
                 CustomerToUpdate.CustomerId = vm.CustomerId;
+                CustomerToUpdate.CustomerReference = vm.CustomerReference;
                 CustomerToUpdate.InvoiceAddress = vm.InvoiceAddress;
                 CustomerToUpdate.SecondInvoiceAddress = vm.SecondInvoiceAddress;
                 CustomerToUpdate.ZipCode = vm.ZipCode;

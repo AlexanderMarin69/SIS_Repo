@@ -71,20 +71,30 @@ namespace vueproject.Controllers
             //maybe send id and get from database, put in vm and send vm
 
 
-            var NewInvoice = new Invoice();
-            //NewInvoice.DateCreated = DateTime.Now;
-            //NewInvoice.EmailFrom = vm.EmailFrom; due to changed viewmodel.........
-            //NewInvoice.EmailTo = vm.EmailTo;
-            NewInvoice.InvoicePdfGuid = fileName;
-            NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
-            //NewInvoice.UserName = "TestUserName";
+            //var NewInvoice = new Invoice();
+            ////NewInvoice.DateCreated = DateTime.Now;
+            ////NewInvoice.EmailFrom = vm.EmailFrom; due to changed viewmodel.........
+            ////NewInvoice.EmailTo = vm.EmailTo;
+            //NewInvoice.InvoicePdfGuid = fileName;
+            //NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
+            ////NewInvoice.UserName = "TestUserName";
+            ///
 
-            //TODO: real invoice has receiveraddress deliver adress etc etc, add by time after testing
 
-            ctx.Invoices.Add(NewInvoice);
-            ctx.SaveChanges();
 
-            return new ViewAsPdf("GenerateInquiryPdf")
+
+
+
+
+
+
+
+
+
+
+            
+
+            return new ViewAsPdf("GenerateInquiryPdf", vm)
             {
                 FileName = fileName,
                 PageSize = Rotativa.AspNetCore.Options.Size.A4,

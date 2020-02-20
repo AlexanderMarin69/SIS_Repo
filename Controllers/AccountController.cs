@@ -201,7 +201,7 @@ namespace vueproject.Controllers
 
                     var NewApplicationUser = new ApplicationUser();
                     NewApplicationUser.EmailAddress = vm.Email;
-                    NewApplicationUser.Name = vm.FirstName;
+                    NewApplicationUser.FirstName = vm.FirstName;
                     NewApplicationUser.LastName = vm.LastName;
                     NewApplicationUser.UserId = user.Id;
                     await ctx.ApplicationUsers.AddAsync(NewApplicationUser);

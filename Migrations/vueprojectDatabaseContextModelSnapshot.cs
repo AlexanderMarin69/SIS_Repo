@@ -192,11 +192,15 @@ namespace vueproject.Migrations
 
                     b.Property<string>("EmailAddress");
 
+                    b.Property<string>("FirstName");
+
                     b.Property<string>("InvoiceAddress");
+
+                    b.Property<string>("InvoicecPastDuePercentageFee");
 
                     b.Property<string>("LastName");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("PaymentTerms");
 
                     b.Property<string>("UserId");
 
@@ -222,6 +226,8 @@ namespace vueproject.Migrations
                     b.Property<string>("Country");
 
                     b.Property<string>("CustomerId");
+
+                    b.Property<string>("CustomerReference");
 
                     b.Property<string>("Description");
 
@@ -272,9 +278,13 @@ namespace vueproject.Migrations
 
                     b.Property<string>("CustomerInvoiceAddress");
 
+                    b.Property<string>("CustomerName");
+
                     b.Property<string>("CustomerZipCode");
 
                     b.Property<decimal>("DecimalRoundUp");
+
+                    b.Property<DateTime>("DeliveryDate");
 
                     b.Property<decimal>("DeliveryFee");
 
@@ -296,9 +306,19 @@ namespace vueproject.Migrations
 
                     b.Property<string>("InvoiceTypeToSend");
 
+                    b.Property<string>("InvoicecPastDuePercentageFee");
+
                     b.Property<decimal>("OptionalReminderFee");
 
+                    b.Property<string>("PaymentTerms");
+
+                    b.Property<string>("ReceiverCustomerId");
+
+                    b.Property<string>("ReceiverReferenceName");
+
                     b.Property<string>("SendAs");
+
+                    b.Property<string>("SenderName");
 
                     b.Property<decimal>("Tax");
 
@@ -337,9 +357,9 @@ namespace vueproject.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Price");
+                    b.Property<decimal>("Price");
 
-                    b.Property<string>("Quantity");
+                    b.Property<decimal>("Quantity");
 
                     b.HasKey("Id");
 

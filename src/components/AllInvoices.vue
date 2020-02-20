@@ -253,6 +253,28 @@
                                 </v-col>
 
                                 <v-col cols="12" sm="6" md="6">
+                                    <v-menu ref="deliveryDateMenu"
+                                            v-model="deliveryDateMenu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="deliveryDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px">
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field v-model="deliveryDate"
+                                                          label="Förfallodatum"
+                                                          readonly
+                                                          v-on="on"></v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="deliveryDate" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="invoiceDatePayMenu = false">Cancel</v-btn>
+                                            <v-btn text color="primary" @click="$refs.deliveryDateMenu.save(deliveryDate)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-col>
+
+                                <v-col cols="12" sm="6" md="3">
                                     <v-container>
                                         <p>Fakturatyp</p>
                                         <v-radio-group v-model="invoiceType" :mandatory="false">
@@ -262,7 +284,7 @@
                                     </v-container>
                                 </v-col>
 
-                                <v-col cols="12" sm="6" md="6">
+                                <v-col cols="12" sm="6" md="3">
                                     <v-container>
                                         <p>Kreditfaktura</p>
                                         <v-radio-group v-model="invoiceIsCredit" :mandatory="false">
@@ -367,7 +389,7 @@
                                                 <tr>
 
                                                     <td>Öresutjämning</td>
-                                                    <td>{{totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25 - Math.round(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25)}} kr</td>
+                                                    <td>{{Math.abs(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25 - Math.round(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25))}} kr</td>
                                                 </tr>
 
                                                 <tr>
@@ -376,6 +398,7 @@
                                                     <td><h3><b>{{Math.round(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25)}} kr</b></h3></td>
 
                                                 </tr>
+                                                
                                             </tbody>
                                         </v-simple-table>
 
@@ -387,7 +410,7 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
-                    <v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>
+                    <!--<v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>-->
                     <v-spacer></v-spacer>
                     <!--<v-card-actions>
                         <v-overflow-btn class="my-2"
@@ -409,7 +432,7 @@
                         </v-container>
                     </v-col>
                     <v-card-actions>
-                        <v-btn color="primary" large rounded class="mt-3 mr-5">
+                        <v-btn color="primary" large rounded class="mt-3 mr-5" @click="sendInvoice()">
                             Skicka
                         </v-btn>
                         <v-spacer></v-spacer>
@@ -468,6 +491,8 @@
             invoicePayDate: new Date().toISOString().substr(0, 10),
             invoicePayDateMenu: false,
             invoicePayDateModal: false,
+            deliveryDate: new Date().toISOString().substr(0, 10),
+            deliveryDateDateMenu: false,
             productsToChoose: [
                 {
                     phoneNumber: '0761952005',
@@ -513,9 +538,9 @@
             totalTyp: 0,
         }),
         methods: {
-            printPdf() {
-                InvoiceAPI.PrintPdf();
-            },
+            //printPdf() {
+            //    InvoiceAPI.PrintPdf();
+            //},
             kanin() {
                 this.totalTyp = parseInt(this.invoiceFee) + parseInt(this.optionalReminderFee) + parseInt(this.deliveryFee);
             },
@@ -618,12 +643,35 @@
                 this.productSuccessfullyAddedDialog = true;
                 setTimeout(() => (this.productSuccessfullyAddedDialog = false), 2000)
             },
+            sendInvoice() {
+                 this.showCustomerIdErrorMessage = false,
+                    InvoiceAPI.GeneratePdfInvoice(
+                        {
+                            InvoiceDate: this.invoiceDate,
+                            InvoicePayDate: this.invoicePayDate,
+                            DeliveryDate: this.deliveryDate,
+                            InvoiceTypeToSend: this.invoiceType,
+                            InvoiceIsCredit: this.invoiceIsCredit,
+                            InvoiceProducts: this.InvoiceProductsToDisplay,
+                            InvoiceFee: this.invoiceFee,
+                            DeliveryFee: this.deliveryFee,
+                            OptionalReminderFee: this.optionalReminderFee,
+                            InvoiceMessageText: this.invoiceMessageText,
+                            SendAs: this.sendAs,
+                            AssociatedCustomerId: this.select.customerId,
+                            ExtraInvoiceCosts: this.totalTyp,
+                            InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
+                        },
+                    ),
+                    this.productAddedDialog();
+                },
             saveInvoice() {
                 this.showCustomerIdErrorMessage = false,
                     InvoiceAPI.CreateNewInvoice(
                         {
                             InvoiceDate: this.invoiceDate,
                             InvoicePayDate: this.invoicePayDate,
+                            DeliveryDate: this.deliveryDate,
                             InvoiceTypeToSend: this.invoiceType,
                             InvoiceIsCredit: this.invoiceIsCredit,
                             InvoiceProducts: this.InvoiceProductsToDisplay,

@@ -11,8 +11,8 @@ namespace vueproject.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string ArticleNumber { get; set; }
-        public string Price { get; set; }
-        public string Quantity { get; set; }
+        public decimal Price { get; set; }
+        public decimal Quantity { get; set; }
         public string AssociatedUserId { get; set; }
         public string AssociatedInvoicePdfGuid { get; set; }
 

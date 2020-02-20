@@ -10,6 +10,7 @@ namespace vueproject.Models
     {
         public string AssociatedUserId { get; set; }
         public string CustomerId { get; set; }
+        public string CustomerReference { get; set; }
         public string InvoiceAddress { get; set; }
         public string SecondInvoiceAddress { get; set; }
         public string ZipCode { get; set; }

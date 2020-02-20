@@ -20,8 +20,12 @@ namespace vueproject.Models
         public string CustomerZipCode { get; set; }
         public string CustomerCity { get; set; }
         public string CustomerCountry { get; set; }
+        public string ReceiverReferenceName { get; set; }
+        public string ReceiverCustomerId { get; set; }
+        public string CustomerName { get; set; }
 
         //USER DETAILS
+        public string SenderName { get; set; }
         public string UserInvoiceAddress { get; set; }
         public string UserZipCode { get; set; }
         public string UserCity { get; set; }
@@ -32,12 +36,13 @@ namespace vueproject.Models
         //public List<InvoiceProduct> InvoiceProducts { get; set; }
         public DateTime InvoiceDate { get; set; }
         public DateTime InvoicePayDate { get; set; }
+        public DateTime DeliveryDate { get; set; }
         public string InvoiceMessageText{ get; set; }
         public decimal OptionalReminderFee { get; set; }
         public string InvoiceTypeToSend { get; set; }
         public string InvoiceIsCredit { get; set; }
         public string SendAs { get; set; }
-
+        public string InvoicecPastDuePercentageFee { get; set; }
         public decimal DeliveryFee { get; set; }
         public decimal InvoiceFee { get; set; }
 
@@ -45,6 +50,7 @@ namespace vueproject.Models
         public decimal TotalCost { get; set; }
         public decimal Tax { get; set; }
         public decimal DecimalRoundUp { get; set; }
+        public string PaymentTerms { get; set; }
 
     }
 }

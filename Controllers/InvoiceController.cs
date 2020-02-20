@@ -33,10 +33,12 @@ namespace vueproject.Controllers
 
             try
             {
+
                 var NewInvoice = new Invoice();
+                NewInvoice.InvoicePdfGuid = Guid.NewGuid().ToString();
+
                 NewInvoice.AssociatedUserId = user.UserId;
                 NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
-                NewInvoice.InvoicePdfGuid = new Guid().ToString();
 
                 NewInvoice.EmailFrom = user.EmailAddress;
                 NewInvoice.EmailTo = Customer.EmailAddress;
@@ -53,6 +55,13 @@ namespace vueproject.Controllers
 
                 NewInvoice.InvoiceDate = vm.InvoiceDate;
                 NewInvoice.InvoicePayDate = vm.InvoicePayDate;
+                NewInvoice.DeliveryDate = vm.DeliveryDate;
+                NewInvoice.InvoicecPastDuePercentageFee = user.InvoicecPastDuePercentageFee;
+                NewInvoice.PaymentTerms = user.PaymentTerms;
+                NewInvoice.SenderName = user.FirstName + " " + user.LastName;
+                NewInvoice.CustomerName = Customer.Name;
+                NewInvoice.ReceiverCustomerId = vm.AssociatedCustomerId;
+                NewInvoice.ReceiverReferenceName = Customer.CustomerReference;
 
                 NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
 
@@ -63,16 +72,59 @@ namespace vueproject.Controllers
                 NewInvoice.OptionalReminderFee = vm.OptionalReminderFee;
                 NewInvoice.DeliveryFee = vm.DeliveryFee;
                 NewInvoice.InvoiceFee = vm.InvoiceFee;
-                NewInvoice.Tax = vm.Tax;
+
+
+
+                decimal TotalFees = NewInvoice.DeliveryFee + NewInvoice.InvoiceFee + NewInvoice.OptionalReminderFee;
+                decimal TotalFeesWithTax = TotalFees * Convert.ToDecimal(1.25);
+
+                decimal TotalProductsCostWithOutTax = vm.InvoiceProductsTotalCost;
+                decimal TotalProductsCostWithTax = vm.InvoiceProductsTotalCost * Convert.ToDecimal(1.25);
+
+                decimal TotalPayWithoutTax = TotalFees + vm.InvoiceProductsTotalCost;
+
+
+                //   TAX LOGIC ----------------- TAX LOGIC -------- TAX LOGIC ----------------- TAX LOGIC
+                // tax = TotalFees - TotalFeesWITHTAX     +++++++   InvoiceProductsTotalCost - InvoiceProductsTotalCostWITHTAX 
+                var FeesDiff = TotalFeesWithTax - TotalFees;
+                var InvoicePriceDiff = TotalProductsCostWithTax - vm.InvoiceProductsTotalCost;
+                decimal Tax = FeesDiff + InvoicePriceDiff;
+                NewInvoice.Tax = Tax;
+                //   TAX LOGIC ----------------- TAX LOGIC -------- TAX LOGIC ----------------- TAX LOGIC
+
+
+                NewInvoice.TotalCostWithoutTax = TotalFees + TotalProductsCostWithOutTax;
+
+                var TotalCostNotRounded = TotalFeesWithTax + TotalProductsCostWithTax;
+
+                decimal TotalCostRounded = Math.Round(TotalCostNotRounded);
+
+
+                // DecimalRoundUp ====  diff between ToPayWithTax  ROUND(ToPayWithTax)
+                decimal DecimalToAbs = TotalCostNotRounded - TotalCostRounded;
+                NewInvoice.DecimalRoundUp = Math.Abs(DecimalToAbs);
+
+                NewInvoice.TotalCost = Math.Round(TotalCostNotRounded);
 
                 ///// COST LOGIC NOT WORKING PROPERLY
 
-                decimal SumsToCombine = vm.Tax + vm.InvoiceFee + vm.DeliveryFee + vm.OptionalReminderFee + vm.InvoiceProductsTotalCost;
-                var TotalInvoiceCosts = Math.Round(SumsToCombine);
 
-                NewInvoice.TotalCost = TotalInvoiceCosts;
-                NewInvoice.TotalCostWithoutTax = TotalInvoiceCosts - vm.Tax;
-                NewInvoice.DecimalRoundUp = NewInvoice.TotalCost - Math.Round(NewInvoice.TotalCost);
+
+
+                //decimal SumsToCombine = NewInvoice.Tax + vm.OptionalReminderFee + vm.InvoiceProductsTotalCost;
+                //var TotalInvoiceCosts = SumsToCombine;
+
+                //var GatheredSum = NewInvoice.InvoiceFee + NewInvoice.DeliveryFee + TotalInvoiceCosts;
+                //var multiplied = GatheredSum * Convert.ToDecimal(1.25);
+                //NewInvoice.Tax = GatheredSum - multiplied;
+
+                //NewInvoice.TotalCost = Math.Round(TotalInvoiceCosts);
+
+                //NewInvoice.TotalCostWithoutTax = TotalInvoiceCosts - NewInvoice.Tax;
+
+                //NewInvoice.DecimalRoundUp = TotalInvoiceCosts - Math.Round(TotalInvoiceCosts);
+
+
 
                 ctx.Invoices.Add(NewInvoice);
                 await ctx.SaveChangesAsync();
@@ -86,8 +138,9 @@ namespace vueproject.Controllers
                     ctx.InvoiceProducts.Add(p);
 
                 }
-
                 await ctx.SaveChangesAsync();
+
+
             }
             catch (Exception e)
             {

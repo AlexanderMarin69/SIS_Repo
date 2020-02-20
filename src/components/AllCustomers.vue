@@ -75,6 +75,9 @@
                                     <v-text-field v-model="customerId" label="Kundnummer"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="customerReference" label="Kundens referens***"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="invoiceAddress" label="Fakturaadress"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
@@ -157,6 +160,9 @@
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field readonly v-model="editCustomerId" label="Kundnummer"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field v-model="editCustomerReference" label="Kundreferens***"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="editInvoiceAddress" label="Fakturaadress"></v-text-field>
@@ -243,6 +249,7 @@
             //create customer v-models start------------
             name: '',
             customerId: '',
+            customerReference: '',
             invoiceAddress: '',
             secondInvoiceAddress: '',
             zipCode: '',
@@ -264,6 +271,7 @@
             //edit customer v-models start-----------------
             editName: '',
             editCustomerId: '',
+            editCustomerReference: '',
             editInvoiceAddress: '',
             editSecondInvoiceAddress: '',
             editZipCode: '',
@@ -317,7 +325,8 @@
             updateExistingCustomer() {
                 CustomerAPI.UpdateExistingCustomer({
                     Name: this.editName,
-                            CustomerId: this.editCustomerId,
+                    CustomerId: this.editCustomerId,
+                            CustomerReference: this.editCustomerReference,
                             InvoiceAddress: this.editInvoiceAddress,
                             SecondInvoiceAddress: this.editSecondInvoiceAddress,
                             ZipCode: this.editZipCode,
@@ -337,6 +346,7 @@
                 this.customerId = item.customerId,
                 CustomerAPI.GetCustomerByCustomerId({ CustomerId: item.customerId }).then((response) => {
                                 this.editName = response.name,
+                                this.editCustomerReference = response.customerReference,
                                 this.editCustomerId = response.customerId,
                                 this.editInvoiceAddress = response.invoiceAddress,
                                 this.editSecondInvoiceAddress = response.secondInvoiceAddress,
@@ -373,6 +383,7 @@
                         {
                             Name: this.name,
                             CustomerId: this.customerId,
+                            CustomerReference: this.customerReference,
                             InvoiceAddress: this.invoiceAddress,
                             SecondInvoiceAddress: this.secondInvoiceAddress,
                             ZipCode: this.zipCode,
@@ -393,6 +404,7 @@
                         } else {
                             this.name = '',
                                 this.customerId = '',
+                                this.customerReference = '',
                                 this.invoiceAddress = '',
                                 this.secondInvoiceAddress = '',
                                 this.zipCode = '',

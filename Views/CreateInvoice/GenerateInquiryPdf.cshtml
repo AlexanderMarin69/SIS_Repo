@@ -1,18 +1,12 @@
-﻿@*@model vueproject.ViewModels.InvoiceViewModel
+﻿@model vueproject.ViewModels.InvoiceViewModel
 
-    @{
-        ViewData["Title"] = "GenerateInquiryPdf";
-    }*@
-
-
-
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>A simple, clean, and responsive HTML invoice template</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <style>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@Model.InvoiceTypeToSend @Model.Id</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
     .invoice-box {
         max-width: 800px;
         margin: auto;
@@ -102,12 +96,12 @@
     .rtl table tr td:nth-child(2) {
         text-align: left;
     }*/
-        </style>
-    </head>
+    </style>
+</head>
 
-    <body>
-        <div class="invoice-box">
-            @*<table cellpadding="0" cellspacing="0">
+<body>
+    <div class="invoice-box">
+        @*<table cellpadding="0" cellspacing="0">
                 <tr class="top">
                     <td colspan="2">
                         <table>
@@ -152,76 +146,70 @@
             </table>*@
 
 
+        <table class="table">
+            <tbody>
+                <tr>
+
+                    <td class="title">
+                        <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
+                    </td>
+
+                    <td style="text-align: left;">
+                        <h3><b>Faktura</b></h3><br>
+                        Fakturanummer #@Model.Id<br>
+                        Fakturadatum @Model.InvoiceDate<br>
+                        Fakturadatum @Model.InvoicePayDate<br>
+                        Vår referens: @Model.SenderName
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Kundnummer @Model.ReceiverCustomerId<br>
+                        Betalningsvillkor @Model.PaymentTerms<br>
+                        Dröjsmålsränta @Model.InvoicecPastDuePercentageFee %<br>
+                        Leveransdatum @Model.DeliveryDate<br>
+                        Er referens: @Model.ReceiverReferenceName
+                    </td>
+
+                    <td style="text-align: left;">
+                        Fakturaadress<br>
+                        @Model.CustomerName<br>
+                        @Model.CustomerInvoiceAddress<br>
+                        @Model.CustomerZipCode @Model.CustomerCity<br>
+                        @Model.CustomerCountry
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>@Model.InvoiceMessageText</p>
+
+        <div class="container">
             <table class="table">
+                <thead>
+                    <tr style="text-align:left;">
+                        <th scope="col">Artnr</th>
+                        <th scope="col">Produkt/tjänst</th>
+                        <th scope="col">Antal Enheter</th>
+                        <th scope="col">A-pris</th>
+                        <th scope="col">Summa</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr>
-
-                        <td class="title">
-                            <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
-                        </td>
-
-                        <td style="text-align: left;">
-                            <h3><b>Faktura</b></h3><br>
-                            Fakturanummer #546<br>
-                            Fakturadatum 2020 - 02 - 14<br>
-                            Fakturadatum 2020 - 02 - 14<br>
-                            Vår referens: Sorin Marin
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Kundnummer 15<br>
-                            Betalningsvillkor 30 dagar<br>
-                            Dröjsmålsränta 10%<br>
-                            Leveransdatum 2020 - 02 - 14<br>
-                        </td>
-
-                        <td style="text-align: left;">
-                            Fakturaadress<br>
-                            Pizzahuset Spetsamossen<br>
-                            Ringbergsvägen 7<br>
-                            35233 Växjö<br>
-                            Sverige
-                        </td>
-                    </tr>
+                    @foreach (var p in Model.InvoiceProducts)
+                    {
+                        <tr>
+                            <th scope="row" style="text-align:left;">@p.ArticleNumber</th>
+                            <td style="text-align:left;">@p.Name</td>
+                            <td>@p.Quantity</td>
+                            <td>@p.Price</td>
+                            <td>@p.Quantity * @p.Price</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
-
-            <p>Detta är en plats för egna anteckningar om man skulle vilja göra det</p>
-
-            <div class="container">
-                <table class="table">
-                    <thead>
-                        <tr style="text-align:left;">
-                            <th scope="col">Artnr</th>
-                            <th scope="col">Produkt/tjänst</th>
-                            <th scope="col">Antal Enheter</th>
-                            <th scope="col">A-pris</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row" style="text-align:left;">A30718</th>
-                            <td style="text-align:left;">Plastkasse Ld Vit 17L</td>
-                            <td>1</td>
-                            <td>220</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" style="text-align:left;">A14114100</th>
-                            <td style="text-align:left;">Aluminiumfoilie 30CMX150M 14MY</td>
-                            <td>3</td>
-                            <td>326</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" style="text-align:left;">AS125SX</th>
-                            <td style="text-align:left;">150st sopsäck x-stark 125L svart</td>
-                            <td>8</td>
-                            <td>179</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
+    </div>
 
 
 
@@ -229,5 +217,5 @@
 
 
 
-    </body>
-    </html>
+</body>
+</html>
