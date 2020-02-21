@@ -296,6 +296,8 @@ namespace vueproject.Migrations
 
                     b.Property<string>("CustomerZipCode");
 
+                    b.Property<DateTime>("DateCreated");
+
                     b.Property<decimal>("DecimalRoundUp");
 
                     b.Property<DateTime>("DeliveryDate");
@@ -305,6 +307,8 @@ namespace vueproject.Migrations
                     b.Property<string>("EmailFrom");
 
                     b.Property<string>("EmailTo");
+
+                    b.Property<string>("FilePath");
 
                     b.Property<DateTime>("InvoiceDate");
 

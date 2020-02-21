@@ -46,7 +46,7 @@ namespace vueproject.Controllers
         {
             try
             {
-                await mail.Execute();
+                await mail.Execute("hello");
 
                 return Ok();
             }
@@ -56,13 +56,10 @@ namespace vueproject.Controllers
             }
         }
 
-        public async Task<IActionResult> GenerateInvoicePdf(InvoiceViewModel vm)
+        public async Task<IActionResult> GenerateInvoicePdf()
         {
-            string fileName = Guid.NewGuid().ToString();
-
-            //TODO: change filepath to server path when saving the inquiry pdf below
-            var filePath = Path.Combine(@"C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\UsersPdfInvoices", fileName + ".pdf");
-
+            
+            
             //var userId = _userManager.GetUserId(User);
             //var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             //Where(x => x.ModifiedBy == user);
@@ -74,104 +71,109 @@ namespace vueproject.Controllers
             var userData = await _userManager.GetUserAsync(User);
             var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
 
-            var Customer = ctx.Customers.Where(x => x.CustomerId == vm.AssociatedCustomerId).FirstOrDefault();
+            var Invoice = ctx.Invoices.OrderByDescending(x => x.DateCreated).FirstOrDefault();
+            var InvoiceProductsToGet = ctx.InvoiceProducts.Where(x => x.AssociatedInvoicePdfGuid == Invoice.InvoicePdfGuid).ToList();
+            Invoice.InvoiceProducts = InvoiceProductsToGet;
 
+            var InvoicePdfGuid = Invoice.InvoicePdfGuid;
+            var filePath = Invoice.FilePath;
+            
 
-            var NewInvoice = new Invoice();
-            NewInvoice.InvoicePdfGuid = Guid.NewGuid().ToString();
+            //var NewInvoice = new Invoice();
+            //NewInvoice.InvoicePdfGuid = vm.InvoicePdfGuid;
 
-            NewInvoice.AssociatedUserId = user.UserId;
-            NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
+            //NewInvoice.AssociatedUserId = user.UserId;
+            //NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
 
-            NewInvoice.EmailFrom = user.EmailAddress;
-            NewInvoice.EmailTo = Customer.EmailAddress;
+            //NewInvoice.EmailFrom = user.EmailAddress;
+            //NewInvoice.EmailTo = Customer.EmailAddress;
 
-            NewInvoice.CustomerInvoiceAddress = Customer.InvoiceAddress;
-            NewInvoice.CustomerZipCode = Customer.ZipCode;
-            NewInvoice.CustomerCity = Customer.City;
-            NewInvoice.CustomerCountry = Customer.Country;
+            //NewInvoice.CustomerInvoiceAddress = Customer.InvoiceAddress;
+            //NewInvoice.CustomerZipCode = Customer.ZipCode;
+            //NewInvoice.CustomerCity = Customer.City;
+            //NewInvoice.CustomerCountry = Customer.Country;
 
-            NewInvoice.UserPhoneNumber = user.PhoneNumber;
-            NewInvoice.UserFax = user.Fax;
-            NewInvoice.UserPlusGiro = user.PlusGiro;
-            NewInvoice.UserBankGiro = user.BankGiro;
-            NewInvoice.UserOrgNr = user.OrgNr;
-            NewInvoice.UserMomsRegNr = user.MomsRegNr;
+            //NewInvoice.UserPhoneNumber = user.PhoneNumber;
+            //NewInvoice.UserFax = user.Fax;
+            //NewInvoice.UserPlusGiro = user.PlusGiro;
+            //NewInvoice.UserBankGiro = user.BankGiro;
+            //NewInvoice.UserOrgNr = user.OrgNr;
+            //NewInvoice.UserMomsRegNr = user.MomsRegNr;
 
-            NewInvoice.UserInvoiceAddress = user.InvoiceAddress;
-            NewInvoice.UserZipCode = user.ZipCode;
-            NewInvoice.UserCity = user.City;
-            NewInvoice.UserCountry = user.Country;
+            //NewInvoice.UserInvoiceAddress = user.InvoiceAddress;
+            //NewInvoice.UserZipCode = user.ZipCode;
+            //NewInvoice.UserCity = user.City;
+            //NewInvoice.UserCountry = user.Country;
 
-            NewInvoice.InvoiceDate = vm.InvoiceDate;
-            NewInvoice.InvoicePayDate = vm.InvoicePayDate;
-            NewInvoice.DeliveryDate = vm.DeliveryDate;
-            NewInvoice.InvoicecPastDuePercentageFee = user.InvoicecPastDuePercentageFee;
-            NewInvoice.PaymentTerms = user.PaymentTerms;
-            NewInvoice.SenderName = user.FirstName + " " + user.LastName;
-            NewInvoice.CustomerName = Customer.Name;
-            NewInvoice.ReceiverCustomerId = vm.AssociatedCustomerId;
-            NewInvoice.ReceiverReferenceName = Customer.CustomerReference;
+            //NewInvoice.InvoiceDate = vm.InvoiceDate;
+            //NewInvoice.InvoicePayDate = vm.InvoicePayDate;
+            //NewInvoice.DeliveryDate = vm.DeliveryDate;
+            //NewInvoice.InvoicecPastDuePercentageFee = user.InvoicecPastDuePercentageFee;
+            //NewInvoice.PaymentTerms = user.PaymentTerms;
+            //NewInvoice.SenderName = user.FirstName + " " + user.LastName;
+            //NewInvoice.CustomerName = Customer.Name;
+            //NewInvoice.ReceiverCustomerId = vm.AssociatedCustomerId;
+            //NewInvoice.ReceiverReferenceName = Customer.CustomerReference;
 
-            NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
+            //NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
 
-            NewInvoice.SendAs = vm.SendAs;
-            NewInvoice.InvoiceTypeToSend = vm.InvoiceTypeToSend;
-            NewInvoice.InvoiceIsCredit = vm.InvoiceIsCredit;
+            //NewInvoice.SendAs = vm.SendAs;
+            //NewInvoice.InvoiceTypeToSend = vm.InvoiceTypeToSend;
+            //NewInvoice.InvoiceIsCredit = vm.InvoiceIsCredit;
 
-            NewInvoice.OptionalReminderFee = vm.OptionalReminderFee;
-            NewInvoice.DeliveryFee = vm.DeliveryFee;
-            NewInvoice.InvoiceFee = vm.InvoiceFee;
+            //NewInvoice.OptionalReminderFee = vm.OptionalReminderFee;
+            //NewInvoice.DeliveryFee = vm.DeliveryFee;
+            //NewInvoice.InvoiceFee = vm.InvoiceFee;
 
-            NewInvoice.InvoiceProducts = vm.InvoiceProducts;
-
-
-
-            decimal TotalFees = NewInvoice.DeliveryFee + NewInvoice.InvoiceFee + NewInvoice.OptionalReminderFee;
-            decimal TotalFeesWithTax = TotalFees * Convert.ToDecimal(1.25);
-
-            decimal TotalProductsCostWithOutTax = vm.InvoiceProductsTotalCost;
-            decimal TotalProductsCostWithTax = vm.InvoiceProductsTotalCost * Convert.ToDecimal(1.25);
-
-            decimal TotalPayWithoutTax = TotalFees + vm.InvoiceProductsTotalCost;
-
-
-            //   TAX LOGIC ----------------- TAX LOGIC -------- TAX LOGIC ----------------- TAX LOGIC
-            // tax = TotalFees - TotalFeesWITHTAX     +++++++   InvoiceProductsTotalCost - InvoiceProductsTotalCostWITHTAX 
-            var FeesDiff = TotalFeesWithTax - TotalFees;
-            var InvoicePriceDiff = TotalProductsCostWithTax - vm.InvoiceProductsTotalCost;
-            decimal Tax = FeesDiff + InvoicePriceDiff;
-            NewInvoice.Tax = Tax;
-            //   TAX LOGIC ----------------- TAX LOGIC -------- TAX LOGIC ----------------- TAX LOGIC
-
-
-            NewInvoice.TotalCostWithoutTax = TotalFees + TotalProductsCostWithOutTax;
-
-            var TotalCostNotRounded = TotalFeesWithTax + TotalProductsCostWithTax;
-
-            decimal TotalCostRounded = Math.Round(TotalCostNotRounded);
-
-
-            // DecimalRoundUp ====  diff between ToPayWithTax  ROUND(ToPayWithTax)
-            decimal DecimalToAbs = TotalCostNotRounded - TotalCostRounded;
-            NewInvoice.DecimalRoundUp = Math.Abs(DecimalToAbs);
-
-            NewInvoice.TotalCost = Math.Round(TotalCostNotRounded);
+            //NewInvoice.InvoiceProducts = vm.InvoiceProducts;
 
 
 
+            //decimal TotalFees = NewInvoice.DeliveryFee + NewInvoice.InvoiceFee + NewInvoice.OptionalReminderFee;
+            //decimal TotalFeesWithTax = TotalFees * Convert.ToDecimal(1.25);
+
+            //decimal TotalProductsCostWithOutTax = vm.InvoiceProductsTotalCost;
+            //decimal TotalProductsCostWithTax = vm.InvoiceProductsTotalCost * Convert.ToDecimal(1.25);
+
+            //decimal TotalPayWithoutTax = TotalFees + vm.InvoiceProductsTotalCost;
 
 
+            ////   TAX LOGIC ----------------- TAX LOGIC -------- TAX LOGIC ----------------- TAX LOGIC
+            //// tax = TotalFees - TotalFeesWITHTAX     +++++++   InvoiceProductsTotalCost - InvoiceProductsTotalCostWITHTAX 
+            //var FeesDiff = TotalFeesWithTax - TotalFees;
+            //var InvoicePriceDiff = TotalProductsCostWithTax - vm.InvoiceProductsTotalCost;
+            //decimal Tax = FeesDiff + InvoicePriceDiff;
+            //NewInvoice.Tax = Tax;
+            ////   TAX LOGIC ----------------- TAX LOGIC -------- TAX LOGIC ----------------- TAX LOGIC
 
 
+            //NewInvoice.TotalCostWithoutTax = TotalFees + TotalProductsCostWithOutTax;
 
+            //var TotalCostNotRounded = TotalFeesWithTax + TotalProductsCostWithTax;
+
+            //decimal TotalCostRounded = Math.Round(TotalCostNotRounded);
+
+
+            //// DecimalRoundUp ====  diff between ToPayWithTax  ROUND(ToPayWithTax)
+            //decimal DecimalToAbs = TotalCostNotRounded - TotalCostRounded;
+            //NewInvoice.DecimalRoundUp = Math.Abs(DecimalToAbs);
+
+            //NewInvoice.TotalCost = Math.Round(TotalCostNotRounded);
 
 
 
 
-            return new ViewAsPdf("GenerateInquiryPdf", NewInvoice)
+
+
+
+
+
+
+
+
+            return new ViewAsPdf("GenerateInquiryPdf", Invoice)
             {
-                FileName = fileName,
+                FileName = InvoicePdfGuid,
                 PageSize = Rotativa.AspNetCore.Options.Size.A4,
                 PageOrientation = Orientation.Portrait,
                 PageMargins = { Left = 0, Right = 0 },

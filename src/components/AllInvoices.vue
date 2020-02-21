@@ -596,24 +596,10 @@
             },
             sendInvoice() {
                  this.showCustomerIdErrorMessage = false,
-                    InvoiceAPI.GeneratePdfInvoice(
-                        {
-                            InvoiceDate: this.invoiceDate,
-                            InvoicePayDate: this.invoicePayDate,
-                            DeliveryDate: this.deliveryDate,
-                            InvoiceTypeToSend: this.invoiceType,
-                            InvoiceIsCredit: this.invoiceIsCredit,
-                            InvoiceProducts: this.InvoiceProductsToDisplay,
-                            InvoiceFee: this.invoiceFee,
-                            DeliveryFee: this.deliveryFee,
-                            OptionalReminderFee: this.optionalReminderFee,
-                            InvoiceMessageText: this.invoiceMessageText,
-                            SendAs: this.sendAs,
-                            AssociatedCustomerId: this.select.customerId,
-                            ExtraInvoiceCosts: this.totalTyp,
-                            InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
-                        },
-                    ),
+                 
+                      //setTimeout(() => (
+                           InvoiceAPI.SendInvoiceViaMail()
+                //), 5000)
                     this.productAddedDialog();
                 },
             saveInvoice() {
@@ -636,6 +622,25 @@
                             InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         },
                     ),
+
+                       InvoiceAPI.GeneratePdfInvoice(
+                        //{
+                        //    InvoiceDate: this.invoiceDate,
+                        //    InvoicePayDate: this.invoicePayDate,
+                        //    DeliveryDate: this.deliveryDate,
+                        //    InvoiceTypeToSend: this.invoiceType,
+                        //    InvoiceIsCredit: this.invoiceIsCredit,
+                        //    InvoiceProducts: this.InvoiceProductsToDisplay,
+                        //    InvoiceFee: this.invoiceFee,
+                        //    DeliveryFee: this.deliveryFee,
+                        //    OptionalReminderFee: this.optionalReminderFee,
+                        //    InvoiceMessageText: this.invoiceMessageText,
+                        //    SendAs: this.sendAs,
+                        //    AssociatedCustomerId: this.select.customerId,
+                        //    ExtraInvoiceCosts: this.totalTyp,
+                        //    InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
+                        //},
+                     ),
                     this.productAddedDialog();
             },
             ...mapActions({

@@ -58,5 +58,6 @@ namespace vueproject.Models
         public decimal Tax { get; set; }
         public decimal DecimalRoundUp { get; set; }
         public string PaymentTerms { get; set; }
+        public string FilePath { get; set; }
     }
 }

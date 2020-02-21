@@ -4,11 +4,11 @@ import axios from "axios";
 
 export default {
 /* eslint-disable no-console */
-    GeneratePdfInvoice: (vm) => {
-        return axios.post('/api/CreateInvoice/GenerateInvoicePdf', vm);
+    GeneratePdfInvoice: () => {
+        return axios.post('/api/CreateInvoice/GenerateInvoicePdf');
     },
-    SendInvoiceViaMail: (vm) => {
-        return axios.post('/api/CreateInvoice/SendInvoiceViaMail', vm)
+    SendInvoiceViaMail: () => {
+        return axios.post('/api/Invoice/SendInvoiceViaMail')
             .then(result => {
                 console.log(result.data, 'success mannen');
                 return result.data;

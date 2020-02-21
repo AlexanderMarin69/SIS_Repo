@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using vueproject.DB;
+using vueproject.Email;
 using vueproject.Models;
 using vueproject.ViewModels;
 
@@ -14,15 +16,37 @@ namespace vueproject.Controllers
     [ApiController]
     public class InvoiceController : Controller
     {
+        private readonly EmailSender mail;
         private vueprojectDatabaseContext ctx;
         private readonly UserManager<IdentityUser> _userManager;
         public InvoiceController(vueprojectDatabaseContext context,
+             EmailSender Email,
             UserManager<IdentityUser> UserManager)
         {
             _userManager = UserManager;
             ctx = context;
+            mail = Email;
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> SendInvoiceViaMail()
+        {
+            try
+            {
+                var usr = await _userManager.GetUserAsync(User);
+                var user = ctx.ApplicationUsers.Where(x => x.UserId == usr.Id).FirstOrDefault();
+                var Invoice = ctx.Invoices.OrderByDescending(x => x.DateCreated).FirstOrDefault();
+                var InvoicePdfGuid = Invoice.InvoicePdfGuid;
+                await mail.Execute(InvoicePdfGuid);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return Ok("invoice is sent");
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateNewInvoice(InvoiceViewModel vm)
         {
@@ -38,7 +62,7 @@ namespace vueproject.Controllers
                    var NewInvoice = new Invoice();
                 NewInvoice.InvoicePdfGuid = Guid.NewGuid().ToString();
                 NewInvoice.DateCreated = DateTime.Now;
-
+                NewInvoice.FilePath = Path.Combine(@"C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\UsersPdfInvoices", NewInvoice.InvoicePdfGuid + ".pdf");
                 NewInvoice.AssociatedUserId = user.UserId;
                 NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
 
