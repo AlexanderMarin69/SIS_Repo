@@ -62,7 +62,7 @@ namespace vueproject.Controllers
                    var NewInvoice = new Invoice();
                 NewInvoice.InvoicePdfGuid = Guid.NewGuid().ToString();
                 NewInvoice.DateCreated = DateTime.Now;
-                NewInvoice.FilePath = Path.Combine(@"C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\UsersPdfInvoices", NewInvoice.InvoicePdfGuid + ".pdf");
+                NewInvoice.FilePath = Path.Combine(@"C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\UsersPdfInvoices", NewInvoice.InvoicePdfGuid);
                 NewInvoice.AssociatedUserId = user.UserId;
                 NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
 

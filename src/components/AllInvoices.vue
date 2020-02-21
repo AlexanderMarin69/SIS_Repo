@@ -622,7 +622,7 @@
                             InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         },
                     ),
-
+                      setTimeout(() => (
                        InvoiceAPI.GeneratePdfInvoice(
                         //{
                         //    InvoiceDate: this.invoiceDate,
@@ -640,6 +640,7 @@
                         //    ExtraInvoiceCosts: this.totalTyp,
                         //    InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         //},
+                             ), 5000)
                      ),
                     this.productAddedDialog();
             },
