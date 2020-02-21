@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using vueproject.DB;
 using vueproject.Email;
 using vueproject.Models;
@@ -62,6 +63,7 @@ namespace vueproject.Controllers
                    var NewInvoice = new Invoice();
                 NewInvoice.InvoicePdfGuid = Guid.NewGuid().ToString();
                 NewInvoice.DateCreated = DateTime.Now;
+
                 NewInvoice.FilePath = Path.Combine(@"C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\UsersPdfInvoices", NewInvoice.InvoicePdfGuid);
                 NewInvoice.AssociatedUserId = user.UserId;
                 NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
@@ -229,12 +231,15 @@ namespace vueproject.Controllers
         //    return Ok();
         //}
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetAllCustomers()
-        //{
-        //    var allCustomers = await ctx.Customers.ToListAsync();
-        //    return Ok(allCustomers);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> GetAllInvoices()
+        {
+            var userData = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
+
+            var allProducts = await ctx.Invoices.Where(x => x.AssociatedUserId == user.UserId).ToListAsync();
+            return Ok(allProducts);
+        }
         //[HttpPost]
         //public async Task<IActionResult> GetCustomerByCustomerId(GetCustomerByCustomerIdViewModel vm)
         //{

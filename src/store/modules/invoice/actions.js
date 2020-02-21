@@ -32,7 +32,7 @@ export default {
 
                 // custom console
                 // eslint-disable-next-line no-console
-                console.log(result)
+                console.log(result, 'INVOICESSSSSS')
                 commit('SET_ALL_USER_INVOICES', result);
             }).catch(result => {
                 // eslint-disable-next-line no-console

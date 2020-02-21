@@ -439,8 +439,6 @@
             this.getAllCustomers();
         }
     }
-
-
     /* eslint-enable no-console */
 </script>
 

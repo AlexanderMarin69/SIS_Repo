@@ -18,7 +18,7 @@ export default {
             ;
     },
     GetAllInvoices: () => {
-        return axios.get('/api/customers/GetAllCustomers')
+        return axios.get('/api/Invoice/GetAllInvoices')
             .then(result => {
                 return result.data;
             });

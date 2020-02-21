@@ -7,9 +7,9 @@
                 <v-spacer></v-spacer>
                 <button hidden id="kanin">helloooo</button>
                 <!--<v-btn icon class="ml-3 mr-3">
-                <v-icon>mdi-magnify</v-icon>
-                sök
-            </v-btn>-->
+            <v-icon>mdi-magnify</v-icon>
+            sök
+        </v-btn>-->
                 <v-btn color="primary" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
@@ -20,23 +20,26 @@
                     <v-text-field class="pa-2 mt-4" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
                 </v-toolbar>
             </v-card>
+            {{invoiceDate}}
             <v-list two-line>
                 <v-list-item-group>
-                    <template v-for="(item, index) in allUserCustomersToDisplay">
-                        <v-list-item :key="item.name" @click="showCustomerDetails(item)">
+                    <template v-for="(item, index) in allUserInvoicesToDisplay">
+                        <v-list-item :key="item.name" class="line" :class="item.invoicePayDate > invoiceDate ? 'red' : 'white'" @click="showCustomerDetails(item)">
                             <template>
                                 <v-list-item-content>
-                                    <v-list-item-subtitle v-text="item.phoneNumber" class="pa-1"></v-list-item-subtitle>
-                                    <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
-                                    <v-list-item-subtitle class="text--primary pa-1" v-text="item.emailAddress"></v-list-item-subtitle>
-                                    <v-list-item-subtitle class="text--primary pa-1" v-text="item.city"></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-text="'Faktnr ' + item.id" class="pa-1"></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-text="'Kundnr ' + item.associatedCustomerId" class="pa-1"></v-list-item-subtitle>
+                                    <v-list-item-title v-text="item.customerName" class="pa-1" style="font-weight: bold;"></v-list-item-title>
+                                    <v-list-item-subtitle class="text--primary pa-1" v-text="'Fakt. datum ' + item.invoiceDate"></v-list-item-subtitle>
                                 </v-list-item-content>
                                 <v-list-item-action>
-                                    <!--<v-list-item-action-text v-text="item.price + ' kr'"></v-list-item-action-text>-->
+                                    <v-list-item-subtitle class="text--primary mt-10" v-text="item.totalCost + ' kr'"></v-list-item-subtitle>
+                                    <v-list-item-subtitle class="text--primary mb-10" v-text="'Förf. datum ' + item.invoicePayDate"></v-list-item-subtitle>
+                                    <v-btn text outlined color="primary">visa</v-btn>
                                 </v-list-item-action>
                             </template>
                         </v-list-item>
-                        <v-divider v-if="index + 1 < listOfProducts.length"
+                        <v-divider v-if="index + 1 < allUserInvoicesToDisplay.length"
                                    :key="index"></v-divider>
                     </template>
                 </v-list-item-group>
@@ -645,7 +648,7 @@
                     this.productAddedDialog();
             },
             ...mapActions({
-                //getAllInvoices: 'customer/GET_ALL_INVOICES',
+                getAllInvoices: 'invoice/GET_ALL_INVOICES',
                 //searchInvoices: 'customer/SEARCH_INVOICES',
                 getAllCustomers: 'customer/GET_ALL_CUSTOMERS',
                 getAllProducts: 'warehouse/GET_ALL_PRODUCTS',
@@ -665,7 +668,7 @@
         },
         computed: {
             ...mapState({
-                //allUserInvoicesToDisplay: state => state.customer.allUserInvoices,
+                allUserInvoicesToDisplay: state => state.invoice.allUserInvoices,
                 allCustomers: state => state.customer.allUserCustomers,
                 warehouseProductsToDisplay: state => state.warehouse.warehouseProducts,
                 InvoiceProductsToDisplay: state => state.invoice.InvoiceProducts,
@@ -674,11 +677,12 @@
             }),
         },
         beforeMount() {
-            //this.getAllInvoices();
+            this.getAllInvoices();
             this.getAllCustomers();
             this.getAllProducts();
             this.calculateTotalPriceAction();
         }
+
     }
     /* eslint-enable no-console */
 </script>
@@ -689,6 +693,13 @@
         padding: 10px;
     }
 
+    .red {
+        background-color:red;
+    }
+
+     .white {
+        background-color:yellow;
+    }
     @media all and (display-mode: standalone) {
         /*works*/
     }

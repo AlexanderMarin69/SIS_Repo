@@ -150,4 +150,9 @@
     //        state.totalInvoiceItemsPrice += state.deliveryFee
     //        state.totalInvoiceItemsPrice += state.invoiceFee
     //},
+
+    SET_ALL_USER_INVOICES(state, result) {
+        state.allUserInvoices = result;
+       
+    },
 }
