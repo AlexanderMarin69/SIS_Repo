@@ -186,11 +186,17 @@ namespace vueproject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("BankGiro");
+
                     b.Property<string>("City");
+
+                    b.Property<string>("CompanyName");
 
                     b.Property<string>("Country");
 
                     b.Property<string>("EmailAddress");
+
+                    b.Property<string>("Fax");
 
                     b.Property<string>("FirstName");
 
@@ -200,7 +206,15 @@ namespace vueproject.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<string>("MomsRegNr");
+
+                    b.Property<string>("OrgNr");
+
                     b.Property<string>("PaymentTerms");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("PlusGiro");
 
                     b.Property<string>("UserId");
 
@@ -326,11 +340,23 @@ namespace vueproject.Migrations
 
                     b.Property<decimal>("TotalCostWithoutTax");
 
+                    b.Property<string>("UserBankGiro");
+
                     b.Property<string>("UserCity");
 
                     b.Property<string>("UserCountry");
 
+                    b.Property<string>("UserFax");
+
                     b.Property<string>("UserInvoiceAddress");
+
+                    b.Property<string>("UserMomsRegNr");
+
+                    b.Property<string>("UserOrgNr");
+
+                    b.Property<string>("UserPhoneNumber");
+
+                    b.Property<string>("UserPlusGiro");
 
                     b.Property<string>("UserZipCode");
 

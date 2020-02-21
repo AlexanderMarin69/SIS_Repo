@@ -14,6 +14,7 @@ namespace vueproject.Models
         public string InvoicePdfGuid { get; set; }
         public string EmailFrom { get; set; }
         public string EmailTo { get; set; }
+        public DateTime DateCreated { get; set; }
 
         //CUSTOMER DETAILS
         public string CustomerInvoiceAddress { get; set; }
@@ -30,6 +31,12 @@ namespace vueproject.Models
         public string UserZipCode { get; set; }
         public string UserCity { get; set; }
         public string UserCountry { get; set; }
+        public string UserPhoneNumber { get; set; }
+        public string UserFax { get; set; }
+        public string UserPlusGiro { get; set; }
+        public string UserBankGiro { get; set; }
+        public string UserOrgNr { get; set; }
+        public string UserMomsRegNr { get; set; }
 
         //GENERIC INVOICE DETAILS
         public List<InvoiceProduct> InvoiceProducts { get; set; }
@@ -51,6 +58,5 @@ namespace vueproject.Models
         public decimal Tax { get; set; }
         public decimal DecimalRoundUp { get; set; }
         public string PaymentTerms { get; set; }
-
     }
 }

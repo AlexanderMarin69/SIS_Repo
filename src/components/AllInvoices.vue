@@ -7,9 +7,9 @@
                 <v-spacer></v-spacer>
                 <button hidden id="kanin">helloooo</button>
                 <!--<v-btn icon class="ml-3 mr-3">
-                    <v-icon>mdi-magnify</v-icon>
-                    sök
-                </v-btn>-->
+                <v-icon>mdi-magnify</v-icon>
+                sök
+            </v-btn>-->
                 <v-btn color="primary" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
@@ -43,73 +43,7 @@
             </v-list>
         </v-card>
         <!--ADD NEW PRODUCT DIALOG ------- START -->
-        <v-row justify="center">
-            <v-dialog v-model="addNewCustomerDialog" hidden id="mannen" persistent max-width="600px">
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">Skapa ny kund</span>
-                        <v-card flat v-if="showCustomerIdErrorMessage">
-                            <p class="customerIdErrorMessage">
-                                Det finns redan en produkt med detta kundnummret, välj ett annat.
-                            </p>
-                        </v-card>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-container>
-                            <v-row>
-                                <!--<v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="name" label="Namn"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="customerId" label="Kundnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="invoiceAddress" label="Fakturaadress"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="secondInvoiceAddress" label="Fakturaadress 2"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="zipCode" label="Postnr"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="city" label="Ort"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="country" label="Land"></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field v-model="organisationNumber" label="Organisationsnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="phoneNumber" label="Telefonnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="secondPhoneNumber" label="Andra telefonnummer"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="fax" label="Fax"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="emailAddress" label="E-post"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="webAddress" label="Webbadress"></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="12">
-                                    <v-text-field v-model="description" label="Beskrivning / egna anteckningar"></v-text-field>
-                                </v-col>-->
-                            </v-row>
-                        </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="closeDialog">Stäng</v-btn>
-                        <v-btn color="blue darken-1" text @click="createNewCustomer()">Skapa</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-        </v-row>
+       
         <!--ADD NEW PRODUCT DIALOG  --------   END-->
         <!--   PRODUCT SUCCESSFULLY ADDED DIALOG --------- START     -->
         <div class="text-center">
@@ -367,9 +301,9 @@
                                         <!--<v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>-->
                                         <!--<p><b>Total exkl. moms</b> 2 003 kr</p>
 
-            <p><b>Moms 25%</b> 480 kr</p>
+                                    <p><b>Moms 25%</b> 480 kr</p>
 
-            <p><b>Öresutjämning</b> 0,50 kr</p>-->
+                                    <p><b>Öresutjämning</b> 0,50 kr</p>-->
 
                                         <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
 
@@ -398,7 +332,7 @@
                                                     <td><h3><b>{{Math.round(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25)}} kr</b></h3></td>
 
                                                 </tr>
-                                                
+
                                             </tbody>
                                         </v-simple-table>
 
@@ -413,22 +347,22 @@
                     <!--<v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>-->
                     <v-spacer></v-spacer>
                     <!--<v-card-actions>
-                        <v-overflow-btn class="my-2"
-                                        :items="dropdown_icon"
-                                        label="Skicka som"
-                                        segmented
-                                        target="#dropdown-example"></v-overflow-btn>
-                    </v-card-actions>-->
+                    <v-overflow-btn class="my-2"
+                                    :items="dropdown_icon"
+                                    label="Skicka som"
+                                    segmented
+                                    target="#dropdown-example"></v-overflow-btn>
+                </v-card-actions>-->
                     <v-col cols="12" sm="6" md="6">
                         <v-container>
                             <p>Skicka som</p>
                             {{sendAs || null}}
-                        <v-radio-group v-model="sendAs" :mandatory="false">
-                            <v-radio label="Faktura" value="Faktura"></v-radio>
-                            <v-radio v-if="invoiceType == 'Faktura'" label="Offert" value="Offert"></v-radio>
-                            <v-radio v-if="invoiceType == 'Faktura'" label="Påminnelse" value="Påminnelse"></v-radio>
+                            <v-radio-group v-model="sendAs" :mandatory="false">
+                                <v-radio label="Faktura" value="Faktura"></v-radio>
+                                <v-radio v-if="invoiceType == 'Faktura'" label="Offert" value="Offert"></v-radio>
+                                <v-radio v-if="invoiceType == 'Faktura'" label="Påminnelse" value="Påminnelse"></v-radio>
 
-                        </v-radio-group>
+                            </v-radio-group>
                         </v-container>
                     </v-col>
                     <v-card-actions>
@@ -446,6 +380,21 @@
                 </v-card>
             </v-dialog>
         </v-row>
+
+
+     
+
+
+        <!--<v-dialog v-model="!IsUserLoggedInVariable"
+                  max-width="400">
+            <v-card>
+                <Login></Login>
+            </v-card>
+        </v-dialog>-->
+
+
+
+
     </div>
 </template>
 <script>
@@ -454,9 +403,11 @@
     import CustomerAPI from '@/services/Customer'
     import InvoiceAPI from '@/services/invoice'
     import AllProductsForInvoice from '@/components/AllProductsForInvoice'
+    //import Login from '@/components/Login'
     export default {
         components: {
-            AllProductsForInvoice
+            AllProductsForInvoice,
+            //Login
         },
         data: () => ({
             invoiceType: 'Faktura',
@@ -492,7 +443,7 @@
             invoicePayDateMenu: false,
             invoicePayDateModal: false,
             deliveryDate: new Date().toISOString().substr(0, 10),
-            deliveryDateDateMenu: false,
+            deliveryDateMenu: false,
             productsToChoose: [
                 {
                     phoneNumber: '0761952005',
@@ -713,6 +664,7 @@
                 warehouseProductsToDisplay: state => state.warehouse.warehouseProducts,
                 InvoiceProductsToDisplay: state => state.invoice.InvoiceProducts,
                 totalInvoiceItemsPriceToDisplay: state => state.invoice.totalInvoiceItemsPrice,
+                IsUserLoggedInVariable: state => state.login.isUserLoggedIn
             }),
         },
         beforeMount() {

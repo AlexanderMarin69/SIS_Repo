@@ -1,4 +1,4 @@
-﻿@model vueproject.ViewModels.InvoiceViewModel
+﻿@model vueproject.Models.Invoice
 
 <html>
 <head>
@@ -151,12 +151,17 @@
                 <tr>
 
                     <td class="title">
-                        <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
+                       @*add user image here*@
+                        @*<img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">*@
                     </td>
 
                     <td style="text-align: left;">
                         <h3><b>Faktura</b></h3><br>
-                        Fakturanummer #@Model.Id<br>
+                        Fakturanummer @if (Model.Id == 0)
+                        {<p>#1</p>}
+                        else
+                        {
+                            <p>#@Model.Id</p>}<br>
                         Fakturadatum @Model.InvoiceDate<br>
                         Fakturadatum @Model.InvoicePayDate<br>
                         Vår referens: @Model.SenderName
@@ -166,7 +171,7 @@
                     <td>
                         Kundnummer @Model.ReceiverCustomerId<br>
                         Betalningsvillkor @Model.PaymentTerms<br>
-                        Dröjsmålsränta @Model.InvoicecPastDuePercentageFee %<br>
+                        Dröjsmålsränta @Model.InvoicecPastDuePercentageFee<br>
                         Leveransdatum @Model.DeliveryDate<br>
                         Er referens: @Model.ReceiverReferenceName
                     </td>
@@ -190,7 +195,7 @@
                     <tr style="text-align:left;">
                         <th scope="col">Artnr</th>
                         <th scope="col">Produkt/tjänst</th>
-                        <th scope="col">Antal Enheter</th>
+                        <th scope="col">Antal enheter</th>
                         <th scope="col">A-pris</th>
                         <th scope="col">Summa</th>
                     </tr>
@@ -202,8 +207,15 @@
                             <th scope="row" style="text-align:left;">@p.ArticleNumber</th>
                             <td style="text-align:left;">@p.Name</td>
                             <td>@p.Quantity</td>
-                            <td>@p.Price</td>
-                            <td>@p.Quantity * @p.Price</td>
+                            <td>@p.Price kr</td>
+                            <td>
+                                @{
+                                    var price = @p.Price;
+                                    var quantity = @p.Quantity;
+                                    var sum = @p.Quantity * @p.Price;
+                                }
+                                @sum kr
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -213,7 +225,66 @@
 
 
 
+    <div class="container fixed-bottom">
+        <table class="table">
+            <thead>
+                <tr style="text-align:left;">
+                    <th scope="col">Frakt</th>
+                    <th scope="col">Fakt.avgift</th>
+                    <th scope="col">Påminnelseavgift</th>
+                    <th scope="col">Exkl. moms</th>
+                    <th scope="col">Moms 25%</th>
+                    <th scope="col">Öresavr</th>
+                    <th scope="col">Att betala</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align:left;">@Model.DeliveryFee kr</td>
+                    <td style="text-align:left;">@Model.InvoiceFee kr</td>
+                    <td style="text-align:left;">@Model.OptionalReminderFee kr</td>
+                    <td style="text-align:left;">@Model.TotalCostWithoutTax kr</td>
+                    <td style="text-align:left;">@Model.Tax kr</td>
+                    <td style="text-align:left;">@Model.DecimalRoundUp kr</td>
+                    <td style="text-align:left;"><b>@Model.TotalCost kr </b></td>
+                </tr>
+            </tbody>
+        </table>
 
+        <table class="table">
+
+            <tbody>
+                <tr>
+                    <td style="text-align:left;">
+                        Adress <br />
+                        @Model.SenderName <br />
+                        @Model.UserInvoiceAddress <br />
+                        @Model.UserZipCode @Model.UserCity <br />
+                        @Model.UserCountry
+
+                    </td>
+                    <td style="text-align:left;">
+                        Telefon <br />
+                        @Model.UserPhoneNumber <br />
+                        @Model.UserFax<br />
+                        @Model.EmailFrom
+                    </td>
+                    <td style="text-align:left;">
+                        Plusgiro <br />
+                        @Model.UserPlusGiro <br />
+                        Bankgiro<br />
+                        @Model.UserBankGiro <br />
+                    </td>
+                    <td style="text-align:left;">
+                        Organisationsnr <br />
+                        @Model.UserOrgNr <br />
+                        Momsreg.nr <br />
+                        @Model.UserMomsRegNr
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 
 

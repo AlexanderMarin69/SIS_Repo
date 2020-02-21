@@ -8,6 +8,7 @@ import Products from '@/Views/Products'
 import Customers from '@/Views/Customers'
 import Settings from '@/Views/Settings'
 import Dashboard from '@/Views/Dashboard'
+import Invoices from '@/Views/Invoices'
 
 import RegisterUserForm from '../components/RegisterUserForm'
 import Login from '@/components/Login'
@@ -56,6 +57,27 @@ const router = new Router({
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/invoices',
+            name: 'invoices',
+            component: Invoices
+            ,
+            async beforeEnter(to, from, next) {
+                var hasPermission = await store.dispatch('login/USER_IS_LOGGED_IN');
+                if (hasPermission) {
+                    next()
+                }
+
+                if (!hasPermission) {
+                    //TODO: Might send user to the configurator instead of login
+                    next({
+                        name: "login", // back to safety route //
+                        query: { redirectFrom: to.fullPath }
+                    })
+                }
+
+            }
         },
         {
             path: '/products',

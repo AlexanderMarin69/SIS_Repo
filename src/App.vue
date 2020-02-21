@@ -29,7 +29,7 @@
                 <v-list-item>
 
                     <v-list-item-content>
-                        <router-link class="linkStyle" to="/">
+                        <router-link class="linkStyle" to="/invoices">
                             <v-list-item-title>
                                 <v-btn text color="primary">Dina Fakturor</v-btn>
                                 <!--<v-btn text> <router-link to="/Products">Artiklar</router-link></v-btn>
@@ -138,7 +138,6 @@
     </v-app>
 </template>
 <script>
-
     export default {
         name: 'App',
         components: {

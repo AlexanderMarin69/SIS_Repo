@@ -3,7 +3,8 @@
 
         <br />
 
-        <AllInvoices></AllInvoices>
+        <!--<AllInvoices></AllInvoices>-->
+        <Login></Login>
 
         <template>
             <v-row justify="center">
@@ -123,7 +124,6 @@
 
 <script>
 
-    import AllInvoices from '@/components/AllInvoices'
     import Login from '@/components/Login'
     import generic from '@/services/generic'
    
@@ -133,7 +133,6 @@
          
             Login,
             //CreateInvoice,
-            AllInvoices
         },
         data: function () {
             return {

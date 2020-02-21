@@ -12,6 +12,7 @@ using AutoMapper;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using vueproject.DB;
+using Microsoft.EntityFrameworkCore;
 
 namespace vueproject.Controllers
 {
@@ -50,53 +51,70 @@ namespace vueproject.Controllers
         //    return Ok(users);
         //}
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetLoggedUser()
-        //{
-        //    //TODO: MAKE NEW VM FFS!
-        //    SettingsViewModel settingsViewModel = new SettingsViewModel();
-        //    var usr = await _userManager.GetUserAsync(User);
-        //    CustomerViewModel customer = await _customerService.GetById(usr.CustomerId);
+        [HttpGet]
+        public async Task<IActionResult> GetLoggedUser()
+        {
+            var usr = await _userManager.GetUserAsync(User);
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == usr.Id).FirstOrDefault();
 
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        settingsViewModel.FirstName = customer.FirstName;
-        //        settingsViewModel.LastName = customer.LastName;
-        //        settingsViewModel.PhoneNumber = customer.PhoneNumber;
-        //        settingsViewModel.CompanyName = customer.CompanyName;
-        //        settingsViewModel.SelectedDeliveryAddressId = customer.SelectedDeliveryAddressId;
-        //        settingsViewModel.SelectedInvoiceAddressId = customer.SelectedInvoiceAddressId;
-        //        //registerUserViewModel.DeliveryAddress = customer.DeliveryAddressId;
-        //        //registerUserViewModel.InvoiceAddress = customer.InvoiceAddressId;
-        //        settingsViewModel.CustomerNumber = customer.CustomerNumber;
-        //        settingsViewModel.Email = usr.Email;
+            var vm = new UpdateUserViewModel();
 
-        //        return Ok(settingsViewModel);
-        //    }
-        //    return Unauthorized();
-        //}
+            if (User.Identity.IsAuthenticated)
+            {
+                vm.FirstName = user.FirstName;
+                vm.LastName = user.LastName;
+                vm.CompanyName = user.CompanyName;
+                vm.PaymentTerms = user.PaymentTerms;
+                vm.InvoicecPastDuePercentageFee = user.InvoicecPastDuePercentageFee;
+                vm.EmailAddress = user.EmailAddress;
+                vm.InvoiceAddress = user.InvoiceAddress;
+                vm.ZipCode = user.ZipCode;
+                vm.City = user.City;
+                vm.Country = user.Country;
+                vm.PhoneNumber = user.PhoneNumber;
+                vm.Fax = user.Fax;
+                vm.PlusGiro = user.PlusGiro;
+                vm.BankGiro = user.BankGiro;
+                vm.OrgNr = user.OrgNr;
+                vm.MomsRegNr = user.MomsRegNr;
 
-        //[HttpPost]
-        //public async Task<IActionResult> UpdateUser(CustomerViewModel vm)
-        //{
-        //    var usr = await _userManager.GetUserAsync(User);
-        //    CustomerViewModel customer = await _customerService.GetById(usr.CustomerId);
+                return Ok(vm);
+            }
+            return Unauthorized();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(UpdateUserViewModel vm)
+        {
+            var usr = await _userManager.GetUserAsync(User);
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == usr.Id).FirstOrDefault();
 
 
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        customer.LastName = vm.LastName;
-        //        customer.FirstName = vm.FirstName;
-        //        customer.PhoneNumber = vm.PhoneNumber;
-        //        customer.CompanyName = vm.CompanyName;
-        //        customer.SelectedDeliveryAddressId = vm.DeliveryAddressId;
-        //        customer.SelectedInvoiceAddressId = vm.InvoiceAddressId;
-        //        await _customerService.Update(customer);
-
-        //        return Ok(customer);
-        //    }
-        //    return Unauthorized();
-        //}
+            if (User.Identity.IsAuthenticated)
+            {
+                user.FirstName = vm.FirstName;
+                user.LastName = vm.LastName;
+                user.CompanyName = vm.CompanyName;
+                user.PaymentTerms = vm.PaymentTerms;
+                user.InvoicecPastDuePercentageFee = vm.InvoicecPastDuePercentageFee;
+                user.EmailAddress = vm.EmailAddress;
+                user.InvoiceAddress = vm.InvoiceAddress;
+                user.ZipCode = vm.ZipCode;
+                user.City = vm.City;
+                user.Country = vm.Country;
+                user.PhoneNumber = vm.PhoneNumber;
+                user.Fax = vm.Fax;
+                user.PlusGiro = vm.PlusGiro;
+                user.BankGiro = vm.BankGiro;
+                user.OrgNr = vm.OrgNr;
+                user.MomsRegNr = vm.MomsRegNr;
+                
+                ctx.ApplicationUsers.Update(user).State = EntityState.Modified;
+                await ctx.SaveChangesAsync();
+                return Ok(user);
+            }
+            return Unauthorized();
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> ChangePassword(ChangePasswordViewModel vm)
@@ -136,7 +154,7 @@ namespace vueproject.Controllers
                 ////Else we just return the "home" route
                 //else
                 //{
-                    return Ok("/");
+                return Ok("/");
                 //}
             }
 
@@ -192,7 +210,7 @@ namespace vueproject.Controllers
                 //}
 
 
-                var user = new IdentityUser { UserName = vm.Email, Email = vm.Email};
+                var user = new IdentityUser { UserName = vm.Email, Email = vm.Email };
                 var result = await _userManager.CreateAsync(user, vm.Password);
 
                 if (result.Succeeded)

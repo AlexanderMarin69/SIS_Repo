@@ -12,7 +12,7 @@ export default {
                 if (data.redirectUrl != '') {
                     router.push(data.redirectUrl);
                 } else {
-                    router.push('/');
+                    router.push('/invoices');
                 }
             }).catch((result) => {
                 //commit('SET_ERRORS', result);
@@ -67,7 +67,7 @@ export default {
                 if (data.redirectUrl != '') {
                     router.push(data.redirectUrl);
                 } else {
-                    router.push('/');
+                    router.push('/invoices');
                 }
             }).catch(() => {
                 commit('SET_AS_LOGGED_IN', false);

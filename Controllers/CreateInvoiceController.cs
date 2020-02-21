@@ -42,11 +42,11 @@ namespace vueproject.Controllers
         }
 
         //TODO: use viewmodel to send data to this controller insted of post method from page as below (old mvc code)
-        public async Task<IActionResult> SendInvoiceViaMail(InvoiceViewModel vm)
+        public async Task<IActionResult> SendInvoiceViaMail()
         {
             try
             {
-                await mail.Execute(vm);
+                await mail.Execute();
 
                 return Ok();
             }
@@ -70,17 +70,93 @@ namespace vueproject.Controllers
 
             //maybe send id and get from database, put in vm and send vm
 
+            //var userData = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var userData = await _userManager.GetUserAsync(User);
+            var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
 
-            //var NewInvoice = new Invoice();
-            ////NewInvoice.DateCreated = DateTime.Now;
-            ////NewInvoice.EmailFrom = vm.EmailFrom; due to changed viewmodel.........
-            ////NewInvoice.EmailTo = vm.EmailTo;
-            //NewInvoice.InvoicePdfGuid = fileName;
-            //NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
-            ////NewInvoice.UserName = "TestUserName";
-            ///
+            var Customer = ctx.Customers.Where(x => x.CustomerId == vm.AssociatedCustomerId).FirstOrDefault();
 
 
+            var NewInvoice = new Invoice();
+            NewInvoice.InvoicePdfGuid = Guid.NewGuid().ToString();
+
+            NewInvoice.AssociatedUserId = user.UserId;
+            NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
+
+            NewInvoice.EmailFrom = user.EmailAddress;
+            NewInvoice.EmailTo = Customer.EmailAddress;
+
+            NewInvoice.CustomerInvoiceAddress = Customer.InvoiceAddress;
+            NewInvoice.CustomerZipCode = Customer.ZipCode;
+            NewInvoice.CustomerCity = Customer.City;
+            NewInvoice.CustomerCountry = Customer.Country;
+
+            NewInvoice.UserPhoneNumber = user.PhoneNumber;
+            NewInvoice.UserFax = user.Fax;
+            NewInvoice.UserPlusGiro = user.PlusGiro;
+            NewInvoice.UserBankGiro = user.BankGiro;
+            NewInvoice.UserOrgNr = user.OrgNr;
+            NewInvoice.UserMomsRegNr = user.MomsRegNr;
+
+            NewInvoice.UserInvoiceAddress = user.InvoiceAddress;
+            NewInvoice.UserZipCode = user.ZipCode;
+            NewInvoice.UserCity = user.City;
+            NewInvoice.UserCountry = user.Country;
+
+            NewInvoice.InvoiceDate = vm.InvoiceDate;
+            NewInvoice.InvoicePayDate = vm.InvoicePayDate;
+            NewInvoice.DeliveryDate = vm.DeliveryDate;
+            NewInvoice.InvoicecPastDuePercentageFee = user.InvoicecPastDuePercentageFee;
+            NewInvoice.PaymentTerms = user.PaymentTerms;
+            NewInvoice.SenderName = user.FirstName + " " + user.LastName;
+            NewInvoice.CustomerName = Customer.Name;
+            NewInvoice.ReceiverCustomerId = vm.AssociatedCustomerId;
+            NewInvoice.ReceiverReferenceName = Customer.CustomerReference;
+
+            NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
+
+            NewInvoice.SendAs = vm.SendAs;
+            NewInvoice.InvoiceTypeToSend = vm.InvoiceTypeToSend;
+            NewInvoice.InvoiceIsCredit = vm.InvoiceIsCredit;
+
+            NewInvoice.OptionalReminderFee = vm.OptionalReminderFee;
+            NewInvoice.DeliveryFee = vm.DeliveryFee;
+            NewInvoice.InvoiceFee = vm.InvoiceFee;
+
+            NewInvoice.InvoiceProducts = vm.InvoiceProducts;
+
+
+
+            decimal TotalFees = NewInvoice.DeliveryFee + NewInvoice.InvoiceFee + NewInvoice.OptionalReminderFee;
+            decimal TotalFeesWithTax = TotalFees * Convert.ToDecimal(1.25);
+
+            decimal TotalProductsCostWithOutTax = vm.InvoiceProductsTotalCost;
+            decimal TotalProductsCostWithTax = vm.InvoiceProductsTotalCost * Convert.ToDecimal(1.25);
+
+            decimal TotalPayWithoutTax = TotalFees + vm.InvoiceProductsTotalCost;
+
+
+            //   TAX LOGIC ----------------- TAX LOGIC -------- TAX LOGIC ----------------- TAX LOGIC
+            // tax = TotalFees - TotalFeesWITHTAX     +++++++   InvoiceProductsTotalCost - InvoiceProductsTotalCostWITHTAX 
+            var FeesDiff = TotalFeesWithTax - TotalFees;
+            var InvoicePriceDiff = TotalProductsCostWithTax - vm.InvoiceProductsTotalCost;
+            decimal Tax = FeesDiff + InvoicePriceDiff;
+            NewInvoice.Tax = Tax;
+            //   TAX LOGIC ----------------- TAX LOGIC -------- TAX LOGIC ----------------- TAX LOGIC
+
+
+            NewInvoice.TotalCostWithoutTax = TotalFees + TotalProductsCostWithOutTax;
+
+            var TotalCostNotRounded = TotalFeesWithTax + TotalProductsCostWithTax;
+
+            decimal TotalCostRounded = Math.Round(TotalCostNotRounded);
+
+
+            // DecimalRoundUp ====  diff between ToPayWithTax  ROUND(ToPayWithTax)
+            decimal DecimalToAbs = TotalCostNotRounded - TotalCostRounded;
+            NewInvoice.DecimalRoundUp = Math.Abs(DecimalToAbs);
+
+            NewInvoice.TotalCost = Math.Round(TotalCostNotRounded);
 
 
 
@@ -92,9 +168,8 @@ namespace vueproject.Controllers
 
 
 
-            
 
-            return new ViewAsPdf("GenerateInquiryPdf", vm)
+            return new ViewAsPdf("GenerateInquiryPdf", NewInvoice)
             {
                 FileName = fileName,
                 PageSize = Rotativa.AspNetCore.Options.Size.A4,

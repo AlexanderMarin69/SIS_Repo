@@ -75,7 +75,7 @@
                                     <v-text-field v-model="customerId" label="Kundnummer"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="customerReference" label="Kundens referens***"></v-text-field>
+                                    <v-text-field v-model="customerReference" label="Kundens referens"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="invoiceAddress" label="Fakturaadress"></v-text-field>
@@ -162,7 +162,7 @@
                                     <v-text-field readonly v-model="editCustomerId" label="Kundnummer"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field v-model="editCustomerReference" label="Kundreferens***"></v-text-field>
+                                    <v-text-field v-model="editCustomerReference" label="Kundreferens"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="editInvoiceAddress" label="Fakturaadress"></v-text-field>
@@ -245,7 +245,7 @@
     import CustomerAPI from '@/services/Customer'
     export default {
         data: () => ({
-
+           
             //create customer v-models start------------
             name: '',
             customerId: '',

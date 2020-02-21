@@ -24,13 +24,4 @@ export default {
     updateUser: (vm) => {
         return axios.post('/api/account/updateUser', vm);
     },
-    impersonate: (id) => {
-        return axios.get(`api/account/impersonateUser/${id}`, { withCredentials: true });
-    },
-    stopImpersonation: () => {
-        return axios.post('api/account/StopImpersonation', { withCredentials: true });
-    },
-    getAllCustomerUsers: () => {
-        return axios.get('api/account/GetAllCustomerUsers', { withCredentials: true });
-    }
 }

@@ -33,9 +33,11 @@ namespace vueproject.Controllers
 
             try
             {
+                
 
-                var NewInvoice = new Invoice();
+                   var NewInvoice = new Invoice();
                 NewInvoice.InvoicePdfGuid = Guid.NewGuid().ToString();
+                NewInvoice.DateCreated = DateTime.Now;
 
                 NewInvoice.AssociatedUserId = user.UserId;
                 NewInvoice.AssociatedCustomerId = vm.AssociatedCustomerId;
@@ -52,6 +54,13 @@ namespace vueproject.Controllers
                 NewInvoice.UserZipCode = user.ZipCode;
                 NewInvoice.UserCity = user.City;
                 NewInvoice.UserCountry = user.Country;
+                
+                NewInvoice.UserPhoneNumber = user.PhoneNumber;
+                NewInvoice.UserFax = user.Fax;
+                NewInvoice.UserPlusGiro = user.PlusGiro;
+                NewInvoice.UserBankGiro = user.BankGiro;
+                NewInvoice.UserOrgNr = user.OrgNr;
+                NewInvoice.UserMomsRegNr = user.MomsRegNr;
 
                 NewInvoice.InvoiceDate = vm.InvoiceDate;
                 NewInvoice.InvoicePayDate = vm.InvoicePayDate;
