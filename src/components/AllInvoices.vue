@@ -1,15 +1,16 @@
 ﻿<template>
-    <div class="pl-1 pr-1">
+    <div class="pl-1 pr-1 mt-5">
         <v-card max-width="1000px" raised shaped
                 class="mx-auto">
             <v-toolbar light>
-                <v-toolbar-title color="black">Alla Fakturor</v-toolbar-title>
+                <v-toolbar-title color="black">Alla Fakturor </v-toolbar-title>
+                
                 <v-spacer></v-spacer>
                 <button hidden id="kanin">helloooo</button>
                 <!--<v-btn icon class="ml-3 mr-3">
-            <v-icon>mdi-magnify</v-icon>
-            sök
-        </v-btn>-->
+        <v-icon>mdi-magnify</v-icon>
+        sök
+    </v-btn>-->
                 <v-btn color="primary" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
@@ -20,11 +21,11 @@
                     <v-text-field class="pa-2 mt-4" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
                 </v-toolbar>
             </v-card>
-            {{invoiceDate}}
+           
             <v-list two-line>
                 <v-list-item-group>
                     <template v-for="(item, index) in allUserInvoicesToDisplay">
-                        <v-list-item :key="item.name" class="line" :class="item.invoicePayDate > invoiceDate ? 'red' : 'white'" @click="showCustomerDetails(item)">
+                        <v-list-item :key="item.name" class="line" :class="item.invoicePayDate < invoiceDate ? 'red' : 'white'" @click="showCustomerDetails(item)">
                             <template>
                                 <v-list-item-content>
                                     <v-list-item-subtitle v-text="'Faktnr ' + item.id" class="pa-1"></v-list-item-subtitle>
@@ -694,11 +695,11 @@
     }
 
     .red {
-        background-color:red;
+         background-color:#e46b6b;
     }
 
      .white {
-        background-color:yellow;
+        
     }
     @media all and (display-mode: standalone) {
         /*works*/

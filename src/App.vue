@@ -105,7 +105,8 @@
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Dina Fakturor</v-toolbar-title>
             <v-spacer></v-spacer>
-            <button style="background-color:yellow;" id="butInstall" aria-label="Install" hidden>Installera</button>
+            <!--<button style="background-color:yellow;" id="butInstall" aria-label="Install" hidden>Installera</button>-->
+            <h3 color="black">{{invoiceDate}}</h3>
         </v-app-bar>
 
         <v-content>
@@ -144,7 +145,8 @@
 
         },
         data: () => ({
-            drawer: null
+            drawer: null,
+            invoiceDate: new Date().toISOString().substr(0, 10),
         }),
     }
 </script>

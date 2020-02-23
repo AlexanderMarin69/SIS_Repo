@@ -11,7 +11,7 @@ namespace vueproject.Email
         {
             //edit values in appsettings.json
 
-            SENDGRID_API_KEY = "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";
+            SENDGRID_API_KEY = "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";
 
         }
 

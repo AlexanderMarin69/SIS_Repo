@@ -70,7 +70,7 @@
               "target": "Package",
               "version": "[1.2.0-beta, )"
             },
-            "Sendgrid": {
+            "SendGrid": {
               "target": "Package",
               "version": "[9.12.0, )"
             }

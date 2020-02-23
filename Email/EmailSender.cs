@@ -31,17 +31,57 @@ namespace vueproject.Email
 
         public async Task Execute(string PdfGuidMannen)
         {
-          
+
+
+
+            //var apiKey = _appSettings.SENDGRID_API_KEY;
+            //var client = new SendGridClient(apiKey);
+
+            //var from = new EmailAddress(InvoiceToSend.EmailFrom, "someUserNameFIXXX");
+            //var to = new EmailAddress(InvoiceToSend.EmailTo, "TestToMustFix");
+
+
+
+            //var subject = InvoiceToSend.InvoiceTypeToSend;
+
+            //var plainTextContent = InvoiceToSend.InvoiceMessageText;
+            //var htmlContent = InvoiceToSend.InvoiceMessageText;
+
+            //var msg = MailHelper.CreateSingleEmail(
+            //    from,
+            //    to,
+            //    subject,
+            //    plainTextContent,
+            //    htmlContent
+            //    );
+
+
+
+
+
+            //pathToAttachment = `${ __dirname}/ attachment.pdf`;
+            //attachment = fs.readFileSync(pathToAttachment).toString("base64");
+
+            //var file = Convert.ToBase64String(bytes);
+            //msg.AddAttachment("file.txt", file);
+
+            //TODO: Provide guid via viewmodel instead of "file.txt."     
+            //Maybe not ".pdf" because guid file does not have .pdf maybe
+
+
+
+
+           
 
             var InvoiceToSend = ctx.Invoices.Where(x => x.InvoicePdfGuid == PdfGuidMannen).FirstOrDefault();
+
+            
 
             var apiKey = _appSettings.SENDGRID_API_KEY;
             var client = new SendGridClient(apiKey);
 
-            var from = new EmailAddress(InvoiceToSend.EmailFrom, "someUserNameFIXXX");
-            var to = new EmailAddress(InvoiceToSend.EmailTo, "TestToMustFix");
-
-          
+            var from = new EmailAddress(InvoiceToSend.EmailFrom, "Alexander");
+            var to = new EmailAddress(InvoiceToSend.EmailTo, "Alexander");
 
             var subject = InvoiceToSend.InvoiceTypeToSend;
 
@@ -56,14 +96,7 @@ namespace vueproject.Email
                 htmlContent
                 );
 
-            //pathToAttachment = `${ __dirname}/ attachment.pdf`;
-            //attachment = fs.readFileSync(pathToAttachment).toString("base64");
-
-            //var file = Convert.ToBase64String(bytes);
-            //msg.AddAttachment("file.txt", file);
-
-            //TODO: Provide guid via viewmodel instead of "file.txt."     
-            //Maybe not ".pdf" because guid file does not have .pdf maybe
+            //var response = await client.SendEmailAsync(msg);
             using (var fileStream = File.OpenRead(InvoiceToSend.FilePath))
             {
                 await msg.AddAttachmentAsync("Faktura 1" + ".pdf", fileStream);
