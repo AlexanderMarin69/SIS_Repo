@@ -31,14 +31,14 @@ namespace vueproject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendInvoiceViaMail()
+        public async Task<IActionResult> SendInvoiceViaMail(string InvoicePdfGuid)
         {
             try
             {
-                var usr = await _userManager.GetUserAsync(User);
-                var user = ctx.ApplicationUsers.Where(x => x.UserId == usr.Id).FirstOrDefault();
-                var Invoice = ctx.Invoices.OrderByDescending(x => x.DateCreated).FirstOrDefault();
-                var InvoicePdfGuid = Invoice.InvoicePdfGuid;
+                //var usr = await _userManager.GetUserAsync(User);
+                //var user = ctx.ApplicationUsers.Where(x => x.UserId == usr.Id).FirstOrDefault();
+                //var Invoice = ctx.Invoices.OrderByDescending(x => x.DateCreated).FirstOrDefault();
+                //var InvoicePdfGuid = Invoice.InvoicePdfGuid;
                 await mail.Execute(InvoicePdfGuid);
             }
             catch (Exception e)
@@ -56,12 +56,17 @@ namespace vueproject.Controllers
 
             var Customer = ctx.Customers.Where(x => x.CustomerId == vm.AssociatedCustomerId).FirstOrDefault();
 
+            var InvoicePdfGuidToReturn = "";
+
             try
             {
                 
 
                    var NewInvoice = new Invoice();
                 NewInvoice.InvoicePdfGuid = Guid.NewGuid().ToString();
+
+                InvoicePdfGuidToReturn = NewInvoice.InvoicePdfGuid;
+
                 NewInvoice.DateCreated = DateTime.Now;
 
                 NewInvoice.FilePath = Path.Combine(@"C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\UsersPdfInvoices", NewInvoice.InvoicePdfGuid);
@@ -181,7 +186,8 @@ namespace vueproject.Controllers
             {
                 throw e;
             }
-            return Ok();
+            var helloo = ctx.Invoices.Where(x => x.InvoicePdfGuid == InvoicePdfGuidToReturn).FirstOrDefault();
+            return Ok(helloo.InvoicePdfGuid);
         }
 
         //[HttpPost]

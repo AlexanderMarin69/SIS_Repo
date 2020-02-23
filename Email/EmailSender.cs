@@ -11,7 +11,7 @@ using SendGrid.Helpers.Mail;
 using vueproject.DB;
 using vueproject.ViewModels;
 
-//TODO: npm sendgrid
+
 namespace vueproject.Email
 {
     public class EmailSender
@@ -32,7 +32,7 @@ namespace vueproject.Email
         public async Task Execute(string PdfGuidMannen)
         {
 
-
+            //commented out code does work for some reason, code below that works, copied from bitsoflifehelsingborg proejct
 
             //var apiKey = _appSettings.SENDGRID_API_KEY;
             //var client = new SendGridClient(apiKey);
@@ -71,7 +71,7 @@ namespace vueproject.Email
 
 
 
-           
+           //this code works, its from bitsoflifehelsingborg
 
             var InvoiceToSend = ctx.Invoices.Where(x => x.InvoicePdfGuid == PdfGuidMannen).FirstOrDefault();
 
@@ -80,6 +80,7 @@ namespace vueproject.Email
             var apiKey = _appSettings.SENDGRID_API_KEY;
             var client = new SendGridClient(apiKey);
 
+            //TODO: does only work if addresses are handwritten with strings, does not work with variables????
             var from = new EmailAddress(InvoiceToSend.EmailFrom, "Alexander");
             var to = new EmailAddress(InvoiceToSend.EmailTo, "Alexander");
 

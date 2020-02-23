@@ -4,13 +4,13 @@
                 class="mx-auto">
             <v-toolbar light>
                 <v-toolbar-title color="black">Alla Fakturor </v-toolbar-title>
-                
+
                 <v-spacer></v-spacer>
                 <button hidden id="kanin">helloooo</button>
                 <!--<v-btn icon class="ml-3 mr-3">
-        <v-icon>mdi-magnify</v-icon>
-        sök
-    </v-btn>-->
+                    <v-icon>mdi-magnify</v-icon>
+                    sök
+                </v-btn>-->
                 <v-btn color="primary" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
@@ -21,7 +21,7 @@
                     <v-text-field class="pa-2 mt-4" placeholder="Hitta..." v-model="searchInput" @keyup="searchOnKeyup"></v-text-field>
                 </v-toolbar>
             </v-card>
-           
+
             <v-list two-line>
                 <v-list-item-group>
                     <template v-for="(item, index) in allUserInvoicesToDisplay">
@@ -47,7 +47,6 @@
             </v-list>
         </v-card>
         <!--ADD NEW PRODUCT DIALOG ------- START -->
-       
         <!--ADD NEW PRODUCT DIALOG  --------   END-->
         <!--   PRODUCT SUCCESSFULLY ADDED DIALOG --------- START     -->
         <div class="text-center">
@@ -233,7 +232,7 @@
                                 </v-col>
 
 
-
+                                {{currentInvoicePdfGuidToHandle}}
 
 
 
@@ -305,9 +304,10 @@
                                         <!--<v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>-->
                                         <!--<p><b>Total exkl. moms</b> 2 003 kr</p>
 
-                                    <p><b>Moms 25%</b> 480 kr</p>
+                                        <p><b>Moms 25%</b> 480 kr</p>
 
-                                    <p><b>Öresutjämning</b> 0,50 kr</p>-->
+                                        <p><b>Öresutjämning</b> 0,50 kr</p>-->
+                                        al
 
                                         <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
 
@@ -351,12 +351,12 @@
                     <!--<v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>-->
                     <v-spacer></v-spacer>
                     <!--<v-card-actions>
-                    <v-overflow-btn class="my-2"
-                                    :items="dropdown_icon"
-                                    label="Skicka som"
-                                    segmented
-                                    target="#dropdown-example"></v-overflow-btn>
-                </v-card-actions>-->
+                        <v-overflow-btn class="my-2"
+                                        :items="dropdown_icon"
+                                        label="Skicka som"
+                                        segmented
+                                        target="#dropdown-example"></v-overflow-btn>
+                    </v-card-actions>-->
                     <v-col cols="12" sm="6" md="6">
                         <v-container>
                             <p>Skicka som</p>
@@ -386,7 +386,7 @@
         </v-row>
 
 
-     
+
 
 
         <!--<v-dialog v-model="!IsUserLoggedInVariable"
@@ -599,13 +599,61 @@
                 setTimeout(() => (this.productSuccessfullyAddedDialog = false), 2000)
             },
             sendInvoice() {
-                 this.showCustomerIdErrorMessage = false,
-                 
-                      //setTimeout(() => (
-                           InvoiceAPI.SendInvoiceViaMail()
-                //), 5000)
-                    this.productAddedDialog();
-                },
+                if (this.currentInvoicePdfGuidToHandle == '') {
+                    InvoiceAPI.CreateNewInvoice(
+                        {
+                            InvoiceDate: this.invoiceDate,
+                            InvoicePayDate: this.invoicePayDate,
+                            DeliveryDate: this.deliveryDate,
+                            InvoiceTypeToSend: this.invoiceType,
+                            InvoiceIsCredit: this.invoiceIsCredit,
+                            InvoiceProducts: this.InvoiceProductsToDisplay,
+                            InvoiceFee: this.invoiceFee,
+                            DeliveryFee: this.deliveryFee,
+                            OptionalReminderFee: this.optionalReminderFee,
+                            InvoiceMessageText: this.invoiceMessageText,
+                            SendAs: this.sendAs,
+                            AssociatedCustomerId: this.select.customerId,
+                            ExtraInvoiceCosts: this.totalTyp,
+                            InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
+                        }).then((response) => {
+                            this.setInvoicePdfGuid(response.data);
+                            setTimeout(() => (
+
+                                //InvoiceAPI.GeneratePdfInvoice(response.data)
+                                InvoiceAPI.GeneratePdfInvoice(this.currentInvoicePdfGuidToHandle)
+                                   
+                                    .then(() => {
+
+
+                                        setTimeout(() => (
+
+
+                                        console.log('körs via .then på GeneratePdfInvoice med response.data'),
+                                            InvoiceAPI.SendInvoiceViaMail(this.currentInvoicePdfGuidToHandle)
+                                            //eller guidhandler
+
+
+                                         ), 1000)
+
+
+                                    })
+
+                            ), 1000)
+
+                            //console.log('timeouten börjar');
+
+
+
+
+                        })
+                } else {
+                    InvoiceAPI.SendInvoiceViaMail(this.currentInvoicePdfGuidToHandle)
+                    console.log('¨körs i elsesatsen felaktigt');
+                }
+
+                this.productAddedDialog();
+            },
             saveInvoice() {
                 this.showCustomerIdErrorMessage = false,
                     InvoiceAPI.CreateNewInvoice(
@@ -625,27 +673,17 @@
                             ExtraInvoiceCosts: this.totalTyp,
                             InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         },
-                    ),
-                      setTimeout(() => (
-                       InvoiceAPI.GeneratePdfInvoice(
-                        //{
-                        //    InvoiceDate: this.invoiceDate,
-                        //    InvoicePayDate: this.invoicePayDate,
-                        //    DeliveryDate: this.deliveryDate,
-                        //    InvoiceTypeToSend: this.invoiceType,
-                        //    InvoiceIsCredit: this.invoiceIsCredit,
-                        //    InvoiceProducts: this.InvoiceProductsToDisplay,
-                        //    InvoiceFee: this.invoiceFee,
-                        //    DeliveryFee: this.deliveryFee,
-                        //    OptionalReminderFee: this.optionalReminderFee,
-                        //    InvoiceMessageText: this.invoiceMessageText,
-                        //    SendAs: this.sendAs,
-                        //    AssociatedCustomerId: this.select.customerId,
-                        //    ExtraInvoiceCosts: this.totalTyp,
-                        //    InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
-                        //},
-                             ), 5000)
-                     ),
+                    )
+                        .then((response) => {
+                            this.setInvoicePdfGuid(response);
+                        }).then(() => {
+                            InvoiceAPI.GeneratePdfInvoice(this.currentInvoicePdfGuidToHandle)
+                        })
+                    ,
+
+
+
+
                     this.productAddedDialog();
             },
             ...mapActions({
@@ -660,6 +698,7 @@
                 searchWarehouse: 'warehouse/SEARCH_WAREHOUSE',
                 resetInvoiceProductListAction: 'invoice/RESET_INVOICE_PRODUCT_LIST_ON_ENTER',
                 calculateTotalPriceAction: 'invoice/CALCULATE_TOTAL_INVOICE_ITEMS_PRICE',
+                setInvoicePdfGuid: 'invoice/SET_INVOICE_PDF_GUID',
                 //updateInvoiceFeeAction: 'invoice/UPDATE_INVOICE_FEE',
                 //updateDeliveryFeeAction: 'invoice/UPDATE_DELIVERY_FEE',
             }),
@@ -674,7 +713,8 @@
                 warehouseProductsToDisplay: state => state.warehouse.warehouseProducts,
                 InvoiceProductsToDisplay: state => state.invoice.InvoiceProducts,
                 totalInvoiceItemsPriceToDisplay: state => state.invoice.totalInvoiceItemsPrice,
-                IsUserLoggedInVariable: state => state.login.isUserLoggedIn
+                IsUserLoggedInVariable: state => state.login.isUserLoggedIn,
+                currentInvoicePdfGuidToHandle: state => state.invoice.currentInvoicePdfGuid,
             }),
         },
         beforeMount() {
@@ -695,12 +735,12 @@
     }
 
     .red {
-         background-color:#e46b6b;
+        background-color: #e46b6b;
     }
 
-     .white {
-        
+    .white {
     }
+
     @media all and (display-mode: standalone) {
         /*works*/
     }

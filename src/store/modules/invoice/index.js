@@ -7,8 +7,7 @@ export default {
         allUserInvoices: [],
         InvoiceProducts: [],
         totalInvoiceItemsPrice: 0,
-        //invoiceFee: 0,
-        //deliveryFee: 0,
+        currentInvoicePdfGuid: '',
     },
     actions,
     mutations

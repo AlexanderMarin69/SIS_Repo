@@ -155,4 +155,9 @@
         state.allUserInvoices = result;
        
     },
+    SET_INVOICE_PDF_GUID(state, result) {
+        state.currentInvoicePdfGuid = result;
+
+    },
+
 }

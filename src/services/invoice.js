@@ -4,11 +4,16 @@ import axios from "axios";
 
 export default {
 /* eslint-disable no-console */
-    GeneratePdfInvoice: () => {
-        return axios.post('/api/CreateInvoice/GenerateInvoicePdf');
+
+    //TODO: vm is not sent, but string is console logged correctly, 
+    //maybe cache not updated on app run, console.log worked after 3 app updates and empty site data...
+    GeneratePdfInvoice: (vm) => {
+        console.log(vm, 'GeneratePdfInvoice');
+        return axios.post('/api/CreateInvoice/GenerateInvoicePdf', vm);
     },
-    SendInvoiceViaMail: () => {
-        return axios.post('/api/Invoice/SendInvoiceViaMail')
+    SendInvoiceViaMail: (vm) => {
+        console.log(vm, 'SendInvoiceViaMail');
+        return axios.post('/api/Invoice/SendInvoiceViaMail', vm)
             .then(result => {
                 console.log(result.data, 'success mannen');
                 return result.data;

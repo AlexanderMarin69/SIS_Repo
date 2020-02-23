@@ -63,6 +63,10 @@ export default {
 
             });
     },
+    SET_INVOICE_PDF_GUID({ commit }, data) {
+        commit('SET_INVOICE_PDF_GUID', data);
+    },
+    
 
     //GET_ALL_PRODUCTS({ commit }) {
     //    return ProductAPI.SearchProducts()
