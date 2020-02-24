@@ -31,7 +31,7 @@ namespace vueproject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendInvoiceViaMail(string InvoicePdfGuid)
+        public async Task<IActionResult> SendInvoiceViaMail(PdfGuidViewModel InvoicePdfGuid)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace vueproject.Controllers
                 //var user = ctx.ApplicationUsers.Where(x => x.UserId == usr.Id).FirstOrDefault();
                 //var Invoice = ctx.Invoices.OrderByDescending(x => x.DateCreated).FirstOrDefault();
                 //var InvoicePdfGuid = Invoice.InvoicePdfGuid;
-                await mail.Execute(InvoicePdfGuid);
+                await mail.Execute(InvoicePdfGuid.PdfGuid);
             }
             catch (Exception e)
             {

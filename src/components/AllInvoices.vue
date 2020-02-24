@@ -618,28 +618,28 @@
                             InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         }).then((response) => {
                             this.setInvoicePdfGuid(response.data);
-                            setTimeout(() => (
+                            //setTimeout(() => (
 
                                 //InvoiceAPI.GeneratePdfInvoice(response.data)
-                                InvoiceAPI.GeneratePdfInvoice(this.currentInvoicePdfGuidToHandle)
+                                InvoiceAPI.GeneratePdfInvoice({ PdfGuid: this.currentInvoicePdfGuidToHandle })
                                    
                                     .then(() => {
 
 
-                                        setTimeout(() => (
+                                        //setTimeout(() => (
 
 
                                         console.log('körs via .then på GeneratePdfInvoice med response.data'),
-                                            InvoiceAPI.SendInvoiceViaMail(this.currentInvoicePdfGuidToHandle)
+                                            InvoiceAPI.SendInvoiceViaMail({ PdfGuid: this.currentInvoicePdfGuidToHandle })
                                             //eller guidhandler
 
 
-                                         ), 1000)
+                                         //), 1000)
 
 
                                     })
 
-                            ), 1000)
+                            //), 1000)
 
                             //console.log('timeouten börjar');
 
@@ -648,8 +648,7 @@
 
                         })
                 } else {
-                    InvoiceAPI.SendInvoiceViaMail(this.currentInvoicePdfGuidToHandle)
-                    console.log('¨körs i elsesatsen felaktigt');
+                    InvoiceAPI.SendInvoiceViaMail({ PdfGuid: this.currentInvoicePdfGuidToHandle } )
                 }
 
                 this.productAddedDialog();

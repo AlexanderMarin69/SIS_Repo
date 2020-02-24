@@ -56,7 +56,7 @@ namespace vueproject.Controllers
             }
         }
 
-        public async Task<IActionResult> GenerateInvoicePdf(string InvoicePdfGuidToGet)
+        public async Task<IActionResult> GenerateInvoicePdf(PdfGuidViewModel InvoicePdfGuidToGet)
         {
 
 
@@ -71,7 +71,7 @@ namespace vueproject.Controllers
             //var userData = await _userManager.GetUserAsync(User);
             //var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
 
-            var Invoice = ctx.Invoices.Where(x => x.InvoicePdfGuid == InvoicePdfGuidToGet).FirstOrDefault();
+            var Invoice = ctx.Invoices.Where(x => x.InvoicePdfGuid == InvoicePdfGuidToGet.PdfGuid).FirstOrDefault();
             var InvoiceProductsToGet = ctx.InvoiceProducts.Where(x => x.AssociatedInvoicePdfGuid == Invoice.InvoicePdfGuid).ToList();
             Invoice.InvoiceProducts = InvoiceProductsToGet;
 

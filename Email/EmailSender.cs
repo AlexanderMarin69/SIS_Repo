@@ -73,19 +73,19 @@ namespace vueproject.Email
 
            //this code works, its from bitsoflifehelsingborg
 
-            var InvoiceToSend = ctx.Invoices.Where(x => x.InvoicePdfGuid == PdfGuidMannen).FirstOrDefault();
+                var InvoiceToSend = ctx.Invoices.Where(x => x.InvoicePdfGuid == PdfGuidMannen).FirstOrDefault();
 
             
 
             var apiKey = _appSettings.SENDGRID_API_KEY;
             var client = new SendGridClient(apiKey);
 
-            //TODO: does only work if addresses are handwritten with strings, does not work with variables????
-            var from = new EmailAddress(InvoiceToSend.EmailFrom, "Alexander");
-            var to = new EmailAddress(InvoiceToSend.EmailTo, "Alexander");
+            var from = new EmailAddress(InvoiceToSend.EmailFrom, InvoiceToSend.SenderName);
+            var to = new EmailAddress(InvoiceToSend.EmailTo, InvoiceToSend.CustomerName);
 
             var subject = InvoiceToSend.InvoiceTypeToSend;
 
+            //works only if message not null or "",
             var plainTextContent = InvoiceToSend.InvoiceMessageText;
             var htmlContent = InvoiceToSend.InvoiceMessageText;
 
