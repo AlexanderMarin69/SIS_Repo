@@ -1,8 +1,16 @@
 ﻿<template>
     <div class="pl-1 pr-1 mt-5">
+        <v-snackbar v-model="installAppDialog"
+                    :multi-line="multiLine"
+                    :timeout="snackBarTimeout">
+            Vill du installera appen på din enhet? Tar upp nästan inget minne alls. Appen kommer fungera offline. Direkt i mobilen, eller datorn.
+            <v-btn color="error"
+                   text class="mt-5 mb-5" rounded @click="groda()">
+                Installera
+            </v-btn>
+        </v-snackbar>
 
-
-        <v-dialog v-model="installAppDialog" transition="dialog-bottom-transition">
+        <!--<v-dialog v-model="installAppDialog" transition="dialog-bottom-transition">
             <v-row align="center"
                    justify="center">
                 <v-card>
@@ -56,7 +64,7 @@
 
 
 
-        </v-dialog>
+        </v-dialog>-->
 
 
 
@@ -68,9 +76,9 @@
                 <v-spacer></v-spacer>
                 <button hidden id="kanin">helloooo</button>
                 <!--<v-btn icon class="ml-3 mr-3">
-                    <v-icon>mdi-magnify</v-icon>
-                    sök
-                </v-btn>-->
+                <v-icon>mdi-magnify</v-icon>
+                sök
+            </v-btn>-->
                 <v-btn color="primary" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
@@ -364,9 +372,9 @@
                                         <!--<v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>-->
                                         <!--<p><b>Total exkl. moms</b> 2 003 kr</p>
 
-                                        <p><b>Moms 25%</b> 480 kr</p>
+                                    <p><b>Moms 25%</b> 480 kr</p>
 
-                                        <p><b>Öresutjämning</b> 0,50 kr</p>-->
+                                    <p><b>Öresutjämning</b> 0,50 kr</p>-->
 
 
                                         <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
@@ -412,12 +420,12 @@
                     <!--<v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>-->
                     <v-spacer></v-spacer>
                     <!--<v-card-actions>
-                        <v-overflow-btn class="my-2"
-                                        :items="dropdown_icon"
-                                        label="Skicka som"
-                                        segmented
-                                        target="#dropdown-example"></v-overflow-btn>
-                    </v-card-actions>-->
+                    <v-overflow-btn class="my-2"
+                                    :items="dropdown_icon"
+                                    label="Skicka som"
+                                    segmented
+                                    target="#dropdown-example"></v-overflow-btn>
+                </v-card-actions>-->
                     <v-col cols="12" sm="6" md="6">
                         <v-container>
                             <p>Skicka som</p>
@@ -451,11 +459,11 @@
 
 
         <!--<v-dialog v-model="!IsUserLoggedInVariable"
-                  max-width="400">
-            <v-card>
-                <Login></Login>
-            </v-card>
-        </v-dialog>-->
+              max-width="400">
+        <v-card>
+            <Login></Login>
+        </v-card>
+    </v-dialog>-->
 
 
 
@@ -490,6 +498,8 @@
             //Login
         },
         data: () => ({
+            snackBarTimeout: 40000,
+            multiLine: true,
             installAppDialog: false,
             invoiceType: 'Faktura',
             invoiceIsCredit: 'Nej',
@@ -823,7 +833,7 @@
                 // e.g. call Google Analytics to track standalone use
                 setTimeout(() => (
                     this.installAppDialog = true
-                ), 30000)
+                ), 1000)
             }
             }
            
