@@ -105,7 +105,6 @@
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Dina Fakturor</v-toolbar-title>
             <v-spacer></v-spacer>
-            <!--<button style="background-color:yellow;" id="butInstall" aria-label="Install" hidden>Installera</button>-->
             <h3 color="black">{{invoiceDate}}</h3>
         </v-app-bar>
 

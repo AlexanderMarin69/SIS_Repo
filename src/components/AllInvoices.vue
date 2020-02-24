@@ -1,5 +1,65 @@
 ﻿<template>
     <div class="pl-1 pr-1 mt-5">
+
+
+        <v-dialog v-model="installAppDialog" transition="dialog-bottom-transition">
+            <v-row align="center"
+                   justify="center">
+                <v-card>
+                    <v-toolbar dark color="error">
+                        <v-btn icon dark @click="installAppDialog = false">
+                            <v-icon>mdi-close</v-icon>
+
+                        </v-btn>
+                        <v-toolbar-title>Installera</v-toolbar-title>
+                    </v-toolbar>
+                    <v-container class="fill-height"
+                                 fluid>
+                        <v-row align="center"
+                               justify="center">
+                            <v-icon x-large class="mt-3">mdi-monitor-cellphone</v-icon>
+
+                        </v-row>
+                    </v-container>
+
+                    <v-card width="480" class="pa-3">
+                        <v-card-title>
+                            Vill du installera appen på din enhet?
+                        </v-card-title>
+
+                        <v-card-text>
+                            Installera appen i din telefon eller dator på ett ögonblick.
+
+                            <v-list class="mt-3">
+                                <v-list-item>
+                                    <b> Avnändning offline eller med dålig täckning.</b>
+                                </v-list-item>
+                                <v-list-item>
+                                    <b> Ökad prestanda.</b>
+                                </v-list-item>
+                                <v-list-item>
+                                    <b> Gör allt du gör direkt från din enhet.</b>
+                                </v-list-item>
+
+                            </v-list>
+                        </v-card-text>
+                        <v-row align="center"
+                               justify="center">
+                            <v-btn color="error" class="mt-5 mb-5" rounded @click="groda()">Installera</v-btn>
+                        </v-row>
+                    </v-card>
+                </v-card>
+
+            </v-row>
+
+
+
+
+
+        </v-dialog>
+
+
+
         <v-card max-width="1000px" raised shaped
                 class="mx-auto">
             <v-toolbar light>
@@ -307,9 +367,10 @@
                                         <p><b>Moms 25%</b> 480 kr</p>
 
                                         <p><b>Öresutjämning</b> 0,50 kr</p>-->
-                                       
+
 
                                         <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
+
 
                                         <v-simple-table>
                                             <tbody>
@@ -403,6 +464,21 @@
 </template>
 <script>
     /* eslint-disable no-console */
+
+
+
+    let deferredInstallPrompt = null;
+
+
+    function saveBeforeInstallPromptEvent(evt) {
+        deferredInstallPrompt = evt;
+
+
+    }
+
+    window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
+
+
     import { mapState, mapActions } from 'vuex';
     import CustomerAPI from '@/services/Customer'
     import InvoiceAPI from '@/services/invoice'
@@ -414,6 +490,7 @@
             //Login
         },
         data: () => ({
+            installAppDialog: false,
             invoiceType: 'Faktura',
             invoiceIsCredit: 'Nej',
             sendAs: 'Faktura',
@@ -491,8 +568,24 @@
             placeholderArrayForProducts: [],
             listOfProducts: [],
             totalTyp: 0,
+            //deferredInstallPrompt: null,
+            //installButton: document.getElementById('butInstall'),
+
         }),
         methods: {
+            groda() {
+                //Notification.requestPermission(function (status) {
+                //    console.log('Notification permission status: ', status);
+                //});
+
+                deferredInstallPrompt.prompt();
+                deferredInstallPrompt.userChoice
+                    .then(() => {
+                        deferredInstallPrompt = null;
+                        this.installAppDialog = false
+                    });
+            },
+
             //printPdf() {
             //    InvoiceAPI.PrintPdf();
             //},
@@ -620,24 +713,24 @@
                             this.setInvoicePdfGuid(response.data);
                             //setTimeout(() => (
 
-                                //InvoiceAPI.GeneratePdfInvoice(response.data)
-                                InvoiceAPI.GeneratePdfInvoice({ PdfGuid: this.currentInvoicePdfGuidToHandle })
-                                   
-                                    .then(() => {
+                            //InvoiceAPI.GeneratePdfInvoice(response.data)
+                            InvoiceAPI.GeneratePdfInvoice({ PdfGuid: this.currentInvoicePdfGuidToHandle })
+
+                                .then(() => {
 
 
-                                        //setTimeout(() => (
+                                    //setTimeout(() => (
 
 
-                                        console.log('körs via .then på GeneratePdfInvoice med response.data'),
-                                            InvoiceAPI.SendInvoiceViaMail({ PdfGuid: this.currentInvoicePdfGuidToHandle })
-                                            //eller guidhandler
+                                    console.log('körs via .then på GeneratePdfInvoice med response.data'),
+                                        InvoiceAPI.SendInvoiceViaMail({ PdfGuid: this.currentInvoicePdfGuidToHandle })
+                                    //eller guidhandler
 
 
-                                         //), 1000)
+                                    //), 1000)
 
 
-                                    })
+                                })
 
                             //), 1000)
 
@@ -648,7 +741,7 @@
 
                         })
                 } else {
-                    InvoiceAPI.SendInvoiceViaMail({ PdfGuid: this.currentInvoicePdfGuidToHandle } )
+                    InvoiceAPI.SendInvoiceViaMail({ PdfGuid: this.currentInvoicePdfGuidToHandle })
                 }
 
                 this.productAddedDialog();
@@ -673,8 +766,8 @@
                             InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         },
                     )
-                    .then((response) => {
-                        console.log(response, 'SAVE INVOICE RESPONSE');
+                        .then((response) => {
+                            console.log(response, 'SAVE INVOICE RESPONSE');
                             this.setInvoicePdfGuid(response.data);
                         }).then(() => {
                             InvoiceAPI.GeneratePdfInvoice({ PdfGuid: this.currentInvoicePdfGuidToHandle })
@@ -722,6 +815,18 @@
             this.getAllCustomers();
             this.getAllProducts();
             this.calculateTotalPriceAction();
+
+            if (deferredInstallPrompt != null) {
+                 if (!window.matchMedia('(display-mode: standalone)').matches) {
+                // do things here
+                // set a variable to be used when calling something
+                // e.g. call Google Analytics to track standalone use
+                setTimeout(() => (
+                    this.installAppDialog = true
+                ), 30000)
+            }
+            }
+           
         }
 
     }
@@ -743,5 +848,8 @@
 
     @media all and (display-mode: standalone) {
         /*works*/
+        /*.installButton {
+            display: none;
+        }*/
     }
 </style>
