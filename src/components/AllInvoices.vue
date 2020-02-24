@@ -307,7 +307,7 @@
                                         <p><b>Moms 25%</b> 480 kr</p>
 
                                         <p><b>Öresutjämning</b> 0,50 kr</p>-->
-                                        al
+                                       
 
                                         <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
 
@@ -673,10 +673,11 @@
                             InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
                         },
                     )
-                        .then((response) => {
-                            this.setInvoicePdfGuid(response);
+                    .then((response) => {
+                        console.log(response, 'SAVE INVOICE RESPONSE');
+                            this.setInvoicePdfGuid(response.data);
                         }).then(() => {
-                            InvoiceAPI.GeneratePdfInvoice(this.currentInvoicePdfGuidToHandle)
+                            InvoiceAPI.GeneratePdfInvoice({ PdfGuid: this.currentInvoicePdfGuidToHandle })
                         })
                     ,
 
