@@ -86,28 +86,7 @@ namespace vueproject.Email
             var subject = InvoiceToSend.InvoiceTypeToSend;
 
             //works only if message not null or "",
-            var PlainText = "Faktura";
-            var HtmlCont = "<strong>Faktura</strong> ";
-
-            if(InvoiceToSend.InvoiceMessageText == "" || InvoiceToSend.InvoiceMessageText == null)
-            {
-                var plainTextContent = PlainText;
-                var htmlContent = HtmlCont;
-                var msg = MailHelper.CreateSingleEmail(
-               from,
-               to,
-               subject,
-               plainTextContent,
-               htmlContent
-               );
-                //var response = await client.SendEmailAsync(msg);
-                using (var fileStream = File.OpenRead(InvoiceToSend.FilePath))
-                {
-                    await msg.AddAttachmentAsync("Faktura" + ".pdf", fileStream);
-                    var response = await client.SendEmailAsync(msg);
-                }
-            } else
-            {
+         
                 var plainTextContent = InvoiceToSend.InvoiceMessageText;
                 var htmlContent = InvoiceToSend.InvoiceMessageText;
                 var msg = MailHelper.CreateSingleEmail(
@@ -123,13 +102,7 @@ namespace vueproject.Email
                     await msg.AddAttachmentAsync("Faktura" + ".pdf", fileStream);
                     var response = await client.SendEmailAsync(msg);
                 }
-            }
-           
-
-           
-
-          
-
+            
         }
     }
 }

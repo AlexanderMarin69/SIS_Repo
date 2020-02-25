@@ -8,6 +8,7 @@ export default {
         InvoiceProducts: [],
         totalInvoiceItemsPrice: 0,
         currentInvoicePdfGuid: '',
+        selectedInvoice: {},
     },
     actions,
     mutations

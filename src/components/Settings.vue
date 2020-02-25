@@ -25,19 +25,12 @@
         </template>
         <v-card class="mx-auto" raised shaped
                 max-width="1000">
-
-
             <v-toolbar light>
-
-
                 <v-toolbar-title flat><v-icon class="mr-1">mdi-account</v-icon> Mitt Konto</v-toolbar-title>
-
                 <v-spacer></v-spacer>
-
+                <v-btn color="error" class="installButton mr-3" @click="groda()">Installera</v-btn>
                 <v-btn color="primary" @click="logout()">Logga ut</v-btn>
-
             </v-toolbar>
-
             <v-container fluid>
                 <v-row>
                     <v-col cols="12" sm="12" md="12">
@@ -183,9 +176,24 @@
 </template>
 
 <style scoped>
+     @media all and (display-mode: standalone) {
+        /*works*/
+        .installButton {
+            display: none;
+        }
+    }
 </style>
 
 <script>
+
+     let deferredInstallPrompt = null;
+
+    function saveBeforeInstallPromptEvent(evt) {
+        deferredInstallPrompt = evt;
+    }
+
+    window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
+
     import { mapActions } from 'vuex';
     import AccountApi from '@/services/account'
     import router from '@/plugins/default.router.js'
@@ -223,6 +231,18 @@
             //titles
         }),
         methods: {
+             groda() {
+                //Notification.requestPermission(function (status) {
+                //    console.log('Notification permission status: ', status);
+                //});
+
+                deferredInstallPrompt.prompt();
+                deferredInstallPrompt.userChoice
+                    .then(() => {
+                        deferredInstallPrompt = null;
+                        this.installAppDialog = false
+                    });
+            },
             updateSettings() {
                 AccountApi.updateUser(
                     {
@@ -300,6 +320,7 @@
         },
         beforeMount() {
             this.getUser();
+
         }
     }
 </script>

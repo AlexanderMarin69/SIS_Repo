@@ -94,6 +94,7 @@ namespace vueproject.Controllers
                 CustomerToUpdate.EmailAddress = vm.EmailAddress;
                 CustomerToUpdate.WebAddress = vm.WebAddress;
                 CustomerToUpdate.Description = vm.Description;
+                CustomerToUpdate.descriptiveDataForSelectList = $"{CustomerToUpdate.CustomerId} - {vm.Name} - {vm.City} - {vm.EmailAddress}";
 
                 ctx.Customers.Update(CustomerToUpdate).State = EntityState.Modified;
                 await ctx.SaveChangesAsync();

@@ -156,14 +156,14 @@
                     </td>
 
                     <td style="text-align: left;">
-                        <h3><b>Faktura</b></h3><br>
+                        <h3><b>@Model.SendAs</b></h3><br>
                         Fakturanummer @if (Model.Id == 0)
                         {<p>#1</p>}
                         else
                         {
                             <p>#@Model.Id</p>}<br>
-                        Fakturadatum @Model.InvoiceDate<br>
-                        Fakturadatum @Model.InvoicePayDate<br>
+                        Fakturadatum @Model.InvoiceDate.ToString("yyyy/MM/dd")<br>
+                        Förfallodatum @Model.InvoicePayDate.ToString("yyyy/MM/dd")<br>
                         Vår referens: @Model.SenderName
                     </td>
                 </tr>
@@ -172,7 +172,7 @@
                         Kundnummer @Model.ReceiverCustomerId<br>
                         Betalningsvillkor @Model.PaymentTerms<br>
                         Dröjsmålsränta @Model.InvoicecPastDuePercentageFee<br>
-                        Leveransdatum @Model.DeliveryDate<br>
+                        Leveransdatum @Model.DeliveryDate.ToString("yyyy/MM/dd")<br>
                         Er referens: @Model.ReceiverReferenceName
                     </td>
 

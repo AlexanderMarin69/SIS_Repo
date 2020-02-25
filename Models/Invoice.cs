@@ -15,6 +15,7 @@ namespace vueproject.Models
         public string EmailFrom { get; set; }
         public string EmailTo { get; set; }
         public DateTime DateCreated { get; set; }
+        public string DateCreatedString { get; set; }
 
         //CUSTOMER DETAILS
         public string CustomerInvoiceAddress { get; set; }
@@ -42,8 +43,11 @@ namespace vueproject.Models
         public List<InvoiceProduct> InvoiceProducts { get; set; }
         //public List<InvoiceProduct> InvoiceProducts { get; set; }
         public DateTime InvoiceDate { get; set; }
+        public string InvoiceDateString { get; set; }
         public DateTime InvoicePayDate { get; set; }
+        public string InvoicePayDateString { get; set; }
         public DateTime DeliveryDate { get; set; }
+        public string DeliveryDateString { get; set; }
         public string InvoiceMessageText{ get; set; }
         public decimal OptionalReminderFee { get; set; }
         public string InvoiceTypeToSend { get; set; }

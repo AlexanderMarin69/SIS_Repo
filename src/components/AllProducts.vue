@@ -69,6 +69,7 @@
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="articleNumber" label="Artikelnummer"></v-text-field>
+                                    <small>Obligatoriskt fält</small>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field v-model="price" label="Försäljningspris"></v-text-field>
@@ -104,7 +105,8 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1" text @click="closeDialog">Stäng</v-btn>
-                        <v-btn color="blue darken-1" text @click="createNewProduct()">Skapa</v-btn>
+                        <v-btn color="blue darken-1" v-if="articleNumber" text @click="createNewProduct()">Skapa</v-btn>
+                        <v-btn color="blue darken-1" v-else text disabled @click="createNewProduct()">Skapa</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>

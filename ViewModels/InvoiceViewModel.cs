@@ -47,6 +47,7 @@ namespace vueproject.ViewModels
         public decimal InvoiceFee { get; set; }
         public decimal OptionalReminderFee { get; set; }
         public string InvoiceTypeToSend { get; set; }
+        public string InvoiceType { get; set; }
         public string InvoiceIsCredit { get; set; }
         public string SendAs { get; set; }
 

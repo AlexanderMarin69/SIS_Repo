@@ -38,7 +38,6 @@ const router = new Router({
                         }
 
                 if (!hasPermission) {
-                    //TODO: Might send user to the configurator instead of login
                     next({
                         name: "login", // back to safety route //
                         query: { redirectFrom: to.fullPath }

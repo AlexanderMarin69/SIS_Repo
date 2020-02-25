@@ -1,5 +1,8 @@
 ﻿import InvoiceAPI from '@/services/invoice'
 export default {
+    SET_SELECTED_INVOICE({ commit }, object) {
+        commit('SET_SELECTED_INVOICE', object)
+    },
     ADD_PRODUCT_TO_LIST({ commit }, item) {
     /*eslint no-debugger: */
         //debugger;

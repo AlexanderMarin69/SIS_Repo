@@ -3,70 +3,12 @@
         <v-snackbar v-model="installAppDialog"
                     :multi-line="multiLine"
                     :timeout="snackBarTimeout">
-            Vill du installera appen på din enhet? Tar upp nästan inget minne alls. Appen kommer fungera offline. Direkt i mobilen, eller datorn.
+            Vill du installera appen på din enhet? Gör det du gör, fast smidigare. Direkt i mobilen, eller datorn. Även offline!
             <v-btn color="error"
                    text class="mt-5 mb-5" rounded @click="groda()">
                 Installera
             </v-btn>
         </v-snackbar>
-
-        <!--<v-dialog v-model="installAppDialog" transition="dialog-bottom-transition">
-            <v-row align="center"
-                   justify="center">
-                <v-card>
-                    <v-toolbar dark color="error">
-                        <v-btn icon dark @click="installAppDialog = false">
-                            <v-icon>mdi-close</v-icon>
-
-                        </v-btn>
-                        <v-toolbar-title>Installera</v-toolbar-title>
-                    </v-toolbar>
-                    <v-container class="fill-height"
-                                 fluid>
-                        <v-row align="center"
-                               justify="center">
-                            <v-icon x-large class="mt-3">mdi-monitor-cellphone</v-icon>
-
-                        </v-row>
-                    </v-container>
-
-                    <v-card width="480" class="pa-3">
-                        <v-card-title>
-                            Vill du installera appen på din enhet?
-                        </v-card-title>
-
-                        <v-card-text>
-                            Installera appen i din telefon eller dator på ett ögonblick.
-
-                            <v-list class="mt-3">
-                                <v-list-item>
-                                    <b> Avnändning offline eller med dålig täckning.</b>
-                                </v-list-item>
-                                <v-list-item>
-                                    <b> Ökad prestanda.</b>
-                                </v-list-item>
-                                <v-list-item>
-                                    <b> Gör allt du gör direkt från din enhet.</b>
-                                </v-list-item>
-
-                            </v-list>
-                        </v-card-text>
-                        <v-row align="center"
-                               justify="center">
-                            <v-btn color="error" class="mt-5 mb-5" rounded @click="groda()">Installera</v-btn>
-                        </v-row>
-                    </v-card>
-                </v-card>
-
-            </v-row>
-
-
-
-
-
-        </v-dialog>-->
-
-
 
         <v-card max-width="1000px" raised shaped
                 class="mx-auto">
@@ -93,7 +35,7 @@
             <v-list two-line>
                 <v-list-item-group>
                     <template v-for="(item, index) in allUserInvoicesToDisplay">
-                        <v-list-item :key="item.name" class="line" :class="item.invoicePayDate < invoiceDate ? 'red' : 'white'" @click="showCustomerDetails(item)">
+                        <v-list-item :key="item.name" class="line" :class="item.invoicePayDate < invoiceDate ? 'red' : 'white'" @click="showInvoiceDetails(item)">
                             <template>
                                 <v-list-item-content>
                                     <v-list-item-subtitle v-text="'Faktnr ' + item.id" class="pa-1"></v-list-item-subtitle>
@@ -131,65 +73,22 @@
             </v-dialog>
         </div>
         <!--   PRODUCT SUCCESSFULLY ADDED DIALOG --------- END     -->
-        <!--  SELECTED PRODUCT DIALOG ------- START -->
+
+
+
+
+
+
+        <!--  SELECTED INVOICE DIALOG ------- START -->
         <v-row justify="center">
-            <v-dialog v-model="selectedCustomerDialog" persistent max-width="600px">
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">Ändra kundinformation</span>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-container>
-                            <v-row>
-
-                            </v-row>
-                        </v-container>
-
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn color="danger darken-1" text @click="deleteCustomerDialog = true">Ta bort</v-btn>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="selectedCustomerDialog = false">Stäng</v-btn>
-                        <v-btn color="blue darken-1" text @click="updateExistingCustomer()">Spara ändringar</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-        </v-row>
-        <!-- SELECTED PRODUCT DIALOG  --------   END-->
-        <!-- DELETE PRODUCT DIALOG  --------   START-->
-
-        <v-row justify="center">
-            <v-dialog v-model="deleteCustomerDialog" max-width="300px">
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">Är du säker?</span>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-container>
-                            <p>Om du tar bort kunden går detta inte att ångra.</p>
-                        </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn color="danger darken-1" text @click="deleteCustomer()">Ta bort</v-btn>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="deleteCustomerDialog = false">Avbryt</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-        </v-row>
-        <!-- DELETE PRODUCT DIALOG  --------   END-->
-
-
-
-        <v-row justify="center">
-            <v-dialog v-model="createNewInvoiceDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+            <v-dialog v-model="showInvoiceDetailsDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
 
                 <v-card>
                     <v-toolbar dark color="primary">
-                        <v-btn icon dark @click="createNewInvoiceDialog = false">
+                        <v-btn icon dark @click="showInvoiceDetailsDialog = false">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
-                        <v-toolbar-title>Ny faktura</v-toolbar-title>
+                        <v-toolbar-title>{{selectedInvoiceToHandle.sendAs}}</v-toolbar-title>
 
 
                         <v-spacer></v-spacer>
@@ -204,7 +103,7 @@
                         <v-list-item>
                             <v-list-item-content>
 
-                                <v-col cols="12" sm="12" md="12">
+                                <!--<v-col cols="12" sm="12" md="12">
                                     <v-select v-model="select"
                                               :hint="`${select.name}, ${select.city}, ${select.phoneNumber}, ${select.emailAddress}, ${select.customerId}`"
                                               :items="allCustomers"
@@ -213,9 +112,13 @@
                                               label="Välj kund"
                                               return-object
                                               single-line></v-select>
-                                </v-col>
+                                </v-col>-->
                                 <v-col cols="12" sm="6" md="6">
+                                    {{selectedInvoiceToHandle.invoiceDateString}}
+                                    
+                                    <!--v-model="invoiceDateMenu"-->
                                     <v-menu ref="invoiceDateMenu"
+                                            readonly
                                             v-model="invoiceDateMenu"
                                             :close-on-content-click="false"
                                             :return-value.sync="invoiceDate"
@@ -267,7 +170,7 @@
                                             min-width="290px">
                                         <template v-slot:activator="{ on }">
                                             <v-text-field v-model="deliveryDate"
-                                                          label="Förfallodatum"
+                                                          label="Leveransdatum"
                                                           readonly
                                                           v-on="on"></v-text-field>
                                         </template>
@@ -300,7 +203,7 @@
                                 </v-col>
 
 
-                                {{currentInvoicePdfGuidToHandle}}
+                              
 
 
 
@@ -453,11 +356,300 @@
                 </v-card>
             </v-dialog>
         </v-row>
+        <!-- SELECTED INVOICE DIALOG  --------   END-->
+        <!-- DELETE PRODUCT DIALOG  --------   START-->
+
+        <v-row justify="center">
+            <v-dialog v-model="deleteCustomerDialog" max-width="300px">
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">Är du säker?</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container>
+                            <p>Om du tar bort kunden går detta inte att ångra.</p>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn color="danger darken-1" text @click="deleteCustomer()">Ta bort</v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="deleteCustomerDialog = false">Avbryt</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
+        <!-- DELETE PRODUCT DIALOG  --------   END-->
+        <!--// CREATE NEW INVOICE DIALOG-->
+        <v-row justify="center">
+            <v-dialog v-model="createNewInvoiceDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+
+                <v-card>
+                    <v-toolbar dark color="primary">
+                        <v-btn icon dark @click="createNewInvoiceDialog = false">
+                            <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                        <v-toolbar-title>Ny faktura</v-toolbar-title>
+
+
+                        <v-spacer></v-spacer>
+
+
+                        <v-toolbar-items>
+                            <v-btn dark text @click="createNewInvoiceDialog = false">Spara</v-btn>
+                        </v-toolbar-items>
+                    </v-toolbar>
+                    <v-list three-line subheader>
+                        <v-subheader style="font-size: 20px;" class="mt-1">Fakturauppgifter</v-subheader>
+                        <v-list-item>
+                            <v-list-item-content>
+
+                                <v-col cols="12" sm="12" md="12">
+                                    <v-select v-model="select"
+                                              :hint="`${select.name}, ${select.city}, ${select.phoneNumber}, ${select.emailAddress}, ${select.customerId}`"
+                                              :items="allCustomers"
+                                              item-text="descriptiveDataForSelectList"
+                                              item-value="customerId"
+                                              label="Välj kund"
+                                              return-object
+                                              single-line></v-select>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-menu ref="invoiceDateMenu"
+                                            v-model="invoiceDateMenu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="invoiceDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px">
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field v-model="invoiceDate"
+                                                          label="Fakturadatum"
+                                                          readonly
+                                                          v-on="on"></v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="invoiceDate" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="invoiceDateMenu = false">Avbryt</v-btn>
+                                            <v-btn text color="primary" @click="$refs.invoiceDateMenu.save(invoiceDate)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-menu ref="invoicePayDateMenu"
+                                            v-model="invoicePayDateMenu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="invoicePayDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px">
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field v-model="invoicePayDate"
+                                                          label="Förfallodatum"
+                                                          readonly
+                                                          v-on="on"></v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="invoicePayDate" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="invoiceDatePayMenu = false">Cancel</v-btn>
+                                            <v-btn text color="primary" @click="$refs.invoicePayDateMenu.save(invoicePayDate)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-col>
+
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-menu ref="deliveryDateMenu"
+                                            v-model="deliveryDateMenu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="deliveryDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px">
+                                        <template v-slot:activator="{ on }">
+                                            <v-text-field v-model="deliveryDate"
+                                                          label="Leveransdatum"
+                                                          readonly
+                                                          v-on="on"></v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="deliveryDate" no-title scrollable>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="invoiceDatePayMenu = false">Cancel</v-btn>
+                                            <v-btn text color="primary" @click="$refs.deliveryDateMenu.save(deliveryDate)">OK</v-btn>
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-col>
+
+                                <v-col cols="12" sm="6" md="3">
+                                    <v-container>
+                                        <p>Fakturatyp</p>
+                                        <v-radio-group v-model="invoiceType" :mandatory="false">
+                                            <v-radio label="Faktura" value="Faktura"></v-radio>
+                                            <v-radio label="Kontantfaktura" value="Kontantfaktura"></v-radio>
+                                        </v-radio-group>
+                                    </v-container>
+                                </v-col>
+
+                                <v-col cols="12" sm="6" md="3">
+                                    <v-container>
+                                        <p>Kreditfaktura</p>
+                                        <v-radio-group v-model="invoiceIsCredit" :mandatory="false">
+                                            <v-radio label="Ja" value="Ja"></v-radio>
+                                            <v-radio label="Nej" value="Nej"></v-radio>
+                                        </v-radio-group>
+                                    </v-container>
+                                </v-col>
 
 
 
+                                <!-- dialog ------------------------ start-->
+
+                                <v-dialog v-model="addProductsToInvoiceDialog" max-width="290">
+                                    <template v-slot:activator="{ on }">
+                                        <v-btn color="primary" rounded dark v-on="on">Lägg till produkter</v-btn>
+                                    </template>
+                                    <v-card raised shaped>
+
+                                        <AllProductsForInvoice></AllProductsForInvoice>
+
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="primary" text @click="addProductsToInvoiceDialog = false">Stäng</v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
 
 
+                                <!-- dialog ------------------------ end -->
+
+                                <v-list two-line>
+                                    <v-list-item-group>
+                                        <template v-for="(item, index) in InvoiceProductsToDisplay">
+                                            <v-list-item :key="item.name">
+                                                <template>
+                                                    <v-list-item-content v-if="InvoiceProductsToDisplay.length < 1">
+
+                                                    </v-list-item-content>
+                                                    <v-list-item-content>
+                                                        <v-list-item-subtitle v-text="item.articleNumber" class="pa-1"></v-list-item-subtitle>
+                                                        <v-list-item-title v-text="item.name" class="pa-1" style="font-weight: bold;"></v-list-item-title>
+                                                        <v-list-item-subtitle class="text--primary pa-1" v-text="item.name"></v-list-item-subtitle>
+                                                        <v-list-item-subtitle class="text--primary pa-1"></v-list-item-subtitle>
+                                                        <div><v-btn color="red" small @click="removeProductFromInvoiceList(item.articleNumber)">ta bort</v-btn></div>
+                                                    </v-list-item-content>
+                                                    <v-list-item-action>
+                                                        <v-col cols="4" sm="6" md="12">
+                                                            <v-text-field v-model="item.price" @keyup="updateInvoiceProductPriceData(item.articleNumber, item.price)" label="Välj pris"></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="4" sm="6" md="12">
+                                                            <v-text-field v-model="item.quantity" @keyup="updateInvoiceProductQuantityData(item.articleNumber, item.quantity)" label="Välj antal"></v-text-field>
+                                                        </v-col>
+                                                    </v-list-item-action>
+                                                </template>
+                                            </v-list-item>
+                                            <v-divider v-if="index + 1 < InvoiceProductsToDisplay.length"
+                                                       :key="index"></v-divider>
+                                        </template>
+                                    </v-list-item-group>
+                                </v-list>
+
+                                <v-col cols="12" sm="6" md="3">
+                                    <v-text-field v-model="deliveryFee" @keyup="kanin()" label="Fraktavgift"></v-text-field>
+                                </v-col>
+
+                                <v-col cols="12" sm="6" md="3">
+                                    <v-text-field v-model="invoiceFee" @keyup="kanin()" label="Fakturaavgift"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="2">
+                                    <v-text-field v-model="optionalReminderFee" @keyup="kanin()" label="Påminnelseavgift"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-spacer></v-spacer>
+                                    <v-card class="pa-2">
+                                        <!--<v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>-->
+                                        <!--<p><b>Total exkl. moms</b> 2 003 kr</p>
+
+                                    <p><b>Moms 25%</b> 480 kr</p>
+
+                                    <p><b>Öresutjämning</b> 0,50 kr</p>-->
+
+
+                                        <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
+
+
+                                        <v-simple-table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Totalt exkl. moms</td>
+                                                    <td>{{totalTyp + totalInvoiceItemsPriceToDisplay}} kr</td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td>Moms 25%</td>
+                                                    <td>{{totalTyp * 1.25 - totalTyp + totalInvoiceItemsPriceToDisplay * 1.25 - totalInvoiceItemsPriceToDisplay}} kr</td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td>Öresutjämning</td>
+                                                    <td>{{Math.abs(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25 - Math.round(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25))}} kr</td>
+                                                </tr>
+
+                                                <tr>
+
+                                                    <td><h3><b>Att belala</b></h3></td>
+                                                    <td><h3><b>{{Math.round(totalTyp * 1.25 + totalInvoiceItemsPriceToDisplay * 1.25)}} kr</b></h3></td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </v-simple-table>
+
+                                    </v-card>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12">
+                                    <v-text-field v-model="invoiceMessageText" label="Fakturatext"></v-text-field>
+                                </v-col>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                    <!--<v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>-->
+                    <v-spacer></v-spacer>
+                    <!--<v-card-actions>
+                    <v-overflow-btn class="my-2"
+                                    :items="dropdown_icon"
+                                    label="Skicka som"
+                                    segmented
+                                    target="#dropdown-example"></v-overflow-btn>
+                </v-card-actions>-->
+                    <v-col cols="12" sm="6" md="6">
+                        <v-container>
+                            <p>Skicka som</p>
+                            {{sendAs || null}}
+                            <v-radio-group v-model="sendAs" :mandatory="false">
+                                <v-radio label="Faktura" value="Faktura"></v-radio>
+                                <v-radio v-if="invoiceType == 'Faktura'" label="Offert" value="Offert"></v-radio>
+                                <v-radio v-if="invoiceType == 'Faktura'" label="Påminnelse" value="Påminnelse"></v-radio>
+
+                            </v-radio-group>
+                        </v-container>
+                    </v-col>
+                    <v-card-actions>
+                        <v-btn color="primary" large rounded class="mt-3 mr-5" @click="sendInvoice()">
+                            Skicka
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn color="primary" large rounded class="ma-3" @click="saveInvoice()">
+                            Spara
+                        </v-btn>
+                    </v-card-actions>
+                    <p class="pa-5" style="font-size:14px; font-weight: 300;">
+                        Välj först ovanför vad du vill skicka som.
+                    </p>
+                </v-card>
+            </v-dialog>
+        </v-row>
+
+        <!--// CREATE NEW INVOICE DIALOG-->
         <!--<v-dialog v-model="!IsUserLoggedInVariable"
               max-width="400">
         <v-card>
@@ -472,8 +664,6 @@
 </template>
 <script>
     /* eslint-disable no-console */
-
-
 
     let deferredInstallPrompt = null;
 
@@ -498,6 +688,8 @@
             //Login
         },
         data: () => ({
+            showInvoiceDetailsDialog: false,
+
             snackBarTimeout: 40000,
             multiLine: true,
             installAppDialog: false,
@@ -583,6 +775,13 @@
 
         }),
         methods: {
+            showInvoiceDetails(selectedInvoice) {
+                this.showInvoiceDetailsDialog = true
+                console.log(selectedInvoice)
+                this.setInvoicePdfGuid(selectedInvoice.invoicePdfGuid);
+                this.setSelectedInvoice(selectedInvoice);
+                
+            },
             groda() {
                 //Notification.requestPermission(function (status) {
                 //    console.log('Notification permission status: ', status);
@@ -708,7 +907,8 @@
                             InvoiceDate: this.invoiceDate,
                             InvoicePayDate: this.invoicePayDate,
                             DeliveryDate: this.deliveryDate,
-                            InvoiceTypeToSend: this.invoiceType,
+                            InvoiceTypeToSend: this.sendAs,
+                            InvoiceType: this.invoiceType,
                             InvoiceIsCredit: this.invoiceIsCredit,
                             InvoiceProducts: this.InvoiceProductsToDisplay,
                             InvoiceFee: this.invoiceFee,
@@ -763,7 +963,8 @@
                             InvoiceDate: this.invoiceDate,
                             InvoicePayDate: this.invoicePayDate,
                             DeliveryDate: this.deliveryDate,
-                            InvoiceTypeToSend: this.invoiceType,
+                            InvoiceTypeToSend: this.sendAs,
+                            InvoiceType: this.invoiceType,
                             InvoiceIsCredit: this.invoiceIsCredit,
                             InvoiceProducts: this.InvoiceProductsToDisplay,
                             InvoiceFee: this.invoiceFee,
@@ -802,8 +1003,8 @@
                 resetInvoiceProductListAction: 'invoice/RESET_INVOICE_PRODUCT_LIST_ON_ENTER',
                 calculateTotalPriceAction: 'invoice/CALCULATE_TOTAL_INVOICE_ITEMS_PRICE',
                 setInvoicePdfGuid: 'invoice/SET_INVOICE_PDF_GUID',
-                //updateInvoiceFeeAction: 'invoice/UPDATE_INVOICE_FEE',
-                //updateDeliveryFeeAction: 'invoice/UPDATE_DELIVERY_FEE',
+                setSelectedInvoice: 'invoice/SET_SELECTED_INVOICE',
+                
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;
@@ -818,6 +1019,7 @@
                 totalInvoiceItemsPriceToDisplay: state => state.invoice.totalInvoiceItemsPrice,
                 IsUserLoggedInVariable: state => state.login.isUserLoggedIn,
                 currentInvoicePdfGuidToHandle: state => state.invoice.currentInvoicePdfGuid,
+                selectedInvoiceToHandle: state => state.invoice.selectedInvoice,
             }),
         },
         beforeMount() {
@@ -827,16 +1029,16 @@
             this.calculateTotalPriceAction();
 
             if (deferredInstallPrompt != null) {
-                 if (!window.matchMedia('(display-mode: standalone)').matches) {
-                // do things here
-                // set a variable to be used when calling something
-                // e.g. call Google Analytics to track standalone use
-                setTimeout(() => (
-                    this.installAppDialog = true
-                ), 1000)
+                if (!window.matchMedia('(display-mode: standalone)').matches) {
+                    // do things here
+                    // set a variable to be used when calling something
+                    // e.g. call Google Analytics to track standalone use
+                    setTimeout(() => (
+                        this.installAppDialog = true
+                    ), 30000)
+                }
             }
-            }
-           
+
         }
 
     }

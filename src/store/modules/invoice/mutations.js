@@ -159,5 +159,8 @@
         state.currentInvoicePdfGuid = result;
 
     },
+    SET_SELECTED_INVOICE(state, result) {
+        state.selectedInvoice = result;
 
+    },
 }

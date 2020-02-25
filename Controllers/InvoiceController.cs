@@ -68,6 +68,7 @@ namespace vueproject.Controllers
                 InvoicePdfGuidToReturn = NewInvoice.InvoicePdfGuid;
 
                 NewInvoice.DateCreated = DateTime.Now;
+                NewInvoice.DateCreatedString = NewInvoice.DateCreated.ToString("yyyy/MM/dd");
 
                 NewInvoice.FilePath = Path.Combine(@"C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\UsersPdfInvoices", NewInvoice.InvoicePdfGuid);
                 NewInvoice.AssociatedUserId = user.UserId;
@@ -93,9 +94,20 @@ namespace vueproject.Controllers
                 NewInvoice.UserOrgNr = user.OrgNr;
                 NewInvoice.UserMomsRegNr = user.MomsRegNr;
 
+                
+
                 NewInvoice.InvoiceDate = vm.InvoiceDate;
+                NewInvoice.InvoiceDateString = NewInvoice.InvoiceDate.ToString("yyyy/MM/dd");
+
+
+
                 NewInvoice.InvoicePayDate = vm.InvoicePayDate;
+                NewInvoice.InvoicePayDateString = NewInvoice.InvoicePayDate.ToString("yyyy/MM/dd");
+
                 NewInvoice.DeliveryDate = vm.DeliveryDate;
+                NewInvoice.DeliveryDateString = NewInvoice.DeliveryDate.ToString("yyyy/MM/dd");
+
+
                 NewInvoice.InvoicecPastDuePercentageFee = user.InvoicecPastDuePercentageFee;
                 NewInvoice.PaymentTerms = user.PaymentTerms;
                 NewInvoice.SenderName = user.FirstName + " " + user.LastName;
@@ -103,10 +115,47 @@ namespace vueproject.Controllers
                 NewInvoice.ReceiverCustomerId = vm.AssociatedCustomerId;
                 NewInvoice.ReceiverReferenceName = Customer.CustomerReference;
 
-                NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
+                 if (vm.InvoiceTypeToSend == "Påminnelse")
+                {
+                    NewInvoice.SendAs = "Påminnelse";
+                }
+                else if (vm.InvoiceTypeToSend == "Offert")
+                {
+                    NewInvoice.SendAs = "Offert";
+                } else
+                {
+                    if (vm.InvoiceMessageText == "" || vm.InvoiceMessageText == null)
+                    {
+                        NewInvoice.InvoiceMessageText = "Faktura";
+                    }
+                    else
+                    {
+                        NewInvoice.InvoiceMessageText = vm.InvoiceMessageText;
+                    }
 
-                NewInvoice.SendAs = vm.SendAs;
-                NewInvoice.InvoiceTypeToSend = vm.InvoiceTypeToSend;
+                    NewInvoice.SendAs = vm.SendAs;
+
+                    if (vm.InvoiceType == "Faktura" && vm.InvoiceIsCredit == "Nej")
+                    {
+                        NewInvoice.SendAs = "Faktura";
+                    }
+                    else if (vm.InvoiceType != "Faktura" && vm.InvoiceIsCredit != "Nej")
+                    {
+                        NewInvoice.SendAs = "Återköp kontantfaktura";
+                    }
+                    else if (vm.InvoiceType == "Faktura" && vm.InvoiceIsCredit != "Nej")
+                    {
+                        NewInvoice.SendAs = "Kreditfaktura";
+                    }
+                    else if (vm.InvoiceType != "Faktura" && vm.InvoiceIsCredit == "Nej")
+                    {
+                        NewInvoice.SendAs = "Kontantfaktura";
+                    }
+                }
+
+               
+             
+
                 NewInvoice.InvoiceIsCredit = vm.InvoiceIsCredit;
 
                 NewInvoice.OptionalReminderFee = vm.OptionalReminderFee;
@@ -243,8 +292,9 @@ namespace vueproject.Controllers
             var userData = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var user = ctx.ApplicationUsers.Where(x => x.UserId == userData.Id).FirstOrDefault();
 
-            var allProducts = await ctx.Invoices.Where(x => x.AssociatedUserId == user.UserId).ToListAsync();
-            return Ok(allProducts);
+            var AllInvoices = await ctx.Invoices.Where(x => x.AssociatedUserId == user.UserId).ToListAsync();
+
+            return Ok(AllInvoices);
         }
         //[HttpPost]
         //public async Task<IActionResult> GetCustomerByCustomerId(GetCustomerByCustomerIdViewModel vm)

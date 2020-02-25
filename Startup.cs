@@ -38,9 +38,6 @@ namespace vueproject
         public void ConfigureServices(IServiceCollection services)
         {
 
-            
-
-
             var conn = Configuration.GetConnectionString("vueprojectContextConnection");
 
             services.AddDbContext<vueprojectDatabaseContext>(options => options.UseSqlServer(conn));
