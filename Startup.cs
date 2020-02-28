@@ -106,7 +106,6 @@ namespace vueproject
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseHttpsRedirection();
-
             // Routa till MVC-controller om controllen finns
             app.UseMvc(routes =>
             {

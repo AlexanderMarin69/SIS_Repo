@@ -6,20 +6,20 @@
         <!--<AllInvoices></AllInvoices>-->
         <Login></Login>
 
-        <template>
+        <!--<template>
             <v-row justify="center">
                 <v-dialog v-model="isUserLoggedInModal" max-width="400">
                     <v-card>
-                        <Login></Login>
+                        <Login></Login>-->
                         <!--<v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
                         <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
                     </v-card-actions>-->
-                    </v-card>
+                    <!--</v-card>
                 </v-dialog>
             </v-row>
-        </template>
+        </template>-->
 
         <!--<v-card shaped raised class="mt-5 pa-3 mx-auto"
             max-width="344">
@@ -43,7 +43,7 @@
         <br />
         <br />
 
-        <v-dialog v-model="showRemoveDialog"
+        <!--<v-dialog v-model="showRemoveDialog"
                   max-width="310">
             <v-card>
                 <v-card-title class="headline">Är du säker att du vill ta bort?</v-card-title>
@@ -63,7 +63,8 @@
                     </v-btn>
                 </v-card-actions>
             </v-card>
-        </v-dialog>
+        </v-dialog>-->
+
         <!--CART MODAL-->
         <!--<v-dialog v-model="showCartDialog"
               max-width="400">
@@ -125,9 +126,12 @@
 <script>
 
     import Login from '@/components/Login'
+    //const Login = () => import('@/components/Login')
+    //const generic = () => import('@/services/generic')
     import generic from '@/services/generic'
    
-    import { mapState, mapMutations, mapActions} from 'vuex';
+    import { mapState, mapMutations, mapActions } from 'vuex';
+    //const { mapState, mapMutations, mapActions } = () => import('vuex')
     export default {
         components: {
          

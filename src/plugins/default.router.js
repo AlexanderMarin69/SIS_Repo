@@ -30,21 +30,21 @@ const router = new Router({
             path: '/',
             name: 'start',
             component: Start
-            ,
-            async beforeEnter(to, from, next) {
-                var hasPermission = await store.dispatch('login/USER_IS_LOGGED_IN');
-                        if (hasPermission) {
-                            next()
-                        }
+            //,
+            //async beforeEnter(to, from, next) {
+            //    var hasPermission = await store.dispatch('login/USER_IS_LOGGED_IN');
+            //            if (hasPermission) {
+            //                next()
+            //            }
 
-                if (!hasPermission) {
-                    next({
-                        name: "login", // back to safety route //
-                        query: { redirectFrom: to.fullPath }
-                    })
-                }
+            //    if (!hasPermission) {
+            //        next({
+            //            name: "login", // back to safety route //
+            //            query: { redirectFrom: to.fullPath }
+            //        })
+            //    }
                 
-            }
+            //}
         },
 
         {
@@ -61,22 +61,22 @@ const router = new Router({
             path: '/invoices',
             name: 'invoices',
             component: Invoices
-            ,
-            async beforeEnter(to, from, next) {
-                var hasPermission = await store.dispatch('login/USER_IS_LOGGED_IN');
-                if (hasPermission) {
-                    next()
-                }
+            //,
+            //async beforeEnter(to, from, next) {
+            //    var hasPermission = await store.dispatch('login/USER_IS_LOGGED_IN');
+            //    if (hasPermission) {
+            //        next()
+            //    }
 
-                if (!hasPermission) {
-                    //TODO: Might send user to the configurator instead of login
-                    next({
-                        name: "login", // back to safety route //
-                        query: { redirectFrom: to.fullPath }
-                    })
-                }
+            //    if (!hasPermission) {
+            //        //TODO: Might send user to the configurator instead of login
+            //        next({
+            //            name: "login", // back to safety route //
+            //            query: { redirectFrom: to.fullPath }
+            //        })
+            //    }
 
-            }
+            //}
         },
         {
             path: '/products',

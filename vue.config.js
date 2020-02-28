@@ -1,8 +1,19 @@
+
+//module.exports = {
+//    "outputDir": "wwwroot",
+//    "publicPath": "/",
+//    "transpileDependencies": [
+//        "vuetify"
+//    ],
+  
+//}
+
 module.exports = {
-    "outputDir": "wwwroot",
-    "publicPath": "/",
+    publicPath: process.env.NODE_ENV === 'production'
+        ? '/dinafakturor.se/'
+        : '/',
     "transpileDependencies": [
         "vuetify"
     ],
-
 }
+

@@ -2,7 +2,7 @@
   "name": "Dina Fakturor",
   "short_name": "Fakturor",
   "start_url": "/index.html",
-  "display": "standalone",
+  "display": "minimal-ui",
   "theme_color": "#b3d4fc",
   "background_color": "#fff",
   "icons": [

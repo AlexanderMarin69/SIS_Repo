@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="web.config" />
     <Content Remove="wwwroot\js\app.46d6bb4f.js" />
     <Content Remove="wwwroot\js\app.46d6bb4f.js.map" />
     <Content Remove="wwwroot\js\app.js" />

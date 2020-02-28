@@ -103,7 +103,7 @@
                         <v-list-item>
                             <v-list-item-content>
 
-                                <!--<v-col cols="12" sm="12" md="12">
+                                <v-col cols="12" sm="12" md="12">
                                     <v-select v-model="select"
                                               :hint="`${select.name}, ${select.city}, ${select.phoneNumber}, ${select.emailAddress}, ${select.customerId}`"
                                               :items="allCustomers"
@@ -112,31 +112,42 @@
                                               label="Välj kund"
                                               return-object
                                               single-line></v-select>
-                                </v-col>-->
+                                </v-col>
                                 <v-col cols="12" sm="6" md="6">
-                                    {{selectedInvoiceToHandle.invoiceDateString}}
-                                    
-                                    <!--v-model="invoiceDateMenu"-->
-                                    <v-menu ref="invoiceDateMenu"
-                                            readonly
-                                            v-model="invoiceDateMenu"
-                                            :close-on-content-click="false"
-                                            :return-value.sync="invoiceDate"
-                                            transition="scale-transition"
-                                            offset-y
-                                            min-width="290px">
-                                        <template v-slot:activator="{ on }">
-                                            <v-text-field v-model="invoiceDate"
-                                                          label="Fakturadatum"
-                                                          readonly
-                                                          v-on="on"></v-text-field>
-                                        </template>
-                                        <v-date-picker v-model="invoiceDate" no-title scrollable>
-                                            <v-spacer></v-spacer>
-                                            <v-btn text color="primary" @click="invoiceDateMenu = false">Avbryt</v-btn>
-                                            <v-btn text color="primary" @click="$refs.invoiceDateMenu.save(invoiceDate)">OK</v-btn>
-                                        </v-date-picker>
-                                    </v-menu>
+                                    <v-title style="font-size: 16px; font-weight:bold;" class="mt-1">Fakturadatum {{selectedInvoiceToHandle.invoiceDateString}}</v-title>
+                                    <v-btn color="primary" text @click="changeInvoiceDateDialog = true">Ändra</v-btn>
+
+
+
+
+                                    <v-dialog v-model="changeInvoiceDateDialog" max-width="400">
+
+                                        <v-card raised shaped class="pa-5">
+                                            <v-menu ref="invoiceDateMenu"
+                                                    v-model="invoiceDateMenu"
+                                                    :close-on-content-click="false"
+                                                    :return-value.sync="invoiceDate"
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    min-width="290px">
+                                                <template v-slot:activator="{ on }">
+                                                    <v-text-field v-model="invoiceDate"
+                                                                  label="Fakturadatum"
+                                                                  readonly
+                                                                  v-on="on"></v-text-field>
+                                                </template>
+                                                <v-date-picker v-model="invoiceDate" no-title scrollable>
+                                                    <v-spacer></v-spacer>
+                                                    <v-btn text color="primary" @click="invoiceDateMenu = false">Avbryt</v-btn>
+                                                    <v-btn text color="primary" @click="$refs.invoiceDateMenu.save(invoiceDate)">OK</v-btn>
+                                                </v-date-picker>
+                                            </v-menu>
+                                            <small>Uppdatera fakturadatumet genom att trycka "spara" längst ner på sidan</small>
+                                        </v-card>
+                                    </v-dialog>
+
+
+
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6">
                                     <v-menu ref="invoicePayDateMenu"
@@ -678,6 +689,13 @@
 
 
     import { mapState, mapActions } from 'vuex';
+    //const { mapState, mapActions } = () => import('vuex')
+
+    //const CustomerAPI = () => import('@/services/Customer')
+    //const InvoiceAPI = () => import('@/services/invoice')
+    //const AllProductsForInvoice = () => import('@/components/AllProductsForInvoice')
+
+
     import CustomerAPI from '@/services/Customer'
     import InvoiceAPI from '@/services/invoice'
     import AllProductsForInvoice from '@/components/AllProductsForInvoice'
@@ -688,6 +706,7 @@
             //Login
         },
         data: () => ({
+            changeInvoiceDateDialog: false,
             showInvoiceDetailsDialog: false,
 
             snackBarTimeout: 40000,
