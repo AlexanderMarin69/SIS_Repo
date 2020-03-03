@@ -20,6 +20,7 @@ namespace vueproject.Controllers
     [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [EnableCors]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;

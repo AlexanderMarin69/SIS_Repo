@@ -37,6 +37,7 @@ namespace vueproject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
 
             var conn = Configuration.GetConnectionString("vueprojectContextConnection");
 
@@ -106,6 +107,7 @@ namespace vueproject
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseHttpsRedirection();
+            app.UseCors();
             // Routa till MVC-controller om controllen finns
             app.UseMvc(routes =>
             {
