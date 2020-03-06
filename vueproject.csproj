@@ -5,60 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\js\**" />
+    <Compile Remove="wwwroot\UsersPdfInvoices\**" />
+    <Content Remove="wwwroot\js\**" />
+    <Content Remove="wwwroot\UsersPdfInvoices\**" />
+    <EmbeddedResource Remove="wwwroot\js\**" />
+    <EmbeddedResource Remove="wwwroot\UsersPdfInvoices\**" />
+    <None Remove="wwwroot\js\**" />
+    <None Remove="wwwroot\UsersPdfInvoices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="web.config" />
-    <Content Remove="wwwroot\js\app.46d6bb4f.js" />
-    <Content Remove="wwwroot\js\app.46d6bb4f.js.map" />
-    <Content Remove="wwwroot\js\app.js" />
-    <Content Remove="wwwroot\js\chunk-vendors.ca9778de.js" />
-    <Content Remove="wwwroot\js\chunk-vendors.ca9778de.js.map" />
-    <Content Remove="wwwroot\js\chunk-vendors.js" />
     <Content Remove="wwwroot\logo.png" />
-    <Content Remove="wwwroot\UsersPdfInvoices\edf4a6cd-e17d-4a81-848d-412e24ede11d" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\176a8134-f4a0-419d-b7fe-129a33fe9d3d.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\23a519cb-886a-4e96-b650-f52fb0a8ea99.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\253793b1-3233-45c7-8616-d8beb105621b.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\2a586c34-0575-4236-8fba-54d7d956f9ad.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\3419aa38-f2ab-4667-8aeb-40ab5ba232ea.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\34f551a7-bab5-411b-a571-d36101f56bd4.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\362f7d3b-bfed-49ec-8fc3-96e1d063bd63.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\3f65c1c0-d20f-4711-8e66-b6505363e18a.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\42c03907-974b-4787-be86-99f050b46a36.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\45715bfa-e540-4578-895f-8985e577de19.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\4a3dcc8e-f23f-4c2c-bd84-ef68ec926270.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\4d352124-c253-4ce6-b008-f25b51759ab6.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\50982f94-ca4b-4f92-a4d5-678e942db3e0.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\57cc3b29-c125-4db1-abf2-136e1cb3e0a8.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\5cc15daa-cc04-4b60-a447-a179a9a96339.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\5ead8678-0f6b-4fb1-a7f1-fba26538ec37.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\5fddc479-9ab7-4d0e-9950-dd29ebe73e0d.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\6ab200b1-5ab8-4bfc-9d2e-41754d67dcd8.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\6fc07c06-fc60-4d6e-aaa2-113f0eb36ea7.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\700e11d8-50b3-491d-9a1f-0a0c68b8c95d.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\7a23d002-bdcb-4f2b-ac1f-7c61fc8c7434.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\84aab70a-c455-4ebd-a519-b4707b9d1f34.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\86bc0453-129a-437b-bf19-7f3f37b4e35f.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\86cd1039-bf5e-4c68-9060-1a4607e30774.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\8d98fd8a-d84e-492e-8939-65418508f1e3.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\951bc0c0-b29e-445b-a2e3-b7c34add293e.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\9a883fac-7d3b-4402-9c83-662a2bf47675.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\9b4c39de-a45b-45e5-9503-c730ccbf0002.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\a3dffac4-bea0-42d8-8075-e92808ceee95.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\aab8688d-a40d-4240-9afe-1fa935895626.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\ae081cbf-3c8b-46f1-b9fc-2e780701746d.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\bd316bfa-c3ee-4402-b22a-e37736dce76b.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\bf5703db-ea1d-4805-b110-b9fb3ab85f37.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\cbf19c3f-4abe-458e-8e65-327577e91585.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\d5d3a530-a047-4615-878e-fbce2fa8a7c0.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\d69e5e6d-453a-430b-aa7e-2d3ffeb71ea7.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\d79de226-59d8-4617-9b28-8696fe866615.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\d8817048-2c68-44d3-b0ce-1820c96da709.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\de37e492-9165-4662-8076-f27c7cb31288.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\e02f89ef-c7a3-4549-b783-a7545ce4bef7.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\e533e43a-8359-481e-8153-14bb960b8bf1.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\f1463367-ed44-481a-a33c-468c8b05d376.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\f57d3ecd-2ea2-4e4f-b0ff-3850ae8a7a8e.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\f6ef4113-556d-45ec-b923-ca2c9f3987ad.pdf" />
-    <Content Remove="wwwroot\UsersPdfInvoices\temporaryRemoved\ff31a1ed-6dee-46cc-a0a7-17e5a0dc8aac.pdf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,57 +43,7 @@
   <ItemGroup>
     <Folder Include="UsersPdfInvoices\" />
     <Folder Include="src\store\modules\login\" />
-    <Folder Include="wwwroot\js\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\logo.png" />
-    <None Include="wwwroot\UsersPdfInvoices\edf4a6cd-e17d-4a81-848d-412e24ede11d" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\176a8134-f4a0-419d-b7fe-129a33fe9d3d.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\23a519cb-886a-4e96-b650-f52fb0a8ea99.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\253793b1-3233-45c7-8616-d8beb105621b.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\2a586c34-0575-4236-8fba-54d7d956f9ad.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\3419aa38-f2ab-4667-8aeb-40ab5ba232ea.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\34f551a7-bab5-411b-a571-d36101f56bd4.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\362f7d3b-bfed-49ec-8fc3-96e1d063bd63.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\3f65c1c0-d20f-4711-8e66-b6505363e18a.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\42c03907-974b-4787-be86-99f050b46a36.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\45715bfa-e540-4578-895f-8985e577de19.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\4a3dcc8e-f23f-4c2c-bd84-ef68ec926270.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\4d352124-c253-4ce6-b008-f25b51759ab6.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\50982f94-ca4b-4f92-a4d5-678e942db3e0.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\57cc3b29-c125-4db1-abf2-136e1cb3e0a8.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\5cc15daa-cc04-4b60-a447-a179a9a96339.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\5ead8678-0f6b-4fb1-a7f1-fba26538ec37.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\5fddc479-9ab7-4d0e-9950-dd29ebe73e0d.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\6ab200b1-5ab8-4bfc-9d2e-41754d67dcd8.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\6fc07c06-fc60-4d6e-aaa2-113f0eb36ea7.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\700e11d8-50b3-491d-9a1f-0a0c68b8c95d.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\7a23d002-bdcb-4f2b-ac1f-7c61fc8c7434.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\84aab70a-c455-4ebd-a519-b4707b9d1f34.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\86bc0453-129a-437b-bf19-7f3f37b4e35f.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\86cd1039-bf5e-4c68-9060-1a4607e30774.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\8d98fd8a-d84e-492e-8939-65418508f1e3.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\951bc0c0-b29e-445b-a2e3-b7c34add293e.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\9a883fac-7d3b-4402-9c83-662a2bf47675.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\9b4c39de-a45b-45e5-9503-c730ccbf0002.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\a3dffac4-bea0-42d8-8075-e92808ceee95.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\aab8688d-a40d-4240-9afe-1fa935895626.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\ae081cbf-3c8b-46f1-b9fc-2e780701746d.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\bd316bfa-c3ee-4402-b22a-e37736dce76b.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\bf5703db-ea1d-4805-b110-b9fb3ab85f37.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\cbf19c3f-4abe-458e-8e65-327577e91585.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\d5d3a530-a047-4615-878e-fbce2fa8a7c0.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\d69e5e6d-453a-430b-aa7e-2d3ffeb71ea7.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\d79de226-59d8-4617-9b28-8696fe866615.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\d8817048-2c68-44d3-b0ce-1820c96da709.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\de37e492-9165-4662-8076-f27c7cb31288.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\e02f89ef-c7a3-4549-b783-a7545ce4bef7.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\e533e43a-8359-481e-8153-14bb960b8bf1.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\f1463367-ed44-481a-a33c-468c8b05d376.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\f57d3ecd-2ea2-4e4f-b0ff-3850ae8a7a8e.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\f6ef4113-556d-45ec-b923-ca2c9f3987ad.pdf" />
-    <None Include="wwwroot\UsersPdfInvoices\temporaryRemoved\ff31a1ed-6dee-46cc-a0a7-17e5a0dc8aac.pdf" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

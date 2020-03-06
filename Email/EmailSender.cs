@@ -83,7 +83,7 @@ namespace vueproject.Email
             var from = new EmailAddress(InvoiceToSend.EmailFrom, InvoiceToSend.SenderName);
             var to = new EmailAddress(InvoiceToSend.EmailTo, InvoiceToSend.CustomerName);
 
-            var subject = InvoiceToSend.InvoiceTypeToSend;
+            var subject = InvoiceToSend.SendAs;
 
             //works only if message not null or "",
          
