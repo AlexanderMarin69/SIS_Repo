@@ -90,7 +90,6 @@ const router = new Router({
                 }
 
                 if (!hasPermission) {
-                    //TODO: Might send user to the configurator instead of login
                     next({
                         name: "login", // back to safety route //
                         query: { redirectFrom: to.fullPath }
@@ -111,7 +110,6 @@ const router = new Router({
                 }
 
                 if (hasPermission == false) {
-                    //TODO: Might send user to the configurator instead of login
                     next({
                         name: "login", // back to safety route //
                         query: { redirectFrom: to.fullPath }
@@ -132,7 +130,6 @@ const router = new Router({
                 }
 
                 if (!hasPermission) {
-                    //TODO: Might send user to the configurator instead of login
                     next({
                         name: "login", // back to safety route //
                         query: { redirectFrom: to.fullPath }
@@ -153,7 +150,6 @@ const router = new Router({
                 }
 
                 if (!hasPermission) {
-                    //TODO: Might send user to the configurator instead of login
                     next({
                         name: "login", // back to safety route //
                         query: { redirectFrom: to.fullPath }
@@ -162,20 +158,9 @@ const router = new Router({
 
             }
         },
-        //{
-        //    path: '/details/:id',
-        //    name: 'details',
-        //    // route level code-splitting
-        //    // this generates a separate chunk (about.[hash].js) for this route
-        //    // which is lazy-loaded when the route is visited.
-        //    component: () => import(/* webpackChunkName: "about" */ './views/ArticleDetails.vue')
-        //}
+
     ]
 });
 
-//router.beforeEach((to, from, next) => {
-//    store.dispatch("login/GET_USERDATA");
-//    next()
-//});
 
 export default router;

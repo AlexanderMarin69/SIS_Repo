@@ -33,13 +33,7 @@ C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcor
 C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\vueproject.RazorTargetAssemblyInfo.cs
 C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\vueproject.Views.pdb
 C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\vueproject.csproj.CopyComplete
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcoreapp2.2\appsettings.Development.json
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcoreapp2.2\appsettings.json
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcoreapp2.2\package-lock.json
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcoreapp2.2\package.json
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\CreateInvoice\GenerateInquiryPdf.cshtml.g.cs
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ViewImports.cshtml.g.cs
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcoreapp2.2\public\manifest.json
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\CreateInvoice\PrintInvoicePdf.cshtml.g.cs
-C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\bin\Debug\netcoreapp2.2\dist\manifest.json
+C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\vueproject.csproj.CoreCompileInputs.cache
+C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\CreateInvoice\GenerateInquiryPdf.g.cshtml.cs
+C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\CreateInvoice\PrintInvoicePdf.g.cshtml.cs
+C:\Users\alexa\Desktop\temptemp\ToDoVueV2-Login_Vue_Identity_V3\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ViewImports.g.cshtml.cs

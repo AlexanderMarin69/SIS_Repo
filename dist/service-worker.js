@@ -15,6 +15,12 @@ const FILES_TO_CACHE = [
 //fic updates on actions in allinvoices etc on frontend and test reliability for service worker then
 
 self.addEventListener('install', (evt) => {
+
+    //dbPromise = idb.open('invoices', 1, db => {
+    //    const invoice = db.createObjectStore('invoice', {
+    //        keyPath: 'articleNumber'
+    //    });
+
     console.log('[ServiceWorker] Install');
 
     caches.delete(CACHE_NAME).then(function (boolean) {
@@ -35,17 +41,17 @@ self.addEventListener('activate', (evt) => {
     console.log('[ServiceWorker] Activate');
     // CODELAB: Remove previous cached data from disk.
     //evt.waitUntil(
-        //caches.keys().then((keyList) => {
-        //    return Promise.all(keyList.map((key) => {
-        //        if (key !== CACHE_NAME) {
-        //            console.log('[ServiceWorker] Removing old cache', key);
-        //            return caches.delete(key);
-        //        }
-        //    }));
-        //})
-        caches.delete(CACHE_NAME).then(function (boolean) {
-            console.log('Cache reset');
-        })
+    //caches.keys().then((keyList) => {
+    //    return Promise.all(keyList.map((key) => {
+    //        if (key !== CACHE_NAME) {
+    //            console.log('[ServiceWorker] Removing old cache', key);
+    //            return caches.delete(key);
+    //        }
+    //    }));
+    //})
+    caches.delete(CACHE_NAME).then(function (boolean) {
+        console.log('Cache reset');
+    })
     //);
     self.clients.claim();
 });
@@ -60,11 +66,14 @@ self.addEventListener('fetch', (event) => {
                         return networkResponse;
                     });
                 return response || fetchPromise;
-     //switch order?
+                //switch order?
             })
         })
     )
 });
+
+
+
 
 
     // ORIGINAL CODE

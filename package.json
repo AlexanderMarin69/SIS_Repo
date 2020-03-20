@@ -11,6 +11,7 @@
     "@sendgrid/mail": "^6.4.0",
     "axios": "^0.18.0",
     "core-js": "^3.4.0",
+    "idb": "^5.0.1",
     "sendgrid": "^5.2.3",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",

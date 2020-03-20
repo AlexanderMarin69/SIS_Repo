@@ -18,9 +18,9 @@
                 <v-spacer></v-spacer>
                 <button hidden id="kanin">helloooo</button>
                 <!--<v-btn icon class="ml-3 mr-3">
-                <v-icon>mdi-magnify</v-icon>
-                sök
-            </v-btn>-->
+                    <v-icon>mdi-magnify</v-icon>
+                    sök
+                </v-btn>-->
                 <v-btn color="primary" rounded style="color: white;" @click="activateCreateNewInvoiceDialog()" class="ml-3">
                     Skapa ny +
                 </v-btn>
@@ -73,12 +73,6 @@
             </v-dialog>
         </div>
         <!--   PRODUCT SUCCESSFULLY ADDED DIALOG --------- END     -->
-
-
-
-
-
-
         <!--  SELECTED INVOICE DIALOG ------- START -->
         <v-row justify="center">
             <v-dialog v-model="showInvoiceDetailsDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
@@ -214,7 +208,7 @@
                                 </v-col>
 
 
-                              
+
 
 
 
@@ -286,9 +280,9 @@
                                         <!--<v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>-->
                                         <!--<p><b>Total exkl. moms</b> 2 003 kr</p>
 
-                                    <p><b>Moms 25%</b> 480 kr</p>
+                                        <p><b>Moms 25%</b> 480 kr</p>
 
-                                    <p><b>Öresutjämning</b> 0,50 kr</p>-->
+                                        <p><b>Öresutjämning</b> 0,50 kr</p>-->
 
 
                                         <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
@@ -334,12 +328,12 @@
                     <!--<v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>-->
                     <v-spacer></v-spacer>
                     <!--<v-card-actions>
-                    <v-overflow-btn class="my-2"
-                                    :items="dropdown_icon"
-                                    label="Skicka som"
-                                    segmented
-                                    target="#dropdown-example"></v-overflow-btn>
-                </v-card-actions>-->
+                        <v-overflow-btn class="my-2"
+                                        :items="dropdown_icon"
+                                        label="Skicka som"
+                                        segmented
+                                        target="#dropdown-example"></v-overflow-btn>
+                    </v-card-actions>-->
                     <v-col cols="12" sm="6" md="6">
                         <v-container>
                             <p>Skicka som</p>
@@ -578,9 +572,9 @@
                                         <!--<v-text-field v-text="totalInvoiceItemsPriceToDisplay + ' SEK'" readonly label="Summa"></v-text-field>-->
                                         <!--<p><b>Total exkl. moms</b> 2 003 kr</p>
 
-                                    <p><b>Moms 25%</b> 480 kr</p>
+                                        <p><b>Moms 25%</b> 480 kr</p>
 
-                                    <p><b>Öresutjämning</b> 0,50 kr</p>-->
+                                        <p><b>Öresutjämning</b> 0,50 kr</p>-->
 
 
                                         <p class="mt-10"><b><!--Total att belala {{totalTyp + totalInvoiceItemsPriceToDisplay}} kr--></b></p>
@@ -626,12 +620,12 @@
                     <!--<v-btn color="primary" @click="printPdf()">Skriv ut</v-btn>-->
                     <v-spacer></v-spacer>
                     <!--<v-card-actions>
-                    <v-overflow-btn class="my-2"
-                                    :items="dropdown_icon"
-                                    label="Skicka som"
-                                    segmented
-                                    target="#dropdown-example"></v-overflow-btn>
-                </v-card-actions>-->
+                        <v-overflow-btn class="my-2"
+                                        :items="dropdown_icon"
+                                        label="Skicka som"
+                                        segmented
+                                        target="#dropdown-example"></v-overflow-btn>
+                    </v-card-actions>-->
                     <v-col cols="12" sm="6" md="6">
                         <v-container>
                             <p>Skicka som</p>
@@ -662,11 +656,11 @@
 
         <!--// CREATE NEW INVOICE DIALOG-->
         <!--<v-dialog v-model="!IsUserLoggedInVariable"
-              max-width="400">
-        <v-card>
-            <Login></Login>
-        </v-card>
-    </v-dialog>-->
+                  max-width="400">
+            <v-card>
+                <Login></Login>
+            </v-card>
+        </v-dialog>-->
 
 
 
@@ -674,17 +668,35 @@
     </div>
 </template>
 <script>
+    
     /* eslint-disable no-console */
 
+
+    //import { openDB } from 'idb';
+    //const dbPromise = openDB({
+    //    articleNumber: '',
+    //    sendAs: ''
+    //}, 1, db => {
+    //    db.createObjectStore('invoices', { keyPath: 'articleNumber' });
+    //})
+
+
+    //self.addEventListener('sync', event => {
+    //    if (event.tag == 'save-invoice') {
+    //        event.waitUntil(
+    //            getMessagesFromOutbox().then(invoices => {
+    //                return sendInvoicesToServer(invoices)
+    //                    .then(() => removeMessageFromOutbox(invoices));
+    //            })
+    //        )
+    //    };
+    //});
+
+
     let deferredInstallPrompt = null;
-
-
     function saveBeforeInstallPromptEvent(evt) {
         deferredInstallPrompt = evt;
-
-
     }
-
     window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
 
 
@@ -706,6 +718,10 @@
             //Login
         },
         data: () => ({
+
+
+
+
             changeInvoiceDateDialog: false,
             showInvoiceDetailsDialog: false,
 
@@ -799,7 +815,7 @@
                 console.log(selectedInvoice)
                 this.setInvoicePdfGuid(selectedInvoice.invoicePdfGuid);
                 this.setSelectedInvoice(selectedInvoice);
-                
+
             },
             groda() {
                 //Notification.requestPermission(function (status) {
@@ -977,6 +993,35 @@
             },
             saveInvoice() {
                 this.showCustomerIdErrorMessage = false,
+
+
+
+
+
+                    //addToOutbox({
+                    //    InvoiceDate: this.invoiceDate,
+                    //    InvoicePayDate: this.invoicePayDate,
+                    //    DeliveryDate: this.deliveryDate,
+                    //    InvoiceTypeToSend: this.sendAs,
+                    //    InvoiceType: this.invoiceType,
+                    //    InvoiceIsCredit: this.invoiceIsCredit,
+                    //    InvoiceProducts: this.InvoiceProductsToDisplay,
+                    //    InvoiceFee: this.invoiceFee,
+                    //    DeliveryFee: this.deliveryFee,
+                    //    OptionalReminderFee: this.optionalReminderFee,
+                    //    InvoiceMessageText: this.invoiceMessageText,
+                    //    SendAs: this.sendAs,
+                    //    AssociatedCustomerId: this.select.customerId,
+                    //    ExtraInvoiceCosts: this.totalTyp,
+                    //    InvoiceProductsTotalCost: this.totalInvoiceItemsPriceToDisplay
+                    //})
+                    //    .then(() => navigator.serviceWorker.ready)
+                    //    .then(reg => reg.sync.register('save-invoice'))
+                    //    .catch(() => console.log('failed to save invoice to idb'));
+
+
+
+
                     InvoiceAPI.CreateNewInvoice(
                         {
                             InvoiceDate: this.invoiceDate,
@@ -1023,7 +1068,7 @@
                 calculateTotalPriceAction: 'invoice/CALCULATE_TOTAL_INVOICE_ITEMS_PRICE',
                 setInvoicePdfGuid: 'invoice/SET_INVOICE_PDF_GUID',
                 setSelectedInvoice: 'invoice/SET_SELECTED_INVOICE',
-                
+
             }),
             closeDialog() {
                 this.addNewCustomerDialog = false;
